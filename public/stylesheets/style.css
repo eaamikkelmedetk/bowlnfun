@@ -1,8 +1,78 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+/**
+  GENERAL LAYOUT CLASSES
+ */
+.center-text {
+  text-align: center;
 }
 
-a {
-  color: #00B7FF;
+.bg-red {
+  background-color: #cf000f;
+}
+
+.bg-yellow {
+  background-color: #f7ca18;
+}
+
+.bg-green {
+  background-color: #1e824c;
+}
+
+.bg-reddish {
+  background-color: #8B251A;
+}
+
+.space-between {
+  padding-top:1vh;
+}
+
+.fill-vh {
+  background-color: black;
+}
+
+/**
+CONCRETE CLASSES
+ */
+
+/** HEADER */
+
+.machines {
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  background-color: #22313f;
+}
+
+.machine {
+  border: 0.5vw solid #22313f;
+}
+
+[class~=machine] {
+  opacity:0.9;
+  cursor: pointer;
+}
+
+[class~=machine]:hover {
+  opacity:1;
+}
+
+/** ERROR TYPES */
+
+.error-type {
+  border: 0.5vw solid #22313f;
+}
+
+/**
+  TYPOGRAPHY
+ */
+
+.machines h1 {
+  font-weight: bold;
+  color: #ecf0f1;
+  min-height: 5vh;
+}
+
+.error-type h1 {
+  font-weight: bold;
+  color: #ecf0f1;
+  min-height: 5vh;
 }
