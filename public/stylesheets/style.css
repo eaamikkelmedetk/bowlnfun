@@ -23,11 +23,7 @@
 }
 
 .space-between {
-  padding-top:1vh;
-}
-
-.fill-vh {
-  background-color: black;
+  margin-top:1vh;
 }
 
 /**
@@ -55,10 +51,44 @@ CONCRETE CLASSES
   opacity:1;
 }
 
+.float-left {
+  float:left;
+}
+
+.float-center {
+  margin:auto;
+}
+
+.float-right {
+  float:right;
+}
+
 /** ERROR TYPES */
+.errors {
+  background-color: #22313f;
+}
 
 .error-type {
   border: 0.5vw solid #22313f;
+  min-height:180px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/** PINS */
+
+.pins {
+  padding-top: 0.5vw;
+}
+
+.pin {
+
+}
+
+.pin img {
+  width:120px;
+  display:block;
 }
 
 /**
@@ -72,7 +102,7 @@ CONCRETE CLASSES
 }
 
 .error-type h1 {
+  font-size: 2em;
   font-weight: bold;
   color: #ecf0f1;
-  min-height: 5vh;
 }
