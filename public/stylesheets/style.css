@@ -6,8 +6,8 @@
   text-align: center;
 }
 
-.bg-red {
-  background-color: #cf000f;
+.bg-grey {
+  background-color: #95a5a6;
 }
 
 .bg-yellow {
@@ -19,7 +19,7 @@
 }
 
 .bg-reddish {
-  background-color: #8B251A;
+  background-color: #cf000f;
 }
 
 .space-between {
@@ -40,12 +40,25 @@ CONCRETE CLASSES
 
 .machine {
   border: 0.5vw solid #22313f;
-  opacity:0.9;
   cursor: pointer;
 }
 
+.machine-selected {
+  background-color: #1abc9c;
+}
+
+.machine-selected:after {
+  font-family: FontAwesome;
+  color: white;
+  font-size: 2em;
+  position: absolute;
+  top: 24%;
+  left: 18%;
+  content: "\f058";
+}
+
+
 .machine:hover {
-  opacity:1;
   text-decoration: none;
 }
 
@@ -72,13 +85,15 @@ CONCRETE CLASSES
   display:flex;
   align-items: center;
   justify-content: center;
-  opacity:0.9;
 }
 
 .error-type:hover {
   text-decoration: none;
-  opacity: 1;
   cursor: pointer;
+}
+
+.error-type-selected {
+  background-color: #1abc9c;
 }
 
 /** PINS */

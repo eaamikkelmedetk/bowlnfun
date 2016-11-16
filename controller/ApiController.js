@@ -28,7 +28,6 @@ module.exports.getErrors = function(req, res) {
     Error.find().exec()
         .then(function(errors) {
         return res.json({"errors": errors});
-
     })
 };
 

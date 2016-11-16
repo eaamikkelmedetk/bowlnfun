@@ -6,12 +6,7 @@ var Schema = mongoose.Schema;
 
 var machine = new Schema({
     state: String,
-    centerId: Number,
+    centerId: Number
 });
-
-error.methods.printError = function () {
-    console.log(this.state + " " + this.centerId);
-    return this.state + " " + this.centerId;
-}
 
 module.exports = mongoose.model('Machine', machine);
