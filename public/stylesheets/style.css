@@ -40,15 +40,13 @@ CONCRETE CLASSES
 
 .machine {
   border: 0.5vw solid #22313f;
-}
-
-[class~=machine] {
   opacity:0.9;
   cursor: pointer;
 }
 
-[class~=machine]:hover {
+.machine:hover {
   opacity:1;
+  text-decoration: none;
 }
 
 .float-left {
@@ -74,6 +72,13 @@ CONCRETE CLASSES
   display:flex;
   align-items: center;
   justify-content: center;
+  opacity:0.9;
+}
+
+.error-type:hover {
+  text-decoration: none;
+  opacity: 1;
+  cursor: pointer;
 }
 
 /** PINS */
