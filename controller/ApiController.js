@@ -12,6 +12,7 @@ module.exports.postError = function (req, res) {
         pins: req.body.pins,
         type: req.body.type,
         machineId: req.body.machineId,
+        timestamp: Date.now()
     });
 
     error.save(function (err) {

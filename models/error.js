@@ -7,11 +7,12 @@ var Schema = mongoose.Schema;
 var error = new Schema({
     pins: [],
     type: String,
-    machineId: Number
+    machineId: String,
+    timestamp: Date
 });
 
 module.exports.printError  = function (error) {
-    console.log(error.type + " " + error._id.getTimestamp() + " " + error.machineId);
+    console.log(error.type + " " + error.timestamp + " " + error.machineId);
     //return error.type + " " + error._id.getTimestamp() + " " + error.machineId;
 }
 
