@@ -36,7 +36,6 @@ module.exports.getError = function (req, res) {
     var errorId = req.params.id;
     Error.find({"_id": errorId}).exec()
         .then(function (singleError) {
-            Error.printError(singleError);
             return res.json({"error": singleError})
         })
 };
