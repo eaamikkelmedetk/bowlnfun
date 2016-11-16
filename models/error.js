@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var error = new Schema({
-    pins: [],
+    pins: Array,
     type: String,
     machineId: String,
     timestamp: Date
