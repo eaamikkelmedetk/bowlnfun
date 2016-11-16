@@ -9,16 +9,12 @@ var Error = require('../models/error');
 
 module.exports.postError = function (req, res) {
     var error = new Error({
-        // pins: req.body.pins,
         type: req.body.type,
         machineId: req.body.machineId,
-        timestamp: Date.now(),
-        pins: JSON.parse(req.body.pins)
+        timestamp: Date.now()
     });
-    console.log(req.body.pins);
-    // if(req.body.pins != undefined)
-    //     for(var i = 0; i < req.body.pins.length; i++)
-    //         error.pins.push(req.body.pins[i]);
+    if(req.body.pins != undefined)
+        error.pins = JSON.parse(req.body.pins);
 
     error.save(function (err) {
         if (err) {

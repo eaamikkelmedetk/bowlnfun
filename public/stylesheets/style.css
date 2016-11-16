@@ -2,6 +2,18 @@
 /**
   GENERAL LAYOUT CLASSES
  */
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:focus {
+  text-decoration: none;
+}
 .center-text {
   text-align: center;
 }
@@ -103,12 +115,29 @@ CONCRETE CLASSES
 }
 
 .pin {
-
+  display: block;
+  width: 120px;
+  height: 120px;
+  background-color:white;
+  border-radius: 50%;
+  border: 10px solid black;
+  color: black;
+  text-align:center;
+  vertical-align:middle;
+  line-height:100px;
 }
 
-.pin img {
-  width:120px;
-  display:block;
+a.pin {
+  font-size: 3em;
+}
+
+.pin:hover {
+  color: black;
+}
+
+.pin-selected {
+  border-color: red;
+  color: red !important;
 }
 
 /**
