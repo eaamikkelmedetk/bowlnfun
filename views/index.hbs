@@ -1,80 +1,17 @@
 <div class="container-fluid machines">
-    <div class="row center-text machine-row">
+<div class="row center-text machine-row">
+    {{#each machines}}
+
+        {{#modulusEven @index}}
+        </div>
+        <div class="row center-text machine-row">
+        {{/modulusEven}}
         <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>1</h1>
+            <input type="hidden" class="machine-id" name="_id" value="{{_id}}">
+            <h1>{{machineNumber}}</h1>
         </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>2</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-grey machine">
-            <h1>3</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-yellow machine">
-            <h1>4</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>5</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>6</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>7</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-yellow machine">
-            <h1>8</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>9</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>10</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>11</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>12</h1>
-        </a>
-    </div>
-    <div class="row center-text machine-row">
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>13</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-grey machine">
-            <h1>14</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>15</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>16</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>17</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-green machine">
-            <h1>18</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 bg-yellow machine">
-            <h1>19</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 machine bg-green machine">
-            <h1>20</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 machine bg-grey machine">
-            <h1>21</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 machine bg-green machine">
-            <h1>22</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 machine bg-green machine">
-            <h1>23</h1>
-        </a>
-        <a class="col-lg-1 col-xs-4 machine bg-grey machine">
-            <h1>24</h1>
-        </a>
-    </div>
+    {{/each}}
+</div>
 </div>
 <div class="container-fluid space-between errors">
     <div class="row">
