@@ -1,7 +1,8 @@
 $(document).ready(function () {
     var ErrorGUI = (function () {
 
-        var machineId = 1;
+        var machineId = '582cae310ce9f313d7e26d9a';
+        var errorReport;
 
         //jQuery variables
         var $machine;
@@ -24,68 +25,97 @@ $(document).ready(function () {
         /**
          * Responsible for binding a handler to machine click events
          */
-        var bindMachineClick = function () {
-            $machine.on({
-                click: function () {
-                    var element = $(this);
-                    $machine.removeClass("machine-selected");
-                    if (!(element.hasClass("machine-selected"))) {
-                        element.addClass("machine-selected");
-                    } else {
-                        element.removeClass("machine-selected");
-                    }
-                    bindErrorTypeClick();
-                }
-            });
+        var machineClick = function () {
+            var element = $(this);
+            $machine.removeClass("machine-selected");
 
-            $pins.on({'click': function() {
-                $(this).addClass("pin-selected");
-            }});
+            element.addClass("machine-selected");
+            errorReport.machineId = machineId;
 
-        }();
+            bindPinClick();
+            errorReport.timer = startTimer();
+
+        };
 
         /**
          * Responsible for binding a click event to Error buttons
          */
-        var bindErrorTypeClick = function() {
-            var startTimer;
-            if(($machine.hasClass("machine-selected"))) {
-                $error_type.on({
-                    click: function() {
-                        var element = $(this)
-                        $error_type.removeClass("error-type-selected");
-                        if(!(element.hasClass("error-type-selected"))) {
-                            element.addClass("error-type-selected");
-                        } else {
-                            element.removeClass("error-type-selected");
-                        }
+        var errorTypeClick = function() {
+            var element = $(this);
+            $error_type.removeClass("error-type-selected");
 
-                        if(startTimer !== undefined) {
-                            clearTimeout(startTimer);
-                        }
-                        startTimer = setTimeout(postErrorReport, 5000, element.text());
-                    }
-                });
-            }
+            if (element.hasClass("use-pins"))
+                errorReport.usePins = true;
+            else errorReport.usePins = false;
+            element.addClass("error-type-selected");
+            errorReport.type = element.text();
+
+            bindPinClick();
+            errorReport.timer = startTimer();
         };
 
+        var pinClick = function () {
+            var element = $(this);
 
-        var postErrorReport = function(errortype) {
-            ErrorService.addError(function() {
-                resetGui();
-            }, 1, errortype);
+            if (element.hasClass("pin-selected")) {
+                element.removeClass("pin-selected").addClass("pin-selectable");
+                errorReport.pins[parseInt(element.text())-1] = false;
+            }
+            else {
+                element.removeClass("pin-selectable").addClass("pin-selected");
+                errorReport.pins[parseInt(element.text())-1] = true;
+            }
 
-            $error_type.off('click');
+            errorReport.timer = startTimer();
+        }
+
+        var bindPinClick = function () {
+            if(errorReport.usePins) {
+                $pins.removeClass("pin-selected").addClass("pin-selectable");
+                $pins.on('click', pinClick);
+            }
+            else {
+                $pins.removeClass("pin-selected pin-selectable");
+                $pins.off('click');
+            }
+        }
+
+        var postErrorReport = function() {
+            if(errorReport.type && errorReport.machineId) {
+                ErrorService.addError(resetGui, errorReport);
+                showModal();
+            }
+            else resetGui();
         };
 
         /**
          * Responsible for clearing the DOM after an error-report
          */
         var resetGui = function() {
-            $machine.removeClass("machine-selected");
-            $error_type.removeClass("error-type-selected");
-        }
+            errorReport = {
+                'pins': [false,false,false,false,false,false,false,false,false,false]
+            };
+            $machine.removeClass("machine-selected").on({'click': machineClick});
+            $error_type.removeClass("error-type-selected").on({'click': errorTypeClick});
+            $pins.removeClass("pin-selected pin-selectable").off('click');
 
+        };
+
+        var startTimer = function () {
+            if(errorReport.timer != undefined) {
+                clearTimeout(errorReport.timer);
+            }
+            return setTimeout(postErrorReport, 3000);
+        };
+
+        var showModal = function () {
+            $('#errorReportSuccess').modal('show');
+            setTimeout(function() {
+                $('#errorReportSuccess').modal('hide');
+            }, 2500)
+        };
+
+        resetGui();
     });
 
     ErrorGUI();
@@ -99,3 +129,5 @@ $(document).ready(function () {
 
     showModal();
 });
+
+
