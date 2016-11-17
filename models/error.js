@@ -11,9 +11,4 @@ var error = new Schema({
     machineId: Schema.Types.ObjectId
 });
 
-module.exports.printError  = function (error) {
-    console.log(error.type + " " + error.timestamp + " " + error.machineId);
-    //return error.type + " " + error._id.getTimestamp() + " " + error.machineId;
-}
-
 module.exports = mongoose.model('Error', error);
