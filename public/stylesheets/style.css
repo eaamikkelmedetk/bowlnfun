@@ -116,15 +116,15 @@ CONCRETE CLASSES
 
 .pin {
   display: block;
-  width: 80px;
-  height: 80px;
+  width: 6.5vw;
+  height: 6.5vw;
   background-color:white;
   border-radius: 80px;
   border: 10px solid black;
   color: black;
   text-align:center;
   vertical-align:middle;
-  line-height:60px;
+  line-height:5.5vw;
 }
 
 a.pin {
