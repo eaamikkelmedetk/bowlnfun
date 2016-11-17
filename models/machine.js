@@ -5,8 +5,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var machine = new Schema({
+    machineNumber: String,
     state: String,
-    centerId: Number
+    centerId: Number,
+    machineErrors: [Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('Machine', machine);

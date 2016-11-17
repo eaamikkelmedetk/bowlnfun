@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 var error = new Schema({
     pins: Array,
     type: String,
-    machineId: String,
-    timestamp: Date
+    timestamp: Date,
+    machineId: Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Error', error);
