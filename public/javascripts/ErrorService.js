@@ -12,19 +12,19 @@
 
 var ErrorService = (function() {
 
-    function publicAddError(callBack, machineId, errorType, pins) {
+    function publicAddError(callBack, errorReport) {
         var root = window.location.origin;
         var route = '/api/errors';
-        if (pins === undefined)
-            pins = [];
+        if (errorReport.pins === undefined)
+            errorReport.pins = [];
         $.ajax(
             {
                 type: "POST",
                 url: root + route,
                 data: {
-                    "machineId": machineId,
-                    "type": errorType,
-                    "pins": JSON.stringify(pins)
+                    "machineId": errorReport.machineId,
+                    "type": errorReport.type,
+                    "pins": JSON.stringify(errorReport.pins)
                 },
                 success: callBack,
                 dataType: 'json'

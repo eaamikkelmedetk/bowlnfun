@@ -16,7 +16,10 @@ module.exports.postError = function (req, res) {
     if(req.body.pins != undefined)
         error.pins = JSON.parse(req.body.pins);
 
+    console.log(error);
+
     error.save(function (err) {
+        console.log(err);
         if (err) {
             res.json({message: "A system error has occured, try again later..."});
         } else {
