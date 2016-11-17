@@ -89,4 +89,13 @@ $(document).ready(function () {
     });
 
     ErrorGUI();
+
+    function showModal() {
+        $('#errorReportSuccess').modal('show');
+        setTimeout(function() {
+            $('#errorReportSuccess').modal('hide');
+        }, 2500)
+    }
+
+    showModal();
 });

@@ -59,15 +59,6 @@ CONCRETE CLASSES
   background-color: #1abc9c;
 }
 
-.machine-selected:after {
-  font-family: FontAwesome;
-  color: white;
-  font-size: 2em;
-  position: absolute;
-  top: 24%;
-  left: 18%;
-  content: "\f058";
-}
 
 
 .machine:hover {
@@ -136,8 +127,8 @@ a.pin {
 }
 
 .pin-selected {
-  border-color: red;
-  color: red !important;
+  border-color: #1abc9c;
+  color: #1abc9c !important;
 }
 
 /**
@@ -155,3 +146,30 @@ a.pin {
   font-weight: bold;
   color: #ecf0f1;
 }
+
+
+/**
+  BOOTSTRAP MODAL CSS START
+ */
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/**
+  BOOTSTRAP MODAL CSS END
+ */
