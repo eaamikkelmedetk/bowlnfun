@@ -8,14 +8,8 @@ module.exports.index = function(req, res) {
 };
 
 
-Handlebars.registerHelper("modulusStart", function(num, block) {
-    if (parseInt(num) % parseInt(12) === 0) {
-        return block.fn(this);
-    }
-});
-
-Handlebars.registerHelper("modulusEnd", function(num, block) {
-    if (parseInt(num) % parseInt(12) !== 0) {
+Handlebars.registerHelper("modulusEven", function(num, block) {
+   if(parseInt(num) % parseInt(12) === 12) {
         return block.fn(this);
     }
 });

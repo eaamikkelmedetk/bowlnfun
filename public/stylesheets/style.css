@@ -116,15 +116,15 @@ CONCRETE CLASSES
 
 .pin {
   display: block;
-  width: 120px;
-  height: 120px;
+  width: 6.5vw;
+  height: 6.5vw;
   background-color:white;
-  border-radius: 50%;
-  border: 10px solid grey;
-  color: grey;
+  border-radius: 80px;
+  border: 10px solid black;
+  color: black;
   text-align:center;
   vertical-align:middle;
-  line-height:100px;
+  line-height:5.5vw;
 }
 
 a.pin {
@@ -138,11 +138,6 @@ a.pin {
 .pin-selected {
   border-color: red;
   color: red !important;
-}
-
-.pin-selectable {
-  border-color: black;
-  color: black !important;
 }
 
 /**
@@ -160,29 +155,3 @@ a.pin {
   font-weight: bold;
   color: #ecf0f1;
 }
-
-/**
-  BOOTSTRAP MODAL CSS START
- */
-.modal {
-  text-align: center;
-}
-
-@media screen and (min-width: 768px) {
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
-}
-
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-}
-
-/**
-  BOOTSTRAP MODAL CSS END
- */
