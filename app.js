@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://root:gummiand@ds011893.mlab.com:11893/bowlnfun')
+mongoose.connect('mongodb://root:gummiand@ds011893.mlab.com:11893/bowlnfun');
 
 var index = require('./routes/index');
 var api = require('./routes/api');

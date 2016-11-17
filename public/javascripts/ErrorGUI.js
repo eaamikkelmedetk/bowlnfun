@@ -8,7 +8,9 @@ $(document).ready(function () {
         var $error_type;
         var $pins;
 
-
+        /**
+         * Responsible for caching choosen DOM-elements
+         */
         var cacheDom = function () {
             $machine = $('.machine');
             $error_type = $('.error-type');
@@ -19,8 +21,10 @@ $(document).ready(function () {
 
         }();
 
-
-        var bindEvents = function () {
+        /**
+         * Responsible for binding a handler to machine click events
+         */
+        var bindMachineClick = function () {
             $machine.on({
                 click: function () {
                     var element = $(this);
@@ -30,7 +34,7 @@ $(document).ready(function () {
                     } else {
                         element.removeClass("machine-selected");
                     }
-                    bindErrorHandler();
+                    bindErrorTypeClick();
                 }
             });
 
@@ -40,7 +44,10 @@ $(document).ready(function () {
 
         }();
 
-        var bindErrorHandler = function() {
+        /**
+         * Responsible for binding a click event to Error buttons
+         */
+        var bindErrorTypeClick = function() {
             var startTimer;
             if(($machine.hasClass("machine-selected"))) {
                 $error_type.on({
@@ -53,17 +60,17 @@ $(document).ready(function () {
                             element.removeClass("error-type-selected");
                         }
 
-                        console.log(element.text());
                         if(startTimer !== undefined) {
                             clearTimeout(startTimer);
                         }
-                        startTimer = setTimeout(postError, 5000, element.text());
+                        startTimer = setTimeout(postErrorReport, 5000, element.text());
                     }
                 });
             }
         };
 
-        var postError = function(errortype) {
+
+        var postErrorReport = function(errortype) {
             ErrorService.addError(function() {
                 resetGui();
             }, 1, errortype);
@@ -71,6 +78,9 @@ $(document).ready(function () {
             $error_type.off('click');
         };
 
+        /**
+         * Responsible for clearing the DOM after an error-report
+         */
         var resetGui = function() {
             $machine.removeClass("machine-selected");
             $error_type.removeClass("error-type-selected");
