@@ -6,17 +6,19 @@ var request = require('supertest');
 var app = require('../app');
 
 suite("POST /errors", function () {
+
+    /*-----------------------  TC1  ---------------------------------*/
+
     test('POST: should post an errors on /errors/', function (done){
             var error = {
-                _id: "582c53e3b447b81268b0e743",
-                type: "Sensor afbrudt på banepar",
-                machineId: "1",
-                timestamp: "2016-11-16T12:41:07.082Z",
                 __v: 0,
-                pins: []
+                _id: "582c58a573daae3fe40f80e2",
+                pins: [],
+                timestamp: "2016-11-16T13:01:25.556Z",
+                type: "Sensor afbrudt på banepar"
             };
             request(app)
-                .post("/api/errors")
+                .post("/api/errors/")
                 .type("form")
                 .send(error)
                 .expect(200)
@@ -27,6 +29,9 @@ suite("POST /errors", function () {
 });
 
 suite("GET /errrors", function () {
+
+    /*-----------------------  TC2  ---------------------------------*/
+
     test("GET: should list errors on /errors/", function() {
         request(app)
             .get('/api/errors')
@@ -37,17 +42,18 @@ suite("GET /errrors", function () {
             });
     });
 
+    /*-----------------------  TC3  ---------------------------------*/
+
    test("GET: should list a SINGLE error on /errors/:id", function (done) {
        request(app)
-           .get('/api/errors/582c53e3b447b81268b0e743')
+           .get('/api/errors/582c58a573daae3fe40f80e2')
            .expect('Content-Type', /json/)
            .expect(200, { error: [{
-               _id: "582c53e3b447b81268b0e743",
-               type: "Sensor afbrudt på banepar",
-               machineId: "1",
-               timestamp: "2016-11-16T12:41:07.082Z",
                __v: 0,
-               pins: []
+               _id: "582c58a573daae3fe40f80e2",
+               pins: [],
+               timestamp: "2016-11-16T13:01:25.556Z",
+               type: "Sensor afbrudt på banepar"
            }]
            }, done);
    })
