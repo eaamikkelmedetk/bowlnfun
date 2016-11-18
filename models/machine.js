@@ -7,8 +7,7 @@ var Schema = mongoose.Schema;
 var machine = new Schema({
     machineNumber: String,
     state: String,
-    centerId: Number,
-    machineErrors: [Schema.Types.ObjectId]
+    centerId: Number
 });
 
 module.exports = mongoose.model('Machine', machine);

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var ErrorGUI = (function () {
 
-        var machineId = '582cae310ce9f313d7e26d9a';
+        var pinsDefault = function() {return [false,false,false,false,false,false,false,false,false,false];};
         var errorReport;
 
         //jQuery variables
@@ -30,7 +30,7 @@ $(document).ready(function () {
             $machine.removeClass("machine-selected");
 
             element.addClass("machine-selected");
-            errorReport.machineId = machineId;
+            errorReport.machineId = element.children(".machine-id").val();
 
             bindPinClick();
             errorReport.timer = startTimer();
@@ -71,10 +71,12 @@ $(document).ready(function () {
 
         var bindPinClick = function () {
             if(errorReport.usePins) {
-                $pins.removeClass("pin-selected").addClass("pin-selectable");
-                $pins.on('click', pinClick);
+                $('.pin:not(.pin-selected)').addClass("pin-selectable");
+                $pins.off('click').on('click', pinClick);
             }
             else {
+                errorReport.pins = pinsDefault();
+                console.log(errorReport.pins);
                 $pins.removeClass("pin-selected pin-selectable");
                 $pins.off('click');
             }
@@ -93,7 +95,7 @@ $(document).ready(function () {
          */
         var resetGui = function() {
             errorReport = {
-                'pins': [false,false,false,false,false,false,false,false,false,false]
+                'pins': pinsDefault()
             };
             $machine.removeClass("machine-selected").on({'click': machineClick});
             $error_type.removeClass("error-type-selected").on({'click': errorTypeClick});
@@ -119,15 +121,6 @@ $(document).ready(function () {
     });
 
     ErrorGUI();
-
-    function showModal() {
-        $('#errorReportSuccess').modal('show');
-        setTimeout(function() {
-            $('#errorReportSuccess').modal('hide');
-        }, 2500)
-    }
-
-    showModal();
 });
 
 

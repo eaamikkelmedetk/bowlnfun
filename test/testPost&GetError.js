@@ -13,20 +13,10 @@ suite("POST /errors", function () {
             var error = {
                 __v: 0,
                 _id: "582c58a573daae3fe40f80e2",
-                pins: [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false
-                ],
+                pins: JSON.stringify([]),
                 timestamp: "2016-11-16T13:01:25.556Z",
-                type: "Test"
+                machineId: '582cae310ce9f313d7e26d9a',
+                type: "Sensor afbrudt på banepar"
             };
             request(app)
                 .post("/api/errors/")
@@ -36,6 +26,49 @@ suite("POST /errors", function () {
                 .expect({
                     message: "The error has been added to the registry"
                 }, done);
+    });
+
+    /*-----------------------  TC4  ---------------------------------*/
+
+    test("POST: pins MUST be a stringified array", function (done) {
+        var error = {
+            pins: 5,
+            type: "TC4",
+            machineId: '582cae310ce9f313d7e26d9a'
+        };
+        request(app)
+            .post("/api/errors/")
+            .type("form")
+            .send(error)
+            .expect(417, done);
+    });
+
+    /*-----------------------  TC5  ---------------------------------*/
+
+    test("POST: type must be defined", function(done) {
+        var error = {
+            pins: JSON.stringify([1,4]),
+            machineId: '582cae310ce9f313d7e26d9a'
+        };
+        request(app)
+            .post("/api/errors/")
+            .type("form")
+            .send(error)
+            .expect(417, done);
+    });
+
+    /*-----------------------  TC6  ---------------------------------*/
+
+    test("POST: machineId must be defined", function(done) {
+        var error = {
+            pins: JSON.stringify([]),
+            type: "TC6"
+        };
+        request(app)
+            .post("/api/errors/")
+            .type("form")
+            .send(error)
+            .expect(417, done);
     });
 });
 
@@ -78,5 +111,6 @@ suite("GET /errrors", function () {
                type: "Test"
            }]
            }, done);
-   })
+   });
+
 });
