@@ -1,0 +1,18 @@
+{{#each error}}
+    {{#modulusEven @index 4}}
+        </div>
+        <div class="row">
+    {{/modulusEven}}
+    <div class="col-lg-3">
+        <div class="errorReport">
+            <div class="indents">
+        <h2>MaskinNummer {{#each machine}}
+            {{machineNumber}}
+        {{/each}}</h2>
+    <h3>Dato: {{format timestamp}}</h3>
+    <h3>Fejltype: {{type}}</h3>
+    Pins: {{pins}}
+            </div>
+        </div>
+    </div>
+{{/each}}

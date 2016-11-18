@@ -1,0 +1,208 @@
+/**
+  GENERAL LAYOUT CLASSES
+ */
+
+a {
+    color: black;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+a:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.bg-grey {
+    background-color: #95a5a6;
+}
+
+.bg-yellow {
+    background-color: #f7ca18;
+}
+
+.bg-green {
+    background-color: #317751;
+}
+
+.bg-reddish {
+    background-color: #a4131e;
+}
+
+.space-between {
+    margin-top: 1vh;
+}
+
+/**
+CONCRETE CLASSES
+ */
+
+/** HEADER */
+
+.machines {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    background-color: #22313f;
+}
+
+.machine {
+    border: 0.5vw solid #22313f;
+    cursor: pointer;
+}
+
+.machine-selected {
+    background-color: #1abc9c;
+}
+
+.machine:hover {
+    text-decoration: none;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-center {
+    margin: auto;
+}
+
+.float-right {
+    float: right;
+}
+
+/** ERROR TYPES */
+.errors {
+    background-color: #22313f;
+}
+
+.error-type {
+    border: 0.5vw solid #22313f;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-type:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.error-type-selected {
+    background-color: #359986;
+}
+
+/** PINS */
+
+.pins {
+    padding-top: 0.5vw;
+}
+
+.pin {
+    display: block;
+    width: 200px;
+    height: 200px;
+    background-color: silver;
+    border-radius: 100px;
+    border: 5px solid #9b9b9b;
+    color: #797979;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 190px;
+}
+
+a.pin {
+    font-size: 5em;
+}
+
+.pin:visited {
+    color: #797979;
+}
+
+.pin:hover {
+    color: #797979;
+}
+
+.pin-selectable {
+    border: 5px solid black;
+    background-color: white;
+    color: black !important;
+}
+
+.pin-selectable:hover {
+    color: black;
+}
+
+.pin-selected {
+    background-color: white;
+    border-color: #359986;
+    color: #359986 !important;
+}
+
+/**
+  TYPOGRAPHY
+ */
+
+.machines h1 {
+    font-weight: bold;
+    color: #ecf0f1;
+    min-height: 5vh;
+}
+
+.error-type h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+/**
+  BOOTSTRAP MODAL CSS START
+ */
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/**
+  BOOTSTRAP MODAL CSS END
+ */
+
+@media (min-width: 992px) {
+
+    .pin {
+        width: 110px;
+        height: 110px;
+        border-radius: 110px;
+        line-height: 100px;
+    }
+
+    a.pin {
+        font-size: 3em;
+    }
+}

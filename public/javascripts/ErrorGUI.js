@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var ErrorGUI = (function () {
 
-        var machineId = '582cae310ce9f313d7e26d9a';
+        var machineId;
         var errorReport;
 
         //jQuery variables
@@ -27,6 +27,8 @@ $(document).ready(function () {
          */
         var machineClick = function () {
             var element = $(this);
+            machineId = element.children(".machine-id").val();
+            console.log(machineId);
             $machine.removeClass("machine-selected");
 
             element.addClass("machine-selected");
@@ -72,7 +74,7 @@ $(document).ready(function () {
         var bindPinClick = function () {
             if(errorReport.usePins) {
                 $pins.removeClass("pin-selected").addClass("pin-selectable");
-                $pins.on('click', pinClick);
+                $pins.off('click').on('click', pinClick);
             }
             else {
                 $pins.removeClass("pin-selected pin-selectable");
@@ -119,15 +121,6 @@ $(document).ready(function () {
     });
 
     ErrorGUI();
-
-    function showModal() {
-        $('#errorReportSuccess').modal('show');
-        setTimeout(function() {
-            $('#errorReportSuccess').modal('hide');
-        }, 2500)
-    }
-
-    showModal();
 });
 
 

@@ -1,0 +1,14 @@
+.row {
+    min-height: 100px;
+}
+
+.indents {
+    padding-top: 10px;
+    margin: 30px;
+}
+
+.errorReport {
+    display: block;
+    height: 100%;
+    background-color: white;
+}
