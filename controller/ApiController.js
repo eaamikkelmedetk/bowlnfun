@@ -8,24 +8,33 @@
 var Error = require('../models/error');
 
 module.exports.postError = function (req, res) {
-    var error = new Error({
-        type: req.body.type,
-        machineId: req.body.machineId,
-        timestamp: Date.now()
-    });
-    if(req.body.pins != undefined)
-        error.pins = JSON.parse(req.body.pins);
 
-    console.log(error);
+    var pinsValidation =  req.body.pins != undefined ? Array.isArray(JSON.parse(req.body.pins)) : false;
+    var machineIdValidation = req.body.machineId != undefined;
+    var typeValidation = req.body.type != undefined;
 
-    error.save(function (err) {
-        console.log(err);
-        if (err) {
-            res.json({message: "A system error has occured, try again later..."});
-        } else {
-            res.json({message: "The error has been added to the registry"});
-        }
-    })
+    var errorReportAuthorized = pinsValidation && machineIdValidation && typeValidation;
+
+
+    if(errorReportAuthorized) {
+
+        var errorReport = new Error({
+            type: req.body.type,
+            machineId: req.body.machineId,
+            timestamp: Date.now(),
+            pins: JSON.parse(req.body.pins)
+        });
+
+        errorReport.save(function (err) {
+            console.log(err);
+            if (err) {
+                res.json({message: "A system error has occured, try again later..."});
+            } else {
+                res.json({message: "The error has been added to the registry"});
+            }
+        });
+    }
+    else res.status(417).json({message: "POST request did not recieve expected data"});
 };
 
 module.exports.getErrors = function(req, res) {
