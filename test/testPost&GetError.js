@@ -9,13 +9,24 @@ suite("POST /errors", function () {
 
     /*-----------------------  TC1  ---------------------------------*/
 
-    test('POST: should post an errors on /errors/', function (done){
+    test('POST: should post an errors on /api/errors/', function (done){
             var error = {
                 __v: 0,
                 _id: "582c58a573daae3fe40f80e2",
-                pins: [],
+                pins: [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+                ],
                 timestamp: "2016-11-16T13:01:25.556Z",
-                type: "Sensor afbrudt på banepar"
+                type: "Test"
             };
             request(app)
                 .post("/api/errors/")
@@ -32,7 +43,7 @@ suite("GET /errrors", function () {
 
     /*-----------------------  TC2  ---------------------------------*/
 
-    test("GET: should list errors on /errors/", function() {
+    test("GET: should list errors on /api/errors/", function() {
         request(app)
             .get('/api/errors')
             .expect('Content-Type', /json/)
@@ -44,16 +55,27 @@ suite("GET /errrors", function () {
 
     /*-----------------------  TC3  ---------------------------------*/
 
-   test("GET: should list a SINGLE error on /errors/:id", function (done) {
+   test("GET: should list a SINGLE error on /api/errors/:id", function (done) {
        request(app)
            .get('/api/errors/582c58a573daae3fe40f80e2')
            .expect('Content-Type', /json/)
            .expect(200, { error: [{
                __v: 0,
                _id: "582c58a573daae3fe40f80e2",
-               pins: [],
+               pins: [
+                   false,
+                   false,
+                   false,
+                   false,
+                   false,
+                   false,
+                   false,
+                   false,
+                   false,
+                   false
+               ],
                timestamp: "2016-11-16T13:01:25.556Z",
-               type: "Sensor afbrudt på banepar"
+               type: "Test"
            }]
            }, done);
    })
