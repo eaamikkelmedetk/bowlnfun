@@ -2,11 +2,11 @@
 <div class="row center-text machine-row">
     {{#each machines}}
 
-        {{#modulusEven @index}}
+        {{#modulusEven @index 12}}
         </div>
         <div class="row center-text machine-row">
         {{/modulusEven}}
-        <a class="col-lg-1 col-xs-4 bg-green machine">
+        <a class="col-lg-1 col-xs-2 bg-green machine">
             <input type="hidden" class="machine-id" name="_id" value="{{_id}}">
             <h1>{{machineNumber}}</h1>
         </a>
@@ -17,42 +17,42 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="row center-text">
-                <a class="col-lg-3 bg-reddish error-type"><h1>STAK</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Crash</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Kegler i bord</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Kegle i kugleretur</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>STAK</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Crash</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Kegler i bord</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Kegle i kugleretur</h1></a>
             </div>
             <div class="row center-text">
-                <a class="col-lg-3 bg-reddish error-type use-pins"><h1>Kegle vælter</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Sætter ikke kegler</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Tæller forkert</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Thermosikring i keglehjul</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type use-pins"><h1>Kegle vælter</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Sætter ikke kegler</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Tæller forkert</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Thermosikring i keglehjul</h1></a>
             </div>
             <div class="row center-text">
-                <a class="col-lg-3 bg-reddish error-type"><h1>Thermosikring sweeper</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Termosikring bord</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Kugle under bagstop</h1></a>
-                <a class="col-lg-3 bg-reddish error-type"><h1>Sensor afbrudt på banepar</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Thermosikring sweeper</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Termosikring bord</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Kugle under bagstop</h1></a>
+                <a class="col-lg-3 col-xs-3 bg-reddish error-type"><h1>Sensor afbrudt på banepar</h1></a>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-xs-12">
             <div class="row pins">
-                <div class="col-lg-3"><a class="float-right pin" href="#">10</a></div>
-                <div class="col-lg-3"><a class="float-left pin" href="#">9</a></div>
-                <div class="col-lg-3"><a class="float-right pin" href="#">8</a></div>
-                <div class="col-lg-3"><a class="float-left pin" href="#">7</a></div>
+                <div class="col-lg-3 col-xs-3"><a class="float-right pin" href="#">10</a></div>
+                <div class="col-lg-3 col-xs-3 "><a class="float-left pin" href="#">9</a></div>
+                <div class="col-lg-3 col-xs-3"><a class="float-right pin" href="#">8</a></div>
+                <div class="col-lg-3 col-xs-3"><a class="float-left pin" href="#">7</a></div>
             </div>
             <div class="row pins">
-                <div class="col-lg-4"><a class="float-right pin" href="#">6</a></div>
-                <div class="col-lg-4"><a class="float-center pin" href="#">5</a></div>
-                <div class="col-lg-4"><a class="float-left pin" href="#">4</a></div>
+                <div class="col-lg-4 col-xs-4"><a class="float-right pin" href="#">6</a></div>
+                <div class="col-lg-4 col-xs-4"><a class="float-center pin" href="#">5</a></div>
+                <div class="col-lg-4 col-xs-4"><a class="float-left pin" href="#">4</a></div>
             </div>
             <div class="row pins">
-                <div class="col-lg-6"><a class="float-right pin" href="#">3</a></div>
-                <div class="col-lg-6"><a class="float-left pin" href="#">2</a></div>
+                <div class="col-lg-6 col-xs-6"><a class="float-right pin" href="#">3</a></div>
+                <div class="col-lg-6 col-xs-6"><a class="float-left pin" href="#">2</a></div>
             </div>
             <div class="row pins">
-                <div class="col-lg-12"><a class="float-center pin" href="#">1</a></div>
+                <div class="col-lg-12 col-xs-12"><a class="float-center pin" href="#">1</a></div>
             </div>
         </div>
     </div>
