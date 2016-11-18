@@ -7,9 +7,10 @@ module.exports.index = function(req, res) {
     });
 };
 
-
-Handlebars.registerHelper("modulusEven", function(num, block) {
-   if(parseInt(num) % parseInt(12) === 12) {
+Handlebars.registerHelper("modulusEven", function(num, divider, block) {
+   if(parseInt(num) % parseInt(divider) === 0) {
         return block.fn(this);
     }
 });
+
+
