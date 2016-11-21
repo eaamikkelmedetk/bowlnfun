@@ -1,17 +1,14 @@
 <div class="container-fluid machines">
-<div class="row center-text machine-row">
-    {{#each machines}}
-
-        {{#modulusEven @index 12}}
-        </div>
+    {{#grouped_each 12 machines}}
         <div class="row center-text machine-row">
-        {{/modulusEven}}
-        <a class="col-lg-1 col-xs-2 bg-green machine">
-            <input type="hidden" class="machine-id" name="_id" value="{{_id}}">
-            <h1>{{machineNumber}}</h1>
-        </a>
-    {{/each}}
-</div>
+            {{#each this }}
+                <a class="col-lg-1 col-xs-2 bg-green machine">
+                    <input type="hidden" class="machine-id" name="_id" value="{{_id}}">
+                    <h1>{{machineNumber}}</h1>
+                </a>
+            {{/each}}
+        </div>
+    {{/grouped_each}}
 </div>
 <div class="container-fluid space-between errors">
     <div class="row">

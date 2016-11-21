@@ -17,7 +17,6 @@ module.exports.postError = function (req, res) {
 
 
     if(errorReportAuthorized) {
-
         var errorReport = new Error({
             type: req.body.type,
             machineId: req.body.machineId,

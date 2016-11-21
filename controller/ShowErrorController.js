@@ -16,7 +16,7 @@ module.exports.index = function(req, res) {
         }
     ]).exec().then(function(errors) {
 
-        res.render('showerrors', {layout: 'layoutcenterlogin.hbs', "error": errors});
+        res.render('showerrors', {layout: 'CenterLayout.hbs', "error": errors});
     })
 };
 
