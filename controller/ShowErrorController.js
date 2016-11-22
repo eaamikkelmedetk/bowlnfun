@@ -60,6 +60,10 @@ Handlebars.registerHelper("format", function (inputDate) {
     return formattedDate;
 });
 
+Handlebars.registerHelper('getDate', function() {
+   return new Date().getDate();
+});
+
 function addZero(i) {
     if (i < 10) {
         i = "0" + i;
