@@ -108,7 +108,7 @@ suite("GET /errrors", function () {
                    false
                ],
                timestamp: "2016-11-16T13:01:25.556Z",
-               type: "Test"
+               type: "Sensor afbrudt på banepar"
            }]
            }, done);
    });
