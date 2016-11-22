@@ -8,7 +8,7 @@ var error = new Schema({
     pins: Array,
     type: String,
     timestamp: Date,
-    machineId: Schema.Types.ObjectId
+    machineId: {type: Schema.Types.ObjectId}
 });
 
 module.exports = mongoose.model('Error', error);

@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var machine = new Schema({
-    machineNumber: String,
+    machineNumber: Number,
     state: String,
     centerId: Number
 });
