@@ -7,6 +7,7 @@
 
 var Error = require('../models/error');
 
+
 module.exports.postError = function (req, res) {
 
     var pinsValidation =  req.body.pins != undefined ? Array.isArray(JSON.parse(req.body.pins)) : false;
@@ -50,5 +51,3 @@ module.exports.getError = function (req, res) {
             return res.json({"error": singleError})
         })
 };
-
-

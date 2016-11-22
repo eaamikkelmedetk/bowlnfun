@@ -4,16 +4,24 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var config = require('./config');
 var mongoose = require('mongoose');
+
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://root:gummiand@ds011893.mlab.com:11893/bowlnfun');
 
 var index = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');
+var admin = require('./routes/admin');
+var authenticate = require('./routes/authentication');
 
 var app = express();
+
+/*--------------------------------------------------*/
+/*                 Configuration                    */
+/*--------------------------------------------------*/
+mongoose.connect(config.database);
+app.set('superSecret', config.secret);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,9 +35,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Open routers(s)
 app.use('/', index);
+
+// 'authenticate' locks all routers assigned later in the code, with a token requirement.
+app.use(authenticate);
+
+// Locked router(s)
 app.use('/api', api);
 app.use('/users', users);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
