@@ -53,7 +53,7 @@ module.exports.index = function (req, res) {
 
 Handlebars.registerHelper("format", function (inputDate) {
     var date = new Date(inputDate);
-
+2
     var formattedDate = "Dato: " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " - kl. " + date.getHours() + ":" + addZero(date.getUTCMinutes());
 
     return formattedDate;
@@ -65,3 +65,14 @@ function addZero(i) {
     }
     return i;
 }
+
+Handlebars.registerHelper("print", function (pins) {
+    var printPins = [];
+    for(var i = 0; i < pins.length; i++) {
+        if (pins[i] != false) {
+            console.log(i);
+            printPins.push("&nbsp;" + (i+1));
+        }
+    }
+    return new Handlebars.SafeString(printPins);
+});
