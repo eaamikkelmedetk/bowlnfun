@@ -1,6 +1,6 @@
 var errorModel = require("../models/error");
-var machineModel = require("../models/machine");
 var Handlebars = require("hbs");
+var moment = require("moment");
 
 
 module.exports.index = function (req, res) {
@@ -61,7 +61,8 @@ Handlebars.registerHelper("format", function (inputDate) {
 });
 
 Handlebars.registerHelper('getDate', function() {
-   return new Date().getDate();
+    var dato = moment().subtract(1, "days").format("DD/MM/YYYY");
+    return dato;
 });
 
 function addZero(i) {

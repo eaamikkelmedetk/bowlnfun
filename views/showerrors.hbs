@@ -2,19 +2,10 @@
     <h1>Dagsrapport</h1>
     <div class="row">
     <div class="col-lg-3 col-md-3 col-xs-3">
-        <p class="inline">Fra dato</p>
-        <div class="input-group date" data-provide="datepicker">
-            <input type="text" value="12-02-2012" class="form-control">
-            <div class="input-group-addon">
-                <span class="glyphicon glyphicon-th"></span>
-            </div>
-        </div>
-        <p class="inline">Til dato</p>
-        <div class="input-group date" data-provide="datepicker">
-            <input type="text" class="form-control">
-            <div class="input-group-addon">
-                <span class="glyphicon glyphicon-th"></span>
-            </div>
+        <div class="input-group input-daterange">
+            <input type="text" class="form-control" id="fromDate" value="{{getDate}}">
+            <span class="input-group-addon">til</span>
+            <input type="text" class="form-control" id="toDate" value="{{getDate}}">
         </div>
     </div>
 </div>
@@ -26,7 +17,7 @@
             <h2>Tidspunkt</h2>
         </div>
         <div class="col-lg-4 col-md-4 col-xs-4">
-            <h2>Pins</h2>
+            <h2>Kegler</h2>
         </div>
     </div>
     {{#each error}}

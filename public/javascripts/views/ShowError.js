@@ -1,6 +1,10 @@
 $(document).ready(function() {
-    $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
-    });
+    var fromDate = $('#fromDate');
+    var toDate = $('#toDate');
+
+    fromDate.datepicker();
+    toDate.datepicker();
+
+    
+    console.log(fromDate.datepicker("getDate"));
 });
