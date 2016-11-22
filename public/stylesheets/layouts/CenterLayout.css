@@ -1,5 +1,13 @@
+body {
+    font-size: 16px;
+}
+
+.container {
+    background-color: white;
+}
+
 .row {
-    min-height: 100px;
+    min-height: 70px;
 }
 
 .indents {
@@ -11,4 +19,12 @@
     display: block;
     height: 100%;
     background-color: white;
+}
+
+p.inline {
+    display: inline;
+}
+
+.form-control {
+    display: inline;
 }
