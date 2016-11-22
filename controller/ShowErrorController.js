@@ -41,7 +41,8 @@ module.exports.index = function (req, res) {
         },
         {
             $sort: {
-                "_id.machineNumber": 1
+                "_id.machineNumber": 1,
+                "timestamp": 1
             }
         },
     ]).exec().then(function (errors) {
