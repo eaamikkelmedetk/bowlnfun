@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var authenticationController = require('../controller/AuthenticationController');
 
-router.post('/authenticate', authenticationController.authenticateLogin);
+router.post('/', authenticationController.authenticateLogin);
 
 router.use(authenticationController.authenticateToken);
 
