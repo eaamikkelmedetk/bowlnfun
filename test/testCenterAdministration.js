@@ -5,6 +5,9 @@
 var request = require('supertest');
 var app = require('../app');
 var route = "/admin/centers/";
+var Center = "../models/center";
+
+var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1NmEzZjI5YTg1MTEyYWNiNjNlM2MiLCJjZW50ZXJJZCI6IjU4MzU2YTNmMjlhODUxMTJhY2I2M2UzYiIsInBlcm1pc3Npb25zIjoicmVhZC1hY2Nlc3MiLCJpYXQiOjE0Nzk4OTU3ODEsImV4cCI6MTQ3OTk4MjE4MX0.xlT_NlUrQcoMFJsTVFcIWjp8_imkMbr5DlAyfzrp7Kc"
 
 suite('POST /admin/centers', function () {
 
@@ -16,7 +19,8 @@ suite('POST /admin/centers', function () {
             readName: "testCenterReadTC7",
             writeName: "testCenterWriteTC7",
             readPass: "testCenterReadPassTC7",
-            writePass: "testCenterWritePassTC7"
+            writePass: "testCenterWritePassTC7",
+            token: validToken
         };
         request(app)
             .post(route)
@@ -32,7 +36,8 @@ suite('POST /admin/centers', function () {
             readName: "testCenterReadTC8",
             writeName: "testCenterWriteTC8",
             readPass: "testCenterReadPassTC8",
-            writePass: "testCenterWritePassTC8"
+            writePass: "testCenterWritePassTC8",
+            token: validToken
         };
         request(app)
             .post(route)
@@ -48,7 +53,8 @@ suite('POST /admin/centers', function () {
             name: "testCenterTC9",
             writeName: "testCenterWriteTC9",
             readPass: "testCenterReadPassTC9",
-            writePass: "testCenterWritePassTC9"
+            writePass: "testCenterWritePassTC9",
+            token: validToken
         };
         request(app)
             .post(route)
@@ -64,7 +70,8 @@ suite('POST /admin/centers', function () {
             name: "testCenterTC10",
             readName: "testCenterReadTC10",
             readPass: "testCenterReadPassTC10",
-            writePass: "testCenterWritePassTC10"
+            writePass: "testCenterWritePassTC10",
+            token: validToken
         };
         request(app)
             .post(route)
@@ -80,7 +87,8 @@ suite('POST /admin/centers', function () {
             name: "testCenterTC11",
             readName: "testCenterReadTC11",
             writeName: "testCenterWriteTC11",
-            writePass: "testCenterWritePassTC11"
+            writePass: "testCenterWritePassTC11",
+            token: validToken
         };
         request(app)
             .post(route)
@@ -96,7 +104,8 @@ suite('POST /admin/centers', function () {
             name: "testCenterTC12",
             readName: "testCenterReadTC12",
             writeName: "testCenterWriteTC12",
-            readPass: "testCenterReadPassTC12"
+            readPass: "testCenterReadPassTC12",
+            token: validToken
         };
         request(app)
             .post(route)
@@ -105,3 +114,21 @@ suite('POST /admin/centers', function () {
             .expect(417, done);
     });
 });
+
+// suite('PUT /admin/centers', function() {
+//     test("DELETE: should deactivate a 'center' and associated 'users' from DB", function(done){
+//         var tC7CenterId;
+//
+//         Center.findOne({name: "testCenterTC7"}, function(err, center){
+//             tC7CenterId = center._id;
+//         });
+//         var center = {
+//             id: tC7CenterId
+//         };
+//         request(app)
+//             .put(route)
+//             .type("form")
+//             .send(center)
+//             .expect(200, done);
+//     })
+// })
