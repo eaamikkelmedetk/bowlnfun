@@ -20,6 +20,10 @@ var center = new Schema({
     name: {
         type: String,
         required: true
+    },
+    active: {
+        type: Boolean,
+        required: true
     }
 });
 

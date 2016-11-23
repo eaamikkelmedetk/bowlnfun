@@ -20,11 +20,14 @@ var user = new Schema({
         required: true
     },
     role: {
-        type: Number,
+        type: String,
         required: true
     },
     centerId: {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId
+    },
+    active: {
+        type: Boolean,
         required: true
     }
 });

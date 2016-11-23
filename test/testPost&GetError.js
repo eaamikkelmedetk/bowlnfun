@@ -5,6 +5,9 @@ var request = require('supertest');
 
 var app = require('../app');
 
+var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1NmEzZjI5YTg1MTEyYWNiNjNlM2MiLCJjZW50ZXJJZCI6IjU4MzU2YTNmMjlhODUxMTJhY2I2M2UzYiIsInBlcm1pc3Npb25zIjoicmVhZC1hY2Nlc3MiLCJpYXQiOjE0Nzk4OTU3ODEsImV4cCI6MTQ3OTk4MjE4MX0.xlT_NlUrQcoMFJsTVFcIWjp8_imkMbr5DlAyfzrp7Kc"
+
+
 suite("POST /errors", function () {
 
     /*-----------------------  TC1  ---------------------------------*/
@@ -16,7 +19,8 @@ suite("POST /errors", function () {
                 pins: JSON.stringify([]),
                 timestamp: "2016-11-16T13:01:25.556Z",
                 machineId: '582cae310ce9f313d7e26d9a',
-                type: "Sensor afbrudt på banepar"
+                type: "Sensor afbrudt på banepar",
+                token: validToken
             };
             request(app)
                 .post("/api/errors/")
@@ -34,7 +38,8 @@ suite("POST /errors", function () {
         var error = {
             pins: 5,
             type: "TC4",
-            machineId: '582cae310ce9f313d7e26d9a'
+            machineId: '582cae310ce9f313d7e26d9a',
+            token: validToken
         };
         request(app)
             .post("/api/errors/")
@@ -48,7 +53,8 @@ suite("POST /errors", function () {
     test("POST: type must be defined", function(done) {
         var error = {
             pins: JSON.stringify([1,4]),
-            machineId: '582cae310ce9f313d7e26d9a'
+            machineId: '582cae310ce9f313d7e26d9a',
+            token: validToken
         };
         request(app)
             .post("/api/errors/")
@@ -62,7 +68,8 @@ suite("POST /errors", function () {
     test("POST: machineId must be defined", function(done) {
         var error = {
             pins: JSON.stringify([]),
-            type: "TC6"
+            type: "TC6",
+            token: validToken
         };
         request(app)
             .post("/api/errors/")
@@ -72,7 +79,7 @@ suite("POST /errors", function () {
     });
 });
 
-suite("GET /errrors", function () {
+suite("GET /errors", function () {
 
     /*-----------------------  TC2  ---------------------------------*/
 

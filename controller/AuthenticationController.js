@@ -19,26 +19,12 @@ module.exports.authenticateLogin = function (req, res) {
             var token = jwt.sign({
                 sub: user._id,
                 centerId: user.centerId,
-                permissions: function() {
-                    var result;
-                    switch(user.role) {
-                        case 1:
-                            result = "read-errors";
-                            break;
-                        case 2:
-                            result = "write-errors";
-                            break;
-                        case 3:
-                            result = "admin";
-                            break;
-                    }
-                    return result;
-                }()
+                permissions: user.role
             }, config.secret, {expiresIn: '24h'});
             console.log(token);
             // return the information including token as JSON
             res.cookie("bowlnfunErrorApp", token, {
-                expires: new Date(Date.now() + (60 * 60 * 24 * 30))
+                expires: new Date(Date.now() + (1000 * 60 * 60 * 24))
             })
                 .json({
                 success: true,
@@ -67,6 +53,13 @@ module.exports.authenticateToken = function (req, res, next) {
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
+                req.permission = function (level) {
+                    var permissions = req.decoded.permissions.split(',');
+                    var result = false;
+                    for(var i = 0; i < permissions.length; i++)
+                        if(permissions[i] == level) result = true;
+                    return result;
+                };
                 next();
             }
         });
@@ -81,7 +74,7 @@ module.exports.authenticateToken = function (req, res, next) {
         });
 
     }
-}
+};
 
 function sha512(password, salt){
     var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
