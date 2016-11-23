@@ -36,6 +36,4 @@ var ErrorService = (function() {
         addError: publicAddError
     };
 
-
-
 })();

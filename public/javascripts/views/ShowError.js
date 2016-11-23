@@ -5,6 +5,5 @@ $(document).ready(function() {
     fromDate.datepicker();
     toDate.datepicker();
 
-    
     console.log(fromDate.datepicker("getDate"));
 });

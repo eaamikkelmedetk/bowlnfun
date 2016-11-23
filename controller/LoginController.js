@@ -8,6 +8,10 @@ var User = require('../models/user');
 var config = require('../config');
 
 
+module.exports.login = function (req, res) {
+    res.render('login');
+};
+
 module.exports.authenticateLogin = function (req, res) {
     User.findOne({
         name: req.body.name
