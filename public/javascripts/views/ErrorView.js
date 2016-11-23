@@ -18,10 +18,6 @@ $(document).ready(function () {
             $pins = $('.pin');
         }();
 
-        var init = function () {
-
-        }();
-
         /**
          * Responsible for binding a handler to machine click events
          */

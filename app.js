@@ -13,7 +13,7 @@ var index = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
-var authenticate = require('./routes/authentication');
+var authenticate = require('./routes/login');
 
 var app = express();
 
@@ -37,9 +37,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Open routers(s)
 app.use('/', index);
+app.use('/authenticate', authenticate);
 
 // 'authenticate' locks all routers assigned later in the code, with a token requirement.
-app.use(authenticate);
+// app.use(authenticate);
 
 // Locked router(s)
 app.use('/api', api);

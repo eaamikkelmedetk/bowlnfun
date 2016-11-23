@@ -7,7 +7,10 @@ var Schema = mongoose.Schema;
 var machine = new Schema({
     machineNumber: Number,
     state: String,
-    centerId: Number
+    centerId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Machine', machine);
