@@ -2,17 +2,16 @@
  * Created by Morten on 16/11/2016.
  */
 var request = require('supertest');
-
+var route = '/terminal/api/errors'
 var app = require('../app');
 
-var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1NmEzZjI5YTg1MTEyYWNiNjNlM2MiLCJjZW50ZXJJZCI6IjU4MzU2YTNmMjlhODUxMTJhY2I2M2UzYiIsInBlcm1pc3Npb25zIjoicmVhZC1hY2Nlc3MiLCJpYXQiOjE0Nzk4OTU3ODEsImV4cCI6MTQ3OTk4MjE4MX0.xlT_NlUrQcoMFJsTVFcIWjp8_imkMbr5DlAyfzrp7Kc"
-
+var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1ODU0NmY3YzE5NWFhNTVjYTY0YmIiLCJwZXJtaXNzaW9ucyI6InJlYWQtYWNjZXNzLHdyaXRlLWFjY2VzcyxhZG1pbiIsImlhdCI6MTQ3OTk4MjUyOCwiZXhwIjoxNDgwMDY4OTI4fQ._0Ldod7qhMO1xFSNGI0osSKxHIF5uMdfJyQ9Mjerjyc";
 
 suite("POST /errors", function () {
 
     /*-----------------------  TC1  ---------------------------------*/
 
-    test('POST: should post an errors on /api/errors/', function (done){
+    test('POST: should post an error on /api/errors/', function (done){
             var error = {
                 __v: 0,
                 _id: "582c58a573daae3fe40f80e2",
@@ -23,7 +22,7 @@ suite("POST /errors", function () {
                 token: validToken
             };
             request(app)
-                .post("/api/errors/")
+                .post(route)
                 .type("form")
                 .send(error)
                 .expect(200)
@@ -42,7 +41,7 @@ suite("POST /errors", function () {
             token: validToken
         };
         request(app)
-            .post("/api/errors/")
+            .post(route)
             .type("form")
             .send(error)
             .expect(417, done);
@@ -57,7 +56,7 @@ suite("POST /errors", function () {
             token: validToken
         };
         request(app)
-            .post("/api/errors/")
+            .post(route)
             .type("form")
             .send(error)
             .expect(417, done);
@@ -72,52 +71,9 @@ suite("POST /errors", function () {
             token: validToken
         };
         request(app)
-            .post("/api/errors/")
+            .post(route)
             .type("form")
             .send(error)
             .expect(417, done);
     });
-});
-
-suite("GET /errors", function () {
-
-    /*-----------------------  TC2  ---------------------------------*/
-
-    test("GET: should list errors on /api/errors/", function() {
-        request(app)
-            .get('/api/errors')
-            .expect('Content-Type', /json/)
-            .expect(200)
-            .end(function(err, res) {
-                if (err) throw err;
-            });
-    });
-
-    /*-----------------------  TC3  ---------------------------------*/
-
-   test("GET: should list a SINGLE error on /api/errors/:id", function (done) {
-       request(app)
-           .get('/api/errors/582c58a573daae3fe40f80e2')
-           .expect('Content-Type', /json/)
-           .expect(200, { error: [{
-               __v: 0,
-               _id: "582c58a573daae3fe40f80e2",
-               pins: [
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false
-               ],
-               timestamp: "2016-11-16T13:01:25.556Z",
-               type: "Sensor afbrudt på banepar"
-           }]
-           }, done);
-   });
-
 });

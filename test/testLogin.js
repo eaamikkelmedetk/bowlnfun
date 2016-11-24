@@ -5,13 +5,13 @@ var request = require('supertest');
 var app = require('../app');
 
 
-suite("GET /authenticate", function () {
+suite("GET /login", function () {
 
     /*-----------------------  TC1  ---------------------------------*/
 
-    test('GET /authenticate', function(done){
+    test('GET /login', function(done){
         request(app)
-            .get('/authenticate')
+            .get('/login')
             .expect(200)
             .end(function(err, res){
                 if (err) return done(err);
@@ -22,13 +22,13 @@ suite("GET /authenticate", function () {
 
 });
 
-suite("POST /authenticate", function () {
+suite("POST /login", function () {
 
     /*-----------------------  TC2  ---------------------------------*/
 
-    test('POST /authenticate', function(done) {
+    test('POST /login', function(done) {
         request(app)
-            .post('/authenticate')
+            .post('/login/authenticate')
             .send({ name: "root", password: "gummiand" })
             .expect(200)
             .end(onResponse);
