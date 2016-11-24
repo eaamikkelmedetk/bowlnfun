@@ -9,4 +9,9 @@ router.get('/', loginController.redirect);
 router.get('/login', loginController.login);
 router.post('/login/authenticate', loginController.authenticateLogin);
 
+//Lock routes
+router.use('/terminal', loginController.terminalAccess);
+router.use('/center', loginController.centerAccess);
+router.use('/admin', loginController.adminAccess);
+
 module.exports = router;

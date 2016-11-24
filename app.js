@@ -36,21 +36,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Open routers(s)
-// app.get('/', function(req, res) {
-//    res.json("Her vil redirect hvis man er/ er ikke logget ind være");
-// });
-
-//app.use('/', <indsæt redirectroutertingeling> );
-
-
-// 'authenticate' locks all routers assigned later in the code, with a token requirement.
 app.use(login);
 
 
 // Locked router(s)
-app.use('/terminal', loginController.terminalAccess, terminal);
-app.use('/center', loginController.centerAccess, center);
-app.use('/admin', loginController.adminAccess, admin);
+app.use('/terminal', terminal);
+app.use('/center', center);
+app.use('/admin', admin);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
