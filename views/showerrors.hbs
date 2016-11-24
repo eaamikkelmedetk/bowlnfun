@@ -1,21 +1,28 @@
 <div class="container">
-    <h1>Dagsrapport</h1>
-    <div class="row">
+    <h1>Dagsrapport </h1><span class="glyphicon glyphicon-print hidden-print glyphicon-bigger" onclick="window.print()"></span><br /><br />
+    <div class="row hidden-print fromToBox" ><br />
         <div class="col-lg-4 col-md-4 col-xs-4">
-            <div class="input-group input-daterange">
-                <span class="input-group-addon">&nbsp;fra</span>
+            <p><strong>Fra dato</strong></p>
+            <div class="input-group date fromDateBtn">
                 <input type="text" class="form-control" id="fromDate">
                 <div class="input-group-addon">
-                    &nbsp;<span class="glyphicon glyphicon-th"></span>
-                </div>
-                <span class="input-group-addon">til</span>
-                <input type="text" class="form-control" id="toDate">
-                <div class="input-group-addon">
-                    &nbsp;<span class="glyphicon glyphicon-th"></span>&nbsp;
+                    <span class="glyphicon glyphicon-th"></span>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            <p><strong>Til dato:</strong></p>
+            <div class="input-group date">
+                <input type="text" class="form-control" id="toDate">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th toDateBtn"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            <br /><br /><br /><br />
+        </div>
+    </div><br/>
     <div class="row row-noheight">
         <div class="col-lg-4 col-md-4 col-xs-4">
             <h2>Fejltype</h2>
@@ -27,7 +34,7 @@
             <h2>Kegler</h2>
         </div>
     </div>
-    <hr />
+    <hr/>
     <div id="errorContainer">
 
     </div>

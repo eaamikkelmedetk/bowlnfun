@@ -210,7 +210,7 @@
 			}
 			o.language = lang;
 
-			// Retrieve view index from any aliases
+			// Retrieve view terminal from any aliases
 			o.startView = this._resolveViewName(o.startView, 0);
 			o.minViewMode = this._resolveViewName(o.minViewMode, 0);
 			o.maxViewMode = this._resolveViewName(o.maxViewMode, 4);
@@ -666,7 +666,7 @@
 
 			var parentsZindex = [];
 			this.element.parents().each(function(){
-				var itemZIndex = $(this).css('z-index');
+				var itemZIndex = $(this).css('z-terminal');
 				if (itemZIndex !== 'auto' && itemZIndex !== 0) parentsZindex.push(parseInt(itemZIndex));
 			});
 			var zIndex = Math.max.apply(Math, parentsZindex) + this.o.zIndexOffset;

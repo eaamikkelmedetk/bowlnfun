@@ -14,7 +14,7 @@ var ErrorService = (function() {
 
     function publicAddError(callBack, errorReport) {
         var root = window.location.origin;
-        var route = '/api/errors';
+        var route = '/terminal/api/errors';
         if (errorReport.pins === undefined)
             errorReport.pins = [];
         $.ajax(

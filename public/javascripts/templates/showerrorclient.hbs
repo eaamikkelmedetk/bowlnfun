@@ -1,7 +1,7 @@
 {{#if error}}
     {{#each error}}
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-xs-4">
+        <div class="row coloroddeven">
+            <div class="col-lg-4 col-md-4 col-xs-4 colmargin">
                 <h3>Maskine {{_id.machineNumber}}</h3>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
@@ -11,13 +11,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-xs-4">
+            <div class="col-lg-4 col-md-4 col-xs-4 colmargin">
                 <h3>&nbsp;</h3>
                 {{#each timestamp}}
                     <p>{{format this}}</p>
                 {{/each}}
             </div>
-            <div class="col-lg-4 col-md-4 col-xs-4">
+            <div class="col-lg-4 col-md-4 col-xs-4 colmargin">
                 <h3>&nbsp;</h3>
                 {{#each pins}}
                     <p>{{print this}}</p>
@@ -26,5 +26,5 @@
         </div>
     {{/each}}
 {{else}}
-    <p>Der er ikke nogen indrapportede fejl.</p>
+    <p class="red">Der er ikke nogen indrapportede fejl.</p>
 {{/if}}

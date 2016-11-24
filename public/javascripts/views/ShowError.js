@@ -16,12 +16,14 @@ $(document).ready(function() {
             //Set datepicker language to Danish
             $fromDate.datepicker({
                 language: "da",
-                format: 'dd/mm/yyyy'
+                format: 'dd/mm/yyyy',
+                autoclose: true
             });
 
             $toDate.datepicker({
                 language: "da",
-                format: 'dd/mm/yyyy'
+                format: 'dd/mm/yyyy',
+                autoclose: true
             });
 
             //initialize toDatePicker with Date.now
@@ -44,6 +46,14 @@ $(document).ready(function() {
             dates.toISODate = convertTOISO($toDate.datepicker("getDate"));
 
             ShowErrorController.getErrorsFromTo(dates);
+
+            $('.fromDateBtn').on('click', function() {
+                $fromDate.datepicker('show');
+            })
+
+            $('.toDateBtn').on('click', function() {
+                $toDate.datepicker('show');
+            })
 
         };
 

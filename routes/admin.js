@@ -4,16 +4,26 @@
 var express = require('express');
 var router = express.Router();
 var adminController = require('../controller/AdminController');
+var User = require('../models/user');
 
 /* POST */
-router.post('/centers', adminController.addCenter);
 
+router.post('/api/centers', adminController.addCenter);
 /* PUT */
-router.put('/centers', adminController.editCenter);
-router.put('/users', adminController.editUser);
+router.put('/api/centers', adminController.editCenter);
 
+router.put('/api/users', adminController.editUser);
 /* GET */
-router.get('/centers', adminController.getCenters);
-router.get('/users/:name', adminController.getUser);
+router.get('/api/centers', adminController.getCenters);
+
+/* GET users listing. */
+router.get('/api/users', function(req, res, next) {
+    User.find({}, function(err, users) {
+        res.json(users);
+    });
+});
+
+router.get('/api/users/:name', adminController.getUser);
+
 
 module.exports = router;

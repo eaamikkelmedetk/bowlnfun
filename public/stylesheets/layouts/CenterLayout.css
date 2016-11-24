@@ -24,6 +24,7 @@ hr {
 
 h1 {
     display: inline;
+    font-size: 50px;
 }
 
 h2 {
@@ -41,6 +42,38 @@ h3 {
 p {
     font-size: 18px;
     line-height: 16px;
+}
+
+.red {
+    color: darkred;
+}
+
+.colmargin {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.glyphicon-bigger {
+    font-size: 40px;
+    float: right;
+}
+
+.glyphicon-bigger:hover {
+    color: #1abc9c !important;
+}
+
+.fromToBox {
+    background-color:lightgray;
+    border-radius: 20px;
+    border:10px solid lightgray;
+}
+
+.coloroddeven:nth-child(odd) {
+    background-color: #ecf0f1;
+}
+
+.input-group-addon:hover {
+    background-color: #1abc9c;
 }
 
 .loading {

@@ -12,9 +12,9 @@ $(document).ready(function() {
         }
 
         if(hasPins) {
-            toPrint = printPins;
+            toPrint = "<p class='red'>" + printPins + "</p>";
         } else {
-            toPrint = "Ingen kegler";
+            toPrint = "Ingen kegler registreret";
         }
 
             return new Handlebars.SafeString(toPrint);

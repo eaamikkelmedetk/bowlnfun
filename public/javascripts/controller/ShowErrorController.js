@@ -1,6 +1,6 @@
 var ShowErrorController = (function () {
     var root = window.location.origin;
-    var route = '/api/errors';
+    var route = '/center/api/errors';
 
     var $loader = $('.loading');
     var delay = 1000;

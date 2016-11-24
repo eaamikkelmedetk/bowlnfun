@@ -148,7 +148,7 @@ module.exports.getUser = function(req,res){
         });
         else res.status(404).json({success: false, message: "User not found"})
     })
-}
+};
 
 function genSalt(length) {
     return crypto.randomBytes(Math.ceil(length/2))

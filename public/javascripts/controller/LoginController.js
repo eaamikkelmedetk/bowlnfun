@@ -13,7 +13,7 @@ var LoginService = (function() {
 
     function publicLogin(username, password) {
         var root = window.location.origin;
-        var route = '/authenticate';
+        var route = '/login/authenticate';
         $.ajax(
             {
                 type: "POST",
