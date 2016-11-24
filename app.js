@@ -13,7 +13,6 @@ var admin = require('./routes/admin');
 var center = require('./routes/center');
 var terminal = require('./routes/terminal');
 var login = require('./routes/login');
-var loginController = require('./controller/LoginController');
 
 var app = express();
 
