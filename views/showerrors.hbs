@@ -1,15 +1,22 @@
-<div class="container" style="background-color: white;">
+<div class="container">
     <h1>Dagsrapport</h1>
     <div class="row">
-    <div class="col-lg-3 col-md-3 col-xs-3">
-        <div class="input-group input-daterange">
-            <input type="text" class="form-control" id="fromDate" value="{{getDate}}">
-            <span class="input-group-addon">til</span>
-            <input type="t ext" class="form-control" id="toDate" value="{{getDate}}">
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            <div class="input-group input-daterange">
+                <span class="input-group-addon">&nbsp;fra</span>
+                <input type="text" class="form-control" id="fromDate">
+                <div class="input-group-addon">
+                    &nbsp;<span class="glyphicon glyphicon-th"></span>
+                </div>
+                <span class="input-group-addon">til</span>
+                <input type="text" class="form-control" id="toDate">
+                <div class="input-group-addon">
+                    &nbsp;<span class="glyphicon glyphicon-th"></span>&nbsp;
+                </div>
+            </div>
         </div>
     </div>
-</div>
-    <div class="row">
+    <div class="row row-noheight">
         <div class="col-lg-4 col-md-4 col-xs-4">
             <h2>Fejltype</h2>
         </div>
@@ -20,30 +27,12 @@
             <h2>Kegler</h2>
         </div>
     </div>
-    {{#each error}}
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-xs-4">
-                <h3>Bane: {{_id.machineNumber}}</h3>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-xs-12">
-                        {{#each type}}
-                            &nbsp;&nbsp;-&nbsp;{{this}}<br />
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-xs-4">
-                <h3>&nbsp;</h3>
-                {{#each timestamp}}
-                    {{format this}}<br />
-                {{/each}}
-            </div>
-            <div class="col-lg-4 col-md-4 col-xs-4">
-                <h3>&nbsp;</h3>
-                {{#each pins}}
-                    {{print this}}<br />
-                {{/each}}
-            </div>
-        </div>
-    {{/each}}
+    <hr />
+    <div id="errorContainer">
+
+    </div>
 </div>
+
+<script id="errorTemplate" type="text/x-handlebars-template"></script>
+<div class="loading">Loading&#8230;</div>
+
