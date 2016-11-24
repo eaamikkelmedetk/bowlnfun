@@ -7,8 +7,7 @@ var app = require('../app');
 var route = "/admin/api/centers/";
 var Center = "../models/center";
 
-var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1NmEzZjI5YTg1MTEyYWNiNjNlM2MiLCJjZW50ZXJJZCI6IjU4MzU2YTNmMjlhODUxMTJhY2I2M2UzYiIsInBlcm1pc3Npb25zIjoicmVhZC1hY2Nlc3MiLCJpYXQiOjE0Nzk4OTU3ODEsImV4cCI6MTQ3OTk4MjE4MX0.xlT_NlUrQcoMFJsTVFcIWjp8_imkMbr5DlAyfzrp7Kc"
-
+var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1ODU0NmY3YzE5NWFhNTVjYTY0YmIiLCJwZXJtaXNzaW9ucyI6InJlYWQtYWNjZXNzLHdyaXRlLWFjY2VzcyxhZG1pbiIsImlhdCI6MTQ3OTk4MjUyOCwiZXhwIjoxNDgwMDY4OTI4fQ._0Ldod7qhMO1xFSNGI0osSKxHIF5uMdfJyQ9Mjerjyc";
 suite('POST /admin/centers', function () {
 
     /*------------------------------- TC7 -----------------------------------*/
