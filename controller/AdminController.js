@@ -33,6 +33,7 @@ module.exports.addCenter = function (req, res) {
             write: req.body.writeName,
             active: true
         });
+        console.log(center);
         var userRead = new User({
             name: req.body.readName,
             password: read.passwordHash,
@@ -48,37 +49,26 @@ module.exports.addCenter = function (req, res) {
             role: 'write-access',
             active: true
         });
+        console.log(userWrite);
 
         center.save(function (err, doc) {
             if (err) {
-                res.status(417).end();
-                throw err;
+                res.status(417).json({success:false,message:"'center' failed validation"});;
             }
             else {
-                var rollback = false;
                 userWrite.centerId = userRead.centerId = doc._id;
                 userWrite.save(function (err) {
-                    if (err) {
-                        rollback = true
-                        throw err;
-                        res.status(417).end();
-                    }
+                    if (err) res.status(417).json({success:false,message:"'userWrite' failed validation"});
+                    else userRead.save(function (err) {
+                        if (err) res.status(417).json({success:false,message:"'userRead' failed validation"});
+                        else res.json({
+                            "message": "The center has been added to the registry",
+                            "center": doc
+                        });
+                    });
                 });
-                userRead.save(function (err) {
-                    if (err) {
-                        rollback = true
-                        throw err;
-                        res.status(417).end();
-                    }
-                });
-                if (rollback) {
-                    Center.remove({_id: doc._id});
-                    User.remove({centerId: doc._id});
-                }
-                res.json({
-                    "message": "The center has been added to the registry",
-                    "center": doc
-                });
+
+
             }
         });
     }
