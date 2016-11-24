@@ -10,7 +10,7 @@
  * @param {Array} pins - Array of truthy and falsy values representing which pins was involved in the error
  */
 
-var ErrorService = (function() {
+var terminalController = (function() {
 
     function publicAddError(callBack, errorReport) {
         var root = window.location.origin;

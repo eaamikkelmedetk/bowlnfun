@@ -7,7 +7,7 @@ var moment = require('moment');
 
 module.exports.index = function(req, res) {
     machineModel.find().exec().then(function(machines) {
-        res.render('index', {"machines": machines});
+        res.render('terminal', {"layout": "layoutTerminal.hbs", "machines": machines});
     });
 };
 

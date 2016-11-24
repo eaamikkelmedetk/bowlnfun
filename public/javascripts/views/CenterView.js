@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var showError = (function() {
+    var centerView = (function() {
 
         var dates = {};
 
@@ -45,7 +45,7 @@ $(document).ready(function() {
             dates.fromISODate = convertTOISO($fromDate.datepicker("getDate"));
             dates.toISODate = convertTOISO($toDate.datepicker("getDate"));
 
-            CenterController.getErrorsFromTo(dates);
+            centerController.getErrorsFromTo(dates);
 
             $('.fromDateBtn').on('click', function() {
                 $fromDate.datepicker('show');
@@ -69,12 +69,12 @@ $(document).ready(function() {
 
         function changeFromDate(e) {
             dates.fromISODate = convertTOISO($fromDate.datepicker("getDate"));
-            CenterController.getErrorsFromTo(dates);
+            centerController.getErrorsFromTo(dates);
         };
 
         function changeToDate(e) {
             dates.toISODate = convertTOISO($toDate.datepicker("getDate"));
-            CenterController.getErrorsFromTo(dates);
+            centerController.getErrorsFromTo(dates);
         };
 
         function convertTOISO(date) {

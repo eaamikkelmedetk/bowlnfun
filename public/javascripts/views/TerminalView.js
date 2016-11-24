@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var ErrorGUI = (function () {
+    var terminalView = (function () {
 
         var pinsDefault = function() {return [false,false,false,false,false,false,false,false,false,false];};
         var errorReport;
@@ -80,7 +80,7 @@ $(document).ready(function () {
 
         var postErrorReport = function() {
             if(errorReport.type && errorReport.machineId) {
-                ErrorService.addError(resetGui, errorReport);
+                terminalController.addError(resetGui, errorReport);
                 showModal();
             }
             else resetGui();

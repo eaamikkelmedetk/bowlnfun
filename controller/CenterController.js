@@ -6,7 +6,7 @@ var Error = require('../models/error');
 var moment = require('moment');
 
 module.exports.index = function (req, res) {
-    res.render('showerrors', {layout: 'CenterLayout.hbs'});
+    res.render('center', {layout: 'layoutCenter.hbs'});
 };
 
 module.exports.getErrors = function(req, res) {

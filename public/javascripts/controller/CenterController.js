@@ -1,4 +1,4 @@
-var ShowErrorController = (function () {
+var centerController = (function () {
     var root = window.location.origin;
     var route = '/center/api/errors';
 
