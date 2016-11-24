@@ -45,7 +45,7 @@ $(document).ready(function() {
             dates.fromISODate = convertTOISO($fromDate.datepicker("getDate"));
             dates.toISODate = convertTOISO($toDate.datepicker("getDate"));
 
-            ShowErrorController.getErrorsFromTo(dates);
+            CenterController.getErrorsFromTo(dates);
 
             $('.fromDateBtn').on('click', function() {
                 $fromDate.datepicker('show');
@@ -69,12 +69,12 @@ $(document).ready(function() {
 
         function changeFromDate(e) {
             dates.fromISODate = convertTOISO($fromDate.datepicker("getDate"));
-            ShowErrorController.getErrorsFromTo(dates);
+            CenterController.getErrorsFromTo(dates);
         };
 
         function changeToDate(e) {
             dates.toISODate = convertTOISO($toDate.datepicker("getDate"));
-            ShowErrorController.getErrorsFromTo(dates);
+            CenterController.getErrorsFromTo(dates);
         };
 
         function convertTOISO(date) {
