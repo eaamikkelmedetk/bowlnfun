@@ -18,24 +18,22 @@ module.exports.authenticateLogin = function (req, res) {
     }, function (err, user){
 
         if(err) throw err;
-        console.log(user);
         if(user && user.password == sha512(req.body.password, user.salt).passwordHash) {
             var token = jwt.sign({
                 sub: user._id,
                 centerId: user.centerId,
                 permissions: user.role
-            }, config.secret, {expiresIn: '24h'});
-            console.log(token);
+            }, config.secret, {expiresIn: '1d'});
             // return the information including token as JSON
             res.cookie("bowlnfunErrorApp", token, {
-                expires: new Date(Date.now() + (1000 * 60 * 60 * 24))
+                expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7))
             })
-                .json({
-                success: true,
-                message: 'Enjoy your token!',
-                token: token
-            });
-            console.log(res.cookie);
+                .redirect('/');
+            //     .json({
+            //     success: true,
+            //     message: 'Enjoy your token!',
+            //     token: token
+            // });
         } else res.status(401.1).json({
             success: false,
             message: 'Authentication failed. Wrong username or password.'
@@ -43,41 +41,125 @@ module.exports.authenticateLogin = function (req, res) {
     });
 };
 
-module.exports.authenticateToken = function (req, res, next) {
-    // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.bowlnfunErrorApp;
+module.exports.redirect = function (req, res, next) {
+    authenticateTokenAndRedirect({
+        req: req,
+        res: res,
+        next: next
+    });
+};
 
-    // decode token
-    if (token) {
+module.exports.terminalAccess = function (req, res, next) {
+    authenticateTokenAndRedirect({
+        req: req,
+        res: res,
+        next: next,
+        role: 'write-access'
+    });
+};
+module.exports.centerAccess = function (req, res, next) {
+    authenticateTokenAndRedirect({
+        req: req,
+        res: res,
+        next: next,
+        role: 'read-access'
+    });
+};
+module.exports.adminAccess = function (req, res, next) {
+    authenticateTokenAndRedirect({
+        req: req,
+        res: res,
+        next: next,
+        role: 'admin'
+    });
+};
 
-        // verifies secret and checks exp
-        jwt.verify(token, config.secret, function(err, decoded) {
-            if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
-            } else {
-                // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
-                req.permission = function (level) {
-                    var permissions = req.decoded.permissions.split(',');
-                    var result = false;
-                    for(var i = 0; i < permissions.length; i++)
-                        if(permissions[i] == level) result = true;
-                    return result;
-                };
-                next();
-            }
-        });
+function authenticateTokenAndRedirect(dat) {
 
-    } else {
+    dat.token = dat.req.body.token
+        || dat.req.query.token
+        || dat.req.headers['x-access-token']
+        || dat.req.cookies.bowlnfunErrorApp;
 
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
+    if (dat.token) verifyToken(dat);
+    else dat.res.redirect('/login');
+};
 
+function verifyToken (dat) {
+    jwt.verify(dat.token, config.secret, function (err, decoded) {
+        dat.decoded = decoded;
+
+        if (err) {
+            throw err;
+            dat.next(errorMessage("Token verification failed.", 403));
+        }
+        else validateTokenUser(dat);
+    });
+};
+
+function validateTokenUser(dat){
+    User.findOne({
+        _id: dat.decoded.sub
+    }, function(err, user) {
+        dat.user = user;
+
+        if(err) {
+            throw err;
+            dat.next(errorMessage("Token user validation failed.", 403));
+        } else if(dat.user.centerId == dat.decoded.centerId)
+            useToken(dat);
+        else dat.next(errorMessage("Token validation failed.", 403));
+    });
+};
+
+function useToken(dat) {
+    // Add custom properties to decoded
+    dat.req.decoded = expandDecoded(dat.decoded);
+
+    if (dat.next && dat.req.decoded.permission(dat.role)) {
+        dat.next();
+
+    } else if (dat.role) {
+        dat.next(errorMessage("Access denied"), 403);
     }
+    else {
+        var path = "";
+        switch (dat.req.decoded.primary) {
+            case "read-access":
+                path = '/center';
+                break;
+            case "write-access":
+                path = '/terminal';
+                break;
+            case "admin":
+                path = '/admin';
+                break;
+            default:
+                path = '/login';
+                break;
+        }
+        dat.res.redirect(path);
+    }
+}
+
+function expandDecoded(decoded) {
+
+    // if everything is good, save to request for use in other routes
+    var permissions = decoded.permissions.toString().split(',');
+    decoded.primary = permissions[0];
+    decoded.permission = function (level) {
+        var result = false;
+        for (var i = 0; i < permissions.length; i++)
+            if (permissions[i] == level) result = true;
+        return result;
+    };
+    return decoded;
+};
+
+function errorMessage(text, code) {
+    var err = new Error(text);
+    err.status = code;
+    return err;
 };
 
 function sha512(password, salt){
