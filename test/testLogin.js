@@ -9,7 +9,7 @@ suite("GET /login", function () {
 
     /*-----------------------  TC1  ---------------------------------*/
 
-    test('GET /login', function(done){
+    test('GET: Should open site on /login', function(done){
         request(app)
             .get('/login')
             .expect(200)
@@ -26,7 +26,7 @@ suite("POST /login", function () {
 
     /*-----------------------  TC2  ---------------------------------*/
 
-    test('POST /login', function(done) {
+    test('POST: /login', function(done) {
         request(app)
             .post('/login/authenticate')
             .send({ name: "root", password: "gummiand" })

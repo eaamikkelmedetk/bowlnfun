@@ -8,11 +8,11 @@ var app = require('../app');
 
 suite("GET /errors", function () {
 
-    /*-----------------------  TC2  ---------------------------------*/
+    /*-----------------------  TC1  ---------------------------------*/
 
     test("GET: should list errors on /api/errors/", function() {
         request(app)
-            .get('/api/errors')
+            .get('/center/api/errors')
             .expect('Content-Type', /json/)
             .expect(200)
             .end(function(err, res) {

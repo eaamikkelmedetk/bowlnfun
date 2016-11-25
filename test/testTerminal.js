@@ -31,12 +31,12 @@ suite("POST /errors", function () {
                 }, done);
     });
 
-    /*-----------------------  TC4  ---------------------------------*/
+    /*-----------------------  TC2  ---------------------------------*/
 
     test("POST: pins MUST be a stringified array", function (done) {
         var error = {
             pins: 5,
-            type: "TC4",
+            type: "TC2",
             machineId: '582cae310ce9f313d7e26d9a',
             token: validToken
         };
@@ -47,7 +47,7 @@ suite("POST /errors", function () {
             .expect(417, done);
     });
 
-    /*-----------------------  TC5  ---------------------------------*/
+    /*-----------------------  TC3  ---------------------------------*/
 
     test("POST: type must be defined", function(done) {
         var error = {
@@ -62,12 +62,12 @@ suite("POST /errors", function () {
             .expect(417, done);
     });
 
-    /*-----------------------  TC6  ---------------------------------*/
+    /*-----------------------  TC4  ---------------------------------*/
 
     test("POST: machineId must be defined", function(done) {
         var error = {
             pins: JSON.stringify([]),
-            type: "TC6",
+            type: "TC4",
             token: validToken
         };
         request(app)
