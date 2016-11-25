@@ -10,6 +10,10 @@ var User = require('../models/user');
 
 var saltLength = 16;
 
+module.exports.index = function (req, res) {
+    res.render('admin', {layout: "layoutAdmin.hbs"});
+};
+
 module.exports.addCenter = function (req, res) {
 
     var writePassValidation = req.body.writePass != undefined;

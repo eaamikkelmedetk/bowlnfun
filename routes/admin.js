@@ -6,8 +6,9 @@ var router = express.Router();
 var adminController = require('../controller/AdminController');
 var User = require('../models/user');
 
-/* POST */
+router.get('/', adminController.index);
 
+/* POST */
 router.post('/api/centers', adminController.addCenter);
 /* PUT */
 router.put('/api/centers', adminController.editCenter);

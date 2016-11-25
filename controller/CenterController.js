@@ -47,6 +47,11 @@ module.exports.getErrors = function(req, res) {
             }
         },
         {
+            $sort: {
+                "timestamp": -1
+            }
+        },
+        {
             $group: {
                 "_id": { machineNumber: "$machine.machineNumber"},
                 "type": { $push: "$type"},
@@ -56,8 +61,7 @@ module.exports.getErrors = function(req, res) {
         },
         {
             $sort: {
-                "_id.machineNumber": 1,
-                "timestamp": -1
+                "_id.machineNumber": 1
             }
         }
     ]).exec().then(function (errors) {
