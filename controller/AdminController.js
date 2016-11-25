@@ -59,14 +59,14 @@ module.exports.addCenter = function (req, res) {
                 userWrite.centerId = userRead.centerId = doc._id;
                 userWrite.save(function (err) {
                     if (err) {
-                        rollback = true
+                        rollback = true;
                         throw err;
                         res.status(417).end();
                     }
                 });
                 userRead.save(function (err) {
                     if (err) {
-                        rollback = true
+                        rollback = true;
                         throw err;
                         res.status(417).end();
                     }
