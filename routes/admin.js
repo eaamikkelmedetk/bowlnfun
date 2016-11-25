@@ -10,20 +10,18 @@ router.get('/', adminController.index);
 
 /* POST */
 router.post('/api/centers', adminController.addCenter);
+router.post('/api/machine', adminController.addMachine);
+
 /* PUT */
 router.put('/api/centers', adminController.editCenter);
-
+router.put('/api/machines', adminController.editMachine);
 router.put('/api/users', adminController.editUser);
+
 /* GET */
 router.get('/api/centers', adminController.getCenters);
-
-/* GET users listing. */
-router.get('/api/users', function(req, res, next) {
-    User.find({}, function(err, users) {
-        res.json(users);
-    });
-});
-
+router.get('/api/machines', adminController.getMachinesFromCenter);
+router.get('/api/machine/:id', adminController.getMachine);
+router.get('/api/users', adminController.getUsers);
 router.get('/api/users/:name', adminController.getUser);
 
 
