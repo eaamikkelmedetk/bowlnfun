@@ -1,0 +1,184 @@
+body {
+    color: white;
+}
+
+h1.menu-heading {
+    font-size: 50px;
+    padding-left: 13px;
+}
+
+
+.no-margin {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.menu {
+    background-color: #1abc9c;
+    min-height: 100%;
+    height: 100%;
+}
+
+.menu-items {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.menu-items ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.menu-items li {
+    display: block;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+ul.menu-items > li > a:link {
+    cursor: pointer;
+    display: block;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+ul.menu-items > li > a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+ul.menu-items > li:hover,
+ul.menu-items > li > a:hover {
+    background-color: white;
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+.menu-items .menu-items-text {
+    padding-left: 20px;
+}
+
+ul > li.menu-active,
+ul > li.menu-active:focus,
+ul > li.menu-active a:link  {
+    background-color: white;
+    color: #1abc9c;
+}
+
+ul > li.menu-active a:visited {
+    color: #1abc9c;
+}
+
+.bg-white {
+    background-color: white;
+    min-height: 96vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Panel tabs*/
+
+.panel {
+    border: 0;
+}
+
+.panel-body {
+    min-height: 350px;
+}
+
+.panel-heading {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+ul.panel-tabs li {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    text-align: center;
+    background-color: white;
+    border: 2px solid #1abc9c;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #1abc9c;
+}
+
+ul.panel-tabs li:hover
+{
+    display: inline-block;
+    float: left;
+    width: 50%;
+    text-align: center;
+    background-color: white;
+    border: 2px solid #1abc9c;
+}
+
+ul.panel-tabs li > a:link, ul.panel-tabs li a:visited
+{
+    color: #1abc9c;
+}
+
+ul.panel-tabs li > a:hover {
+    color: white;
+}
+
+.panel-tabs .active
+{
+    background-color: #1abc9c;
+}
+
+.panel-tabs .active a:link, .panel-tabs .active a:visited {
+    color: white;
+}
+
+.panel-tabs .active > a:hover {
+    background-color: #1abc9c;
+}
+
+
+
+
+ul.panel-tabs li a {
+    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.tab-pane {
+    font-size: 18px;
+    color: black;
+}
+
+.tab-pane h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 45px;
+}
+
+.maskiner {
+    color: black;
+    text-align: center;
+}
+
+.maskine {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 30px;
+    min-height: 150px;
+    line-height: 150px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    color: #1abc9c;
+    text-transform: uppercase;
+    border: 3px solid #1abc9c;
+    border-radius: 5%;
+}
+
+
