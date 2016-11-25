@@ -114,9 +114,7 @@ $(document).ready(function () {
         };
 
         resetGui();
-    });
-
-    ErrorGUI();
+    }());
 });
 
 
