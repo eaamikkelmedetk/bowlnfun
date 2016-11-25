@@ -1,28 +1,28 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     Handlebars.registerHelper("print", function (pins) {
         var hasPins = false;
         var printPins = [];
         var toPrint;
-        for(var i = 0; i < pins.length; i++) {
+        for (var i = 0; i < pins.length; i++) {
             if (pins[i] != false) {
-                printPins.push("&nbsp;" + (i+1));
+                printPins.push("&nbsp;" + (i + 1));
                 hasPins = true;
             }
         }
 
-        if(hasPins) {
+        if (hasPins) {
             toPrint = "<p class='red'>" + printPins + "</p>";
         } else {
             toPrint = "Ingen kegler registreret";
         }
 
-            return new Handlebars.SafeString(toPrint);
+        return new Handlebars.SafeString(toPrint);
 
 
     });
 
-    Handlebars.registerHelper('getDate', function() {
+    Handlebars.registerHelper('getDate', function () {
         var dato = moment().format("DD-MM-YYYY");
         return dato;
     });
