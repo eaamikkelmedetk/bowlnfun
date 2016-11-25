@@ -99,8 +99,12 @@ ul.panel-tabs li {
     float: left;
     width: 50%;
     text-align: center;
-    background-color: white;
-    border: 2px solid #1abc9c;
+    background-color: lightgray;
+    border-bottom: 3px solid black;
+}
+
+ul.panel-tabs li:nth-child(1) {
+    border-right: 3px solid black;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
@@ -114,12 +118,11 @@ ul.panel-tabs li:hover
     width: 50%;
     text-align: center;
     background-color: white;
-    border: 2px solid #1abc9c;
 }
 
 ul.panel-tabs li > a:link, ul.panel-tabs li a:visited
 {
-    color: #1abc9c;
+    color: white;
 }
 
 ul.panel-tabs li > a:hover {
