@@ -164,6 +164,8 @@ ul.panel-tabs li a {
 .maskiner {
     color: black;
     text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .maskine {
@@ -181,4 +183,6 @@ ul.panel-tabs li a {
     border-radius: 5%;
 }
 
-
+.top-spacing {
+    padding-top: 15px;
+}
