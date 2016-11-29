@@ -1,25 +1,38 @@
-$(document).ready(function () {
+var AdminController = (function () {
 
+    var root = window.location.origin;
 
+    var renderTemplate = function(data, template, target) {
+        var compiledTemplate = Handlebars.getTemplate(template);
+        var html = compiledTemplate(data);
+        $(target).html(html);
+    };
 
-    $('ul.menu-items li').on('click', function() {
-        $('ul.menu-items li').removeClass('menu-active');
-        $(this).addClass('menu-active');
-    });
+    var getRequest = function (route, data, sCallback) {
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: root + route,
+            data: data,
+            success: sCallback
+            }
+        );
+    };
 
-    resizeMenu();
+    var postRequest = function (route, data, sCallback) {
+        $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: root + route,
+                data: data,
+                success: sCallback
+            }
+        );
+    };
 
-    $(window).on("resize", function () {
-        resizeMenu();
-    });
-
-    function resizeMenu() {
-        if ($(document).width() > 1170) {
-            $(".menu").css({"min-height": $(document).height(), "margin-left": "0px", "margin-right": "0px"});
-        } else {
-            $(".menu").css({"min-height": "0px", "margin-left": "15px", "margin-right": "15px"});
-        }
-
-
+    return {
+        "renderTemplate": renderTemplate,
+        "getrequest": getRequest
     }
-});
+
+})();

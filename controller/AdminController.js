@@ -4,6 +4,7 @@
 'use strict';
 
 var crypto = require('crypto');
+var Handlebars = require('hbs');
 
 var Center = require('../models/center');
 var User = require('../models/user');
@@ -12,8 +13,22 @@ var Machine = require('../models/machine');
 var saltLength = 16;
 
 module.exports.index = function (req, res) {
-    res.render('admin', {layout: "layoutAdmin.hbs"});
+
+    Center.find({}).exec().then(function(centers) {
+        res.render('admin', {layout: "layoutAdmin.hbs", centers: centers});
+    })
 };
+
+Handlebars.registerHelper('menuhelper', function (context, options) {
+    for (var i = 0; i < context.length; i++) {
+        if (i == 0) {
+            return options.fn(context[i])
+        } else {
+            return options.inverse(context[i])
+        }
+    }
+});
+
 
 module.exports.addCenter = function (req, res) {
 
@@ -58,14 +73,14 @@ module.exports.addCenter = function (req, res) {
 
         center.save(function (err, doc) {
             if (err) {
-                res.status(417).json({success:false,message:"'center' failed validation"});;
+                res.status(417).json({success: false, message: "'center' failed validation"});
             }
             else {
                 userWrite.centerId = userRead.centerId = doc._id;
                 userWrite.save(function (err) {
-                    if (err) res.status(417).json({success:false,message:"'userWrite' failed validation"});
+                    if (err) res.status(417).json({success: false, message: "'userWrite' failed validation"});
                     else userRead.save(function (err) {
-                        if (err) res.status(417).json({success:false,message:"'userRead' failed validation"});
+                        if (err) res.status(417).json({success: false, message: "'userRead' failed validation"});
                         else res.json({
                             "message": "The center has been added to the registry",
                             "center": doc
@@ -77,7 +92,7 @@ module.exports.addCenter = function (req, res) {
     }
     else res.status(417).end();
 };
-module.exports.addMachine = function(req,res) {
+module.exports.addMachine = function (req, res) {
     var newMachine = {
         machineNumber: req.body.machineNumber,
         state: req.body.state,
@@ -155,39 +170,40 @@ module.exports.editMachine = function (req, res) {
     });
 };
 
-module.exports.getMachinesFromCenter = function(req, res) {
-    Machine.find({centerId: req.body.id}, function(err, machines) {
-        if(err) throw err;
+module.exports.getMachinesFromCenter = function (req, res) {
+    Machine.find({centerId: req.body.id}, function (err, machines) {
+        if (err) throw err;
         res.json(machines);
     });
 };
-module.exports.getMachine = function(req,res){
-    Machine.findOne({_id: req.params.id}, function(err, machine){
-        if(err) throw err;
+module.exports.getMachine = function (req, res) {
+    Machine.findOne({_id: req.params.id}, function (err, machine) {
+        if (err) throw err;
         res.json(machine);
     });
 };
-module.exports.getCenters = function(req,res) {
+module.exports.getCenters = function (req, res) {
     Center.find({}, function (err, centers) {
         if (err) throw err;
         res.json(centers);
     });
 };
-module.exports.getCenter = function(req, res) {
+
+module.exports.getCenter = function (req, res) {
     var query = {};
-    if(req.body.name) query.name = req.body.name;
-    if(req.body.id) query._id = req.body.id;
+    if (req.body.name) query.name = req.body.name;
+    if (req.body.id) query._id = req.body.id;
     Center.findOne(query, function (err, center) {
         if (err) throw err;
         res.json(center);
     });
 };
-module.exports.getUser = function(req,res){
+module.exports.getUser = function (req, res) {
     User.findOne({
         _id: req.params.name
-    }, function (err, user){
-        if(err) throw err;
-        if(user) res.json({
+    }, function (err, user) {
+        if (err) throw err;
+        if (user) res.json({
             success: true,
             message: "Here is the user requested. Enjoy!",
             user: user
@@ -195,24 +211,26 @@ module.exports.getUser = function(req,res){
         else res.status(404).json({success: false, message: "User not found"})
     })
 };
-module.exports.getUsers = function (req,res) {
+
+
+module.exports.getUsers = function (req, res) {
     User.find({}, function (err, users) {
         res.json(users);
     });
 };
 
 function genSalt(length) {
-    return crypto.randomBytes(Math.ceil(length/2))
+    return crypto.randomBytes(Math.ceil(length / 2))
         .toString('hex')
-        .slice(0,length);
-};
-
-function sha512(password, salt){
-    var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+        .slice(0, length);
+}
+function sha512(password, salt) {
+    var hash = crypto.createHmac('sha512', salt);
+    /** Hashing algorithm sha512 */
     hash.update(password);
     var value = hash.digest('hex');
     return {
-        salt:salt,
-        passwordHash:value
+        salt: salt,
+        passwordHash: value
     };
-};
+}

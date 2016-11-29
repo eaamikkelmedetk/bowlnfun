@@ -24,7 +24,8 @@ var user = new Schema({
         required: true
     },
     centerId: {
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        ref: "Center"
     },
     active: {
         type: Boolean,

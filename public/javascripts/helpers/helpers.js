@@ -18,8 +18,6 @@ $(document).ready(function () {
         }
 
         return new Handlebars.SafeString(toPrint);
-
-
     });
 
     Handlebars.registerHelper('getDate', function () {
@@ -41,4 +39,23 @@ $(document).ready(function () {
         }
         return i;
     }
+
+    Handlebars.getTemplate = function(name) {
+        if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
+            $.ajax({
+                url : '/javascripts/templates/' + name + '.hbs',
+                success : function(data) {
+                    if (Handlebars.templates === undefined) {
+                        Handlebars.templates = {};
+                    }
+                    Handlebars.templates[name] = Handlebars.compile(data);
+                },
+                async : false
+            });
+        }
+        return Handlebars.templates[name];
+    };
+
+
+
 });

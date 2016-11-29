@@ -94,13 +94,17 @@ ul > li.menu-active a:visited {
     border-radius: 0;
 }
 
+ul.panel-tabs {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 5px;
+}
+
 ul.panel-tabs li {
     display: inline-block;
     float: left;
     width: 50%;
     text-align: center;
     background-color: lightgray;
-    border-bottom: 3px solid black;
 }
 
 ul.panel-tabs li:nth-child(1) {
@@ -123,6 +127,7 @@ ul.panel-tabs li:hover
 ul.panel-tabs li > a:link, ul.panel-tabs li a:visited
 {
     color: white;
+    border-bottom: 3px solid black;
 }
 
 ul.panel-tabs li > a:hover {
@@ -141,9 +146,6 @@ ul.panel-tabs li > a:hover {
 .panel-tabs .active > a:hover {
     background-color: #1abc9c;
 }
-
-
-
 
 ul.panel-tabs li a {
     padding: 0;

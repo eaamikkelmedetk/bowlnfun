@@ -23,10 +23,6 @@ var centerController = (function () {
         )
     }
 
-    return {
-        getErrorsFromTo: publicGetErrorsFromTo
-    };
-
     function longRequest() {
         message_timer = setTimeout(function () {
             $loader.show();
@@ -35,11 +31,9 @@ var centerController = (function () {
     }
 
     function renderTemplate(data) {
-        return $.get('/javascripts/templates/showerrorclient.hbs').then(function(src) {
-            var compiledTemplate = Handlebars.compile(src);
-            var html = compiledTemplate(data);
-            $('#errorContainer').html(html);
-        });
+        var compiledTemplate = Handlebars.getTemplate('CenterErrorView');
+        var html = compiledTemplate(data);
+        $('#errorContainer').html(html);
     }
 
     function callback(errors) {
@@ -49,8 +43,11 @@ var centerController = (function () {
         message_timer = false;
         $loader.hide();
         renderTemplate({error: errors});
-
-
     }
+
+
+    return {
+        getErrorsFromTo: publicGetErrorsFromTo
+    };
 
 })();

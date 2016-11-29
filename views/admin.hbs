@@ -2,13 +2,17 @@
     <div class="col-lg-3 col-md-3 no-margin menu">
         <h1 class="menu-heading">CENTER</h1>
         <ul class="menu-items">
-            <li class="menu-active"><a href="#" class="menu-items-text">Århus</a></li>
-            <li><a href="#" class="menu-items-text">Silkeborg</a></li>
-            <li><a href="#" class="menu-items-text">Skive</a></li>
-            <li><a href="#" class="menu-items-text">Svendborg</a></li>
+            {{#menuhelper centers}}
+                <li class="menu-active"><a href="#" class="menu-items-text">{{name}}</a></li>
+            {{else}}
+                <li><a href="#" class="menu-items-text">{{name}}</a></li>
+            {{/menuhelper}}
         </ul>
     </div>
-    <div class="col-lg-9 col-md-9">
+    <div class="col-lg-1">
+        &nbsp;
+    </div>
+    <div class="col-lg-7 col-md-7 top-spacing ">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary">
@@ -49,7 +53,7 @@
                                     <div class="row">
                                         <div class="form-group col-lg-4 col-lg-offset-4">
                                             <label for="txtUser">Brugernavn</label>
-                                            <input type="txtUser" class="form-control" id="txtUser">
+                                            <input type="txtUser" value="{{users}}" class="form-control" id="txtUser">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -131,5 +135,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-lg-1">
+        &nbsp;
     </div>
 </div>

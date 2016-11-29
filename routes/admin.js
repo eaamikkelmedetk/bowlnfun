@@ -18,7 +18,10 @@ router.put('/api/machines', adminController.editMachine);
 router.put('/api/users', adminController.editUser);
 
 /* GET */
+router.get('/centers/:name', adminController.getCenter);
+
 router.get('/api/centers', adminController.getCenters);
+router.get('/api/centers/:name', adminController.getCenter);
 router.get('/api/machines', adminController.getMachinesFromCenter);
 router.get('/api/machine/:id', adminController.getMachine);
 router.get('/api/users', adminController.getUsers);

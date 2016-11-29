@@ -9,7 +9,8 @@ var machine = new Schema({
     state: String,
     centerId: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'Center'
     }
 });
 

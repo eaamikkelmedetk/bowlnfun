@@ -13,6 +13,8 @@ $(document).ready(function() {
         };
 
         var initializeDatepickers = function() {
+
+            console.log(document.cookie);
             //Set datepicker language to Danish
             $fromDate.datepicker({
                 language: "da",

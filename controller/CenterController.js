@@ -4,20 +4,21 @@
 
 var Error = require('../models/error');
 var moment = require('moment');
+var mongoose = require('mongoose');
 
 module.exports.index = function (req, res) {
+
     res.render('center', {layout: 'layoutCenter.hbs'});
 };
 
 module.exports.getErrors = function(req, res) {
+    var getPermittedCenter = mongoose.Types.ObjectId(req.decoded.centerId);
     var fDate = req.query.fDate;
     var tDate = req.query.tDate;
 
     fDate = moment(fDate).hours(0, 'h');
     tDate = moment(tDate).hours(23, 'h').minutes(59);
 
-    var testFromDate = "2016-11-20T00:00:00Z";
-    var testToDate = "2016-11-23T23:59:00Z";
 
     Error.aggregate([
         {
@@ -34,6 +35,11 @@ module.exports.getErrors = function(req, res) {
             }
         },
         {
+            $match: {
+                "machine.centerId": getPermittedCenter
+            }
+        },
+        {
             $unwind: {
                 path: "$machine"
             }
@@ -43,7 +49,8 @@ module.exports.getErrors = function(req, res) {
                 "type": 1,
                 "timestamp": 1,
                 "pins": 1,
-                "machine.machineNumber": 1
+                "machine.machineNumber": 1,
+                "machine.centerId": 1
             }
         },
         {

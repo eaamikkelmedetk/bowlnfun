@@ -90,8 +90,8 @@ function verifyToken (dat) {
         dat.decoded = decoded;
 
         if (err) {
-            throw err;
             dat.next(errorMessage("Token verification failed.", 403));
+            throw err;
         }
         else validateTokenUser(dat);
     });
@@ -115,6 +115,7 @@ function validateTokenUser(dat){
 function useToken(dat) {
     // Add custom properties to decoded
     dat.req.decoded = expandDecoded(dat.decoded);
+
 
     if (dat.next && dat.req.decoded.permission(dat.role)) {
         dat.next();
