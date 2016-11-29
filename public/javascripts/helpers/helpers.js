@@ -40,6 +40,20 @@ $(document).ready(function () {
         return i;
     }
 
+    Handlebars.registerHelper('menuhelper', function (context, options) {
+        var html = "";
+
+        for (var i = 0; i < context.length; i++) {
+            if (i == 0) {
+                html = options.fn(context[i]);
+            } else {
+                html += options.inverse(context[i]);
+            }
+        }
+        return html;
+    });
+
+
     Handlebars.getTemplate = function(name) {
         if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
             $.ajax({

@@ -13,22 +13,8 @@ var Machine = require('../models/machine');
 var saltLength = 16;
 
 module.exports.index = function (req, res) {
-
-    Center.find({}).exec().then(function(centers) {
-        res.render('admin', {layout: "layoutAdmin.hbs", centers: centers});
-    })
+        res.render('admin', {layout: "layoutAdmin.hbs"});
 };
-
-Handlebars.registerHelper('menuhelper', function (context, options) {
-    for (var i = 0; i < context.length; i++) {
-        if (i == 0) {
-            return options.fn(context[i])
-        } else {
-            return options.inverse(context[i])
-        }
-    }
-});
-
 
 module.exports.addCenter = function (req, res) {
 

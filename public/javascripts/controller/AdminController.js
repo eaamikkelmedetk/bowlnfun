@@ -30,6 +30,13 @@ var AdminController = (function () {
         );
     };
 
+
+    var getMenuItems = function() {
+        getRequest("/admin/api/centers", undefined, function(centers) {
+            return centers;
+        });
+    };
+
     return {
         "renderTemplate": renderTemplate,
         "getrequest": getRequest

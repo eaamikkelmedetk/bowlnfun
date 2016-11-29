@@ -3,7 +3,11 @@
  */
 
 var AdminView = (function() {
-        var resizeMenu = function() {
+
+    /**
+     * LAYOUT START
+     */
+    var resizeMenu = function() {
         if ($(document).width() >= 975) {
             $(".menu").css({"min-height": $(document).height(), "margin-left": "0px", "margin-right": "0px"});
         } else {
@@ -21,6 +25,14 @@ var AdminView = (function() {
             $(window).on("resize", resizeMenu);
         resizeMenu();
     }();
+    /**
+     * LAYOUT SLUT
+     */
+    var renderMenu = function() {
+        var compiledTemplate = Handlebars.getTemplate('AdminMenusView');
+        var html = compiledTemplate({ name : 'Test' });
+    };
+
 
 });
 
