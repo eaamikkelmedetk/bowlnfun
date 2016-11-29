@@ -2,40 +2,33 @@
  * Created by Mikkel on 26-11-2016.
  */
 
-var AdminView = (function() {
-
+var AdminView = (function () {
+    var isItemsBound = false;
     /**
      * LAYOUT START
      */
-    var resizeMenu = function() {
-        if ($(document).width() >= 975) {
-            $(".menu").css({"min-height": $(document).height(), "margin-left": "0px", "margin-right": "0px"});
-        } else {
-            $(".menu").css({"min-height": "0px", "margin-left": "15px", "margin-right": "15px"});
-        }
-    };
 
-    var highlightMenuitems = function() {
+    var highlightMenuitems = function () {
         $('ul.menu-items li').removeClass('menu-active');
         $(this).addClass('menu-active');
+
+        var centerName = $('.menu-active').children('.menu-items-text').text();
+
+        AdminController.getCenter(centerName, function(center) {
+
+            var usernames = [center.read, center.write];
+            changeUsername(usernames[0], usernames[1]);
+            setMachines(center._id);
+        });
     };
 
-    var bindEvents = function() {
+    var bindEvents = function () {
         $('ul.menu-items li').on('click', highlightMenuitems);
-            $(window).on("resize", resizeMenu);
-        resizeMenu();
     }();
-    /**
-     * LAYOUT SLUT
-     */
-    var renderMenu = function() {
-        var compiledTemplate = Handlebars.getTemplate('AdminMenusView');
-        var html = compiledTemplate({ name : 'Test' });
-    };
 
 
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     AdminView();
 });

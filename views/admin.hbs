@@ -1,142 +1,97 @@
 <div class="container-fluid no-margin">
-    <div class="col-lg-3 col-md-3 no-margin menu">
-        <h1 class="menu-heading">CENTER</h1>
-        <ul class="menu-items">
-            {{#menuhelper centers}}
-                <li class="menu-active"><a href="#" class="menu-items-text">{{name}}</a></li>
-            {{else}}
-                <li><a href="#" class="menu-items-text">{{name}}</a></li>
-            {{/menuhelper}}
-        </ul>
-    </div>
-    <div class="col-lg-1">
-        &nbsp;
-    </div>
-    <div class="col-lg-7 col-md-7 top-spacing ">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <!-- Tabs -->
-                        <ul class="nav panel-tabs">
-                            <li class="active"><a href="#tab1" data-toggle="tab">CENTER</a></li>
-                            <li><a href="#tab2" data-toggle="tab">TERMINAL</a></li>
-                        </ul>
-                    </div>
-                    <div class="panel-body">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab1"><h1>CENTER</h1><br/>
-                                <form>
-                                    <div class="row">
-                                        <div class="form-group col-lg-4 col-lg-offset-4">
-                                            <label for="txtUser">Brugernavn</label>
-                                            <input type="txtUser" class="form-control" id="txtUser">
+    <div class="row-fluid">
+        <div class="col-lg-3 col-md-3 no-margin menu">
+            <h1 class="menu-heading">CENTER</h1>
+            <ul class="menu-items">
+                {{#menuhelper centers}}
+                    <li class="menu-active"><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
+                {{else}}
+                    <li><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
+                {{/menuhelper}}
+            </ul>
+        </div>
+        <div class="col-lg-1">
+            &nbsp;
+        </div>
+        <div class="col-lg-7 col-md-7 top-spacing ">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <!-- Tabs -->
+                            <ul class="nav panel-tabs">
+                                <li class="active"><a href="#tab1" data-toggle="tab">CENTER</a></li>
+                                <li><a href="#tab2" data-toggle="tab">TERMINAL</a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab1"><h1>CENTER</h1><br/>
+                                    <form>
+                                        <div class="row">
+                                            <div class="form-group col-lg-4 col-lg-offset-4">
+                                                <label for="txtUser">Brugernavn</label>
+                                                <input readonly type="txtUser" value="{{selectedCenter.centerUser}}" class="form-control" id="txtCenterUser">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-4 col-lg-offset-4">
-                                            <label for="pwd">Password:</label>
-                                            <input type="password" class="form-control" id="pwd">
+                                        <div class="row">
+                                            <div class="form-group col-lg-4 col-lg-offset-4">
+                                                <label for="pwd">Password:</label>
+                                                <input type="password" class="form-control" id="txtCenterPwd">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2 col-lg-offset-6">
-                                            <button type="submit" class="btn btn-success pull-right">Change password
-                                            </button>
+                                        <div class="row">
+                                            <div class="col-lg-2 col-lg-offset-6">
+                                                <button type="submit" class="btn btn-success pull-right">Change password
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane" id="tab2">
-                                <h1>TERMINAL</h1><br/>
-                                <form>
-                                    <div class="row">
-                                        <div class="form-group col-lg-4 col-lg-offset-4">
-                                            <label for="txtUser">Brugernavn</label>
-                                            <input type="txtUser" value="{{users}}" class="form-control" id="txtUser">
+                                    </form>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h1>TERMINAL</h1><br/>
+                                    <form>
+                                        <div class="row">
+                                            <div class="form-group col-lg-4 col-lg-offset-4">
+                                                <label for="txtUser">Brugernavn</label>
+                                                <input readonly type="txtUser" value="{{selectedCenter.terminalUser}}" class="form-control"
+                                                       id="txtTerminalUser">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-4 col-lg-offset-4">
-                                            <label for="pwd">Password:</label>
-                                            <input type="password" class="form-control" id="pwd">
+                                        <div class="row">
+                                            <div class="form-group col-lg-4 col-lg-offset-4">
+                                                <label for="pwd">Password:</label>
+                                                <input type="password" class="form-control" id="txtTerminalPwd">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2 col-lg-offset-6">
-                                            <button type="submit" class="btn btn-success pull-right">Change password
-                                            </button>
+                                        <div class="row">
+                                            <div class="col-lg-2 col-lg-offset-6">
+                                                <button type="submit" class="btn btn-success pull-right">Change password
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br/><br/>
-                    <div class="maskiner">
-                        <h1 class="menu-heading">MASKINER</h1><br/>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 1</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 2</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 3</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 4</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 1</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 3</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 4</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 1</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 2</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 3</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 4</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 1</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 2</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 3</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="maskine">Maskine 4</div>
-                            </div>
+                        <br/><br/>
+                        <div class="maskiner">
+                            <h1 class="menu-heading">MASKINER</h1><br/>
+                            {{#grouped_each 4 machines}}
+                                <div class="row">
+                                    {{#each this }}
+                                        <div class="col-lg-3">
+                                            <div class="maskine">MASKINE {{machineNumber}}</div>
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            {{/grouped_each}}
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-1">&nbsp;
+            </div>
         </div>
-    </div>
-    <div class="col-lg-1">
-        &nbsp;
     </div>
 </div>

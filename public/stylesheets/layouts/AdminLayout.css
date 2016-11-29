@@ -1,21 +1,27 @@
-body {
-    color: white;
+html, body {
+    height: 100%;
 }
 
 h1.menu-heading {
+    color: white;
     font-size: 50px;
     padding-left: 13px;
 }
 
+.row-fluid {
+    height: 100%;
+}
 
 .no-margin {
     padding-left: 0px;
     padding-right: 0px;
+    height: 100%;
 }
 
 .menu {
     background-color: #1abc9c;
     min-height: 100%;
+    height: auto !important;
     height: 100%;
 }
 

@@ -8,16 +8,6 @@ var AdminController = (function () {
         $(target).html(html);
     };
 
-    var getRequest = function (route, data, sCallback) {
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            url: root + route,
-            data: data,
-            success: sCallback
-            }
-        );
-    };
 
     var postRequest = function (route, data, sCallback) {
         $.ajax({
@@ -30,16 +20,11 @@ var AdminController = (function () {
         );
     };
 
-
-    var getMenuItems = function() {
-        getRequest("/admin/api/centers", undefined, function(centers) {
-            return centers;
-        });
-    };
-
     return {
         "renderTemplate": renderTemplate,
-        "getrequest": getRequest
+        "getMenuitems": getMenuItems,
+        "getmachinesById": getMachinesByid,
+        "getCenter": getCenter
     }
 
 })();
