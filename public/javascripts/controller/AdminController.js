@@ -18,7 +18,6 @@ var AdminController = (function () {
         );
     };
 
-
     var postRequest = function (route, data, sCallback, fCallback) {
         $.ajax({
                 type: "POST",
@@ -30,7 +29,6 @@ var AdminController = (function () {
             }
         );
     };
-
 
     var putRequest = function (route, data, sCallback) {
         console.log(root + route);
@@ -45,7 +43,6 @@ var AdminController = (function () {
     };
 
     var deleteRequest = function (route, data, sCallback) {
-        console.log(root + route);
         $.ajax({
                 type: "DELETE",
                 dataType: 'json',
@@ -75,6 +72,7 @@ var AdminController = (function () {
     var addCenter = function (data, sCallback, fCallback) {
         return postRequest('/admin/api/centers', data, sCallback, fCallback);
     };
+
     var disableCenter = function (name, sCallback, fCallback) {
         $.ajax({
             type: "PUT",
@@ -86,14 +84,15 @@ var AdminController = (function () {
             },
             success: sCallback,
             error: fCallback
-        })
+        });
 
     return {
         "renderTemplate": renderTemplate,
         "getMenuitems": getMenuItems,
         "getmachinesById": getMachinesByid,
-        "getCenter": getCenter,
         "addCenter": addCenter,
         "disableCenter": disableCenter
     }
-})();
+
+
+}})();

@@ -35,7 +35,7 @@ var AdminView = (function () {
             readPass: $centerpsw.val(),
             writeName: $terminalusrname.val(),
             writePass: $terminalpsw.val()
-        }
+        };
 
         AdminController.addCenter(newCenter, function () {
             $('#addCenterModal').modal('hide');
@@ -62,7 +62,7 @@ var AdminView = (function () {
                 console.log(response);
             })
         });
-    };
+    });
 
         var changeTerminalPassword = function(e) {
             e.preventDefault();
@@ -95,9 +95,7 @@ var AdminView = (function () {
     };
 
     var removeMachine = function() {
-
         var machineId = $(this).siblings(".machineId").val();
-
         AdminController.deleteMachine({"id": machineId, "state": "deleted"}, function() {
             alert("Maskinen er blevet slettet!");
             location.reload();
@@ -112,12 +110,12 @@ var AdminView = (function () {
         $('.deleteContainer').on('click', removeMachine);
         $('#addCenterBtn').on('click', function(){
             $('#addCenterModal').modal();
-        })
+        });
         $('#addCenterSubmitBtn').on('click', addCenterSubmit);
         // $('#disableCenterBtn').on('click', disableCenter);
     }();
 
-});
+})
 
 $(document).ready(function () {
     AdminView();

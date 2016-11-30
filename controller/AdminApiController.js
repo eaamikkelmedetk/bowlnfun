@@ -82,7 +82,7 @@ module.exports.addMachine = function (req, res) {
         machineNumber: req.body.machineNumber,
         state: req.body.state,
         centerId: req.body.centerId
-    };
+    });
     newMachine.save(function (err, machine) {
         if (err) res.status(417).json({success: false, message: "'machine' failed validation"});
         else res.json({
