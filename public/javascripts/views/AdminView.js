@@ -23,6 +23,34 @@ var AdminView = (function () {
         var newCenterPassword = $('#txtCenterPwd').val();
         var centerId = $('#selectedCenterId').val();
 
+        var $centerName = $('#centername');
+        var $terminalusrname = $('#terminalusrname');
+        var $terminalpsw = $('#terminalpsw');
+        var $centerusrname = $('#centerusrname');
+        var $centerpsw = $('#centerpsw');
+
+        var newCenter = {
+            name: $centerName.val(),
+            readName: $centerusrname.val(),
+            readPass: $centerpsw.val(),
+            writeName: $terminalusrname.val(),
+            writePass: $terminalpsw.val()
+        }
+
+        AdminController.addCenter(newCenter, function () {
+            $('#addCenterModal').modal('hide');
+            $centerName.val("");
+            $centerusrname.val("");
+            $centerpsw.val("");
+            $terminalusrname.val("");
+            $terminalpsw.val("");
+        }, function (err) {
+            console.log(err.responseText);
+            $('.modal-footer').show();
+            $('#failureMessage').val(err.responseText.message);
+        });
+    };
+
         AdminController.findUser(getSelectedCenterUser, function (user) {
             AdminController.changePassword({
                 id: user._id,
@@ -82,6 +110,11 @@ var AdminView = (function () {
         $('.changeTerminalUser').on('click', changeTerminalPassword);
         $('#btnAddMachine').on('click', addMachine);
         $('.deleteContainer').on('click', removeMachine);
+        $('#addCenterBtn').on('click', function(){
+            $('#addCenterModal').modal();
+        })
+        $('#addCenterSubmitBtn').on('click', addCenterSubmit);
+        // $('#disableCenterBtn').on('click', disableCenter);
     }();
 
 });

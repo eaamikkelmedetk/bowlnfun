@@ -65,6 +65,7 @@ module.exports.addCenter = function (req, res) {
                     else userRead.save(function (err) {
                         if (err) res.status(417).json({success: false, message: "'userRead' failed validation"});
                         else res.json({
+                            "success": true,
                             "message": "The center has been added to the registry",
                             "center": doc
                         });
@@ -73,7 +74,7 @@ module.exports.addCenter = function (req, res) {
             }
         });
     }
-    else res.status(417).end();
+    else res.status(417).json({success: false, message: "no passwords defined"});
 };
 
 module.exports.addMachine = function (req, res) {
@@ -81,8 +82,7 @@ module.exports.addMachine = function (req, res) {
         machineNumber: req.body.machineNumber,
         state: req.body.state,
         centerId: req.body.centerId
-    })
-
+    };
     newMachine.save(function (err, machine) {
         if (err) res.status(417).json({success: false, message: "'machine' failed validation"});
         else res.json({
@@ -95,19 +95,19 @@ module.exports.addMachine = function (req, res) {
 
 module.exports.editCenter = function (req, res) {
     Center.findOne({
-        _id: req.body.id
+        _id: req.body.name
     }, function (err, center) {
         if (err) throw err;
 
-        var newCenter = {};
-
-        if (req.body.name) newCenter.name = req.body.name;
-        if (req.body.active) {
-            newCenter.active = req.body.active;
-            User.update({centerId: req.body.id}, {active: req.body.active}, {multi: true}).exec();
-        }
         if (center) {
-            center.update(newCenter, {}).exec();
+            if (req.body.name) center.name = req.body.name;
+            if (req.body.active) {
+                center.active = req.body.active;
+                User.update({centerId: req.body.id}, {active: req.body.active}, {multi: true}).exec();
+            }
+
+            center.save();
+
             res.json({success: true, message: "'center' with id " + req.body.id + " updated"});
         }
         else res.status(404).json({success: false, message: "No 'center' with id " + req.body.id + " found"});
@@ -120,15 +120,13 @@ module.exports.editUser = function (req, res) {
     }, function (err, user) {
         if (err) throw err;
 
-        var newUser = {};
-
-        if (req.body.name) newUser.name = req.body.name;
+        if (req.body.name) user.name = req.body.name;
         if (req.body.password) {
             var pass = sha512(req.body.password, genSalt(saltLength));
-            newUser.password = pass.passwordHash;
-            newUser.salt = pass.salt;
+            user.password = pass.passwordHash;
+            user.salt = pass.salt;
         }
-        if (req.body.role) newUser.role = req.body.permissions;
+        if (req.body.role) user.role = req.body.permissions;
 
         if (user) {
             user.update(newUser, {});
