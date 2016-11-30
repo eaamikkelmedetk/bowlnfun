@@ -11,7 +11,7 @@
             </ul>
         </div>
         <div class="col-lg-1">
-            &nbsp;
+            &nbsp;&nbsp;
         </div>
         <div class="col-lg-7 col-md-7 top-spacing ">
             <div class="row">
@@ -30,8 +30,9 @@
                                     <form>
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
+                                                <input type="hidden" value="{{centerUser}}" id="txtOCenterUser" />
                                                 <label for="txtUser">Brugernavn</label>
-                                                <input readonly type="txtUser" value="{{selectedCenter.centerUser}}" class="form-control" id="txtCenterUser">
+                                                <input type="txtUser" value="{{centerUser}}" class="form-control" id="txtCenterUser">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -42,7 +43,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-2 col-lg-offset-6">
-                                                <button type="submit" class="btn btn-success pull-right">Change password
+                                                <button type="submit" class="btn btn-success pull-right changeCenterUser">Change password
                                                 </button>
                                             </div>
                                         </div>
@@ -53,8 +54,9 @@
                                     <form>
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
+                                                <input type="hidden" value="{{terminalUser}}" id="txtOTerminalUser" />
                                                 <label for="txtUser">Brugernavn</label>
-                                                <input readonly type="txtUser" value="{{selectedCenter.terminalUser}}" class="form-control"
+                                                <input type="txtUser" value="{{terminalUser}}" class="form-control"
                                                        id="txtTerminalUser">
                                             </div>
                                         </div>
@@ -66,7 +68,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-2 col-lg-offset-6">
-                                                <button type="submit" class="btn btn-success pull-right">Change password
+                                                <button type="submit" class="btn btn-success pull-right changeTerminalUser">Change password
                                                 </button>
                                             </div>
                                         </div>
@@ -76,12 +78,15 @@
                         </div>
                         <br/><br/>
                         <div class="maskiner">
-                            <h1 class="menu-heading">MASKINER</h1><br/>
+                            <h1>MASKINER</h1><br/>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalTilføjMaskine">Tilføj maskine</button><br /><br />
                             {{#grouped_each 4 machines}}
                                 <div class="row">
                                     {{#each this }}
                                         <div class="col-lg-3">
+                                            <input type="hidden" value="{{_id}}" class="machineId" />
                                             <div class="maskine">MASKINE {{machineNumber}}</div>
+                                            <p class="deleteContainer">&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span> FJERN</p>
                                         </div>
                                     {{/each}}
                                 </div>
@@ -91,6 +96,34 @@
                 </div>
             </div>
             <div class="col-lg-1">&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalTilføjMaskine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Tilføj maskine</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="{{selectedCenterId}}" id="selectedCenterId">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="txtUser">Maskinnummer (Kun i tal)</label>
+                            <input type="txtUser" class="form-control"
+                                   id="txtMachineNumber">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnAddMachine">Opret</button>
             </div>
         </div>
     </div>

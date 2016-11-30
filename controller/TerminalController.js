@@ -6,7 +6,8 @@ var moment = require('moment');
 
 
 module.exports.index = function(req, res) {
-    machineModel.find().exec().then(function(machines) {
+    console.log(req.decoded);
+    machineModel.find({"centerId": req.decoded.centerId, "state": "normal"}).exec().then(function(machines) {
         res.render('terminal', {"layout": "layoutTerminal.hbs", "machines": machines});
     });
 };
@@ -43,7 +44,6 @@ module.exports.postError = function (req, res) {
         });
 
         errorReport.save(function (err) {
-            console.log(err);
             if (err) {
                 res.json({message: "A system error has occured, try again later..."});
             } else {

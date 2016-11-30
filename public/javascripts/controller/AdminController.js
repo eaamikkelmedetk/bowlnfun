@@ -8,6 +8,16 @@ var AdminController = (function () {
         $(target).html(html);
     };
 
+    var getRequest = function (route, data, sCallback) {
+        $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: root + route + data,
+                success: sCallback
+            }
+        );
+    };
+
 
     var postRequest = function (route, data, sCallback) {
         $.ajax({
@@ -20,11 +30,51 @@ var AdminController = (function () {
         );
     };
 
-    return {
-        "renderTemplate": renderTemplate,
-        "getMenuitems": getMenuItems,
-        "getmachinesById": getMachinesByid,
-        "getCenter": getCenter
-    }
 
+    var putRequest = function (route, data, sCallback) {
+        console.log(root + route);
+        $.ajax({
+                type: "PUT",
+                dataType: 'json',
+                url: root + route,
+                data: data,
+                success: sCallback
+            }
+        );
+    };
+
+    var deleteRequest = function (route, data, sCallback) {
+        console.log(root + route);
+        $.ajax({
+                type: "DELETE",
+                dataType: 'json',
+                url: root + route,
+                data: data,
+                success: sCallback
+            }
+        );
+    };
+
+    var findUser = function(data, sCallBack) {
+        return getRequest('/admin/api/users/', data, sCallBack);
+    };
+
+    var changePassword = function(data, sCallBack) {
+        return putRequest('/admin/api/users/', data, sCallBack);
+    };
+
+    var addMachine = function(data, sCallback) {
+        return postRequest('/admin/api/machine/', data, sCallback);
+    };
+
+    var deleteMachine = function(data, sCallback) {
+        return putRequest('/admin/api/machines/', data, sCallback);
+    };
+
+    return {
+        findUser: findUser,
+        changePassword: changePassword,
+        addMachine: addMachine,
+        deleteMachine: deleteMachine
+    }
 })();

@@ -5,6 +5,7 @@
 
 var crypto = require('crypto');
 var Handlebars = require('hbs');
+var async = require('async');
 
 var Center = require('../models/center');
 var User = require('../models/user');
@@ -74,12 +75,14 @@ module.exports.addCenter = function (req, res) {
     }
     else res.status(417).end();
 };
+
 module.exports.addMachine = function (req, res) {
-    var newMachine = {
+    var newMachine = new Machine({
         machineNumber: req.body.machineNumber,
         state: req.body.state,
         centerId: req.body.centerId
-    };
+    })
+
     newMachine.save(function (err, machine) {
         if (err) res.status(417).json({success: false, message: "'machine' failed validation"});
         else res.json({
@@ -133,20 +136,70 @@ module.exports.editUser = function (req, res) {
         } else res.status(404).json({success: false, message: "No 'user' with id " + req.body.id + " found"});
     });
 };
+
+module.exports.editUser1 = function (req, res) {
+    async.series([
+        function(callback) {
+            User.findOne({"_id": req.body.id}).exec().then(function(user) {
+                console.log(req.body.id);
+                callback(null, user);
+            });
+        },
+        function(callback) {
+            Center.findOne({"_id": req.body.centerid}).exec().then(function(center) {
+               callback(null, center);
+            });
+        }
+    ], function(err, results) {
+        console.log(results);
+        var userId = results[0]._id;
+        var userName = results[0].name;
+        var centerId = results[1]._id;
+        var terminalUser = results[1].write;
+        var centerUser = results[1].read;
+        var pass = sha512(req.body.password, genSalt(saltLength));
+
+
+
+
+            async.series([
+                function(callback) {
+                    User.update({"_id": userId}, {"name": req.body.name, "password": pass.passwordHash, "salt": pass.salt}, function() {
+                        callback(null);
+                    })
+                },
+                function(callback) {
+                if(userName === terminalUser) {
+                    Center.update({"_id": centerId}, {"write": req.body.name}, function () {
+                        callback(null);
+                    })
+                } else {
+                    Center.update({"_id": centerId}, {"read": req.body.name}, function () {
+                        callback(null);
+                    })
+                }
+                }
+            ], function(err, results) {
+                res.json("Brugernavnet og passwordet er blevet opdatereret.");
+            })
+
+    });
+};
+
+
 module.exports.editMachine = function (req, res) {
     Machine.findOne({
         _id: req.body.id
     }, function (err, machine) {
         if (err) throw err;
 
-        var newMachine = {};
-
-        if (req.body.machineNumber) newMachine.machineNumber = req.body.machineNumber;
-        if (req.body.state) newMachine.state = req.body.state;
-        if (req.body.role) newMachine.role = req.body.permissions;
-
         if (machine) {
-            machine.update(newMachine, {});
+            if (req.body.machineNumber) machine.machineNumber = req.body.machineNumber;
+            if (req.body.state) machine.state = req.body.state;
+            if (req.body.role) machine.role = req.body.permissions;
+
+            machine.save();
+
             res.json({success: true, message: "'machine' with id " + req.body.id + " updated"});
         } else res.status(404).json({success: false, message: "No 'machine' with id " + req.body.id + " found"});
     });
@@ -182,14 +235,10 @@ module.exports.getCenter = function (req, res) {
 };
 module.exports.getUser = function (req, res) {
     User.findOne({
-        _id: req.params.name
+        name: req.params.name
     }, function (err, user) {
         if (err) throw err;
-        if (user) res.json({
-            success: true,
-            message: "Here is the user requested. Enjoy!",
-            user: user
-        });
+        if (user) res.json(user);
         else res.status(404).json({success: false, message: "User not found"})
     })
 };

@@ -1,11 +1,28 @@
 html, body {
     height: 100%;
+    color: black;
+}
+
+h1 {
+    font-weight: bold;
 }
 
 h1.menu-heading {
-    color: white;
     font-size: 50px;
     padding-left: 13px;
+}
+
+.deleteContainer {
+    margin-top: -25px;
+    margin-bottom: 25px;
+    display: block;
+    cursor: pointer;
+    font-weight: bold;
+    color: red;
+}
+
+.deleteContainer .glyphicon {
+    color: black;
 }
 
 .row-fluid {
@@ -174,12 +191,12 @@ ul.panel-tabs li a {
 
 .maskiner {
     color: black;
-    text-align: center;
     padding-left: 15px;
     padding-right: 15px;
 }
 
 .maskine {
+    text-align: center;
     width: 100%;
     height: 100%;
     margin-bottom: 30px;

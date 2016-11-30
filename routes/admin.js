@@ -17,7 +17,7 @@ router.post('/api/machine', AdminApiController.addMachine);
 /* PUT */
 router.put('/api/centers', AdminApiController.editCenter);
 router.put('/api/machines', AdminApiController.editMachine);
-router.put('/api/users', AdminApiController.editUser);
+router.put('/api/users', AdminApiController.editUser1);
 
 /* GET */
 router.get('/centers/:name', AdminApiController.getCenter);

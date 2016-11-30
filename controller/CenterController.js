@@ -36,6 +36,11 @@ module.exports.getErrors = function(req, res) {
         },
         {
             $match: {
+                "machine.state": "normal"
+            }
+        },
+        {
+            $match: {
                 "machine.centerId": getPermittedCenter
             }
         },

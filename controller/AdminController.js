@@ -1,56 +1,79 @@
 var Handlebars = require('hbs');
 
+var async = require("async");
 var Center = require('../models/center');
 var User = require('../models/user');
 var Machine = require('../models/machine');
 
 module.exports.index = function (req, res) {
-    Center.find({}).exec()
-        .then(function (centers) {
-            Machine.find({centerId: centers[0]._id}).exec().then(function (machines) {
-                var selectedCenter = {};
-                //Initial load will get the first center in the array
-                selectedCenter.name = centers[0].name;
-                selectedCenter.centerUser = centers[0].read;
-                selectedCenter.terminalUser = centers[0].write;
-
-                res.render("admin", {
-                    "layout": "layoutAdmin",
-                    centers: centers,
-                    machines: machines,
-                    selectedCenter: selectedCenter
+    async.series([
+            function (callback) {
+                Center.find({}).exec().then(function (centers) {
+                    req.params.selectedCenter = centers[0]._id;
+                    callback(null, centers);
+                })
+            },
+            function (callback) {
+                Machine.find({centerId: req.params.selectedCenter, state: 'normal'}).exec().then(function (machines) {
+                    callback(null, machines);
                 });
+            }
+        ], function (err, results) {
+
+            var centers = results[0];
+            var selectedCenterId = results[0][0]._id;
+            var centerUser = results[0][0].read;
+            var terminalUser = results[0][0].write;
+            var machines = results[1];
+
+            res.render("admin", {
+                layout: "layoutAdmin",
+                centers: centers,
+                centerUser: centerUser,
+                terminalUser: terminalUser,
+                selectedCenterId: selectedCenterId,
+                machines: machines
             });
-        });
+        }
+    );
 };
+
 
 module.exports.getCenter = function (req, res) {
-    Center.find({}).exec()
-        .then(function (centers) {
-            objPage = {};
-            objPage.allCenters = centers;
-            return objPage
-        }).then(function (centers) {
-        Center.find({name: req.params.name}).then(function (selectedCenter) {
-            centers.selectedCenter = selectedCenter;
-            return centers
-        }).then(function (centersObj) {
-            Machine.find({centerId: centersObj.selectedCenter[0]._id}).exec().then(function (machines) {
-                centersObj.selectedCenterMachines = machines;
-                //res.json(centersObj);
-                res.render("admin", {
-                    layout: "layoutAdmin",
-                    "centers": centersObj.allCenters,
-                    "selectedCenter": {
-                        "centerUser": centersObj.selectedCenter[0].read,
-                        "terminalUser": centersObj.selectedCenter[0].write
-                    },
-                    "machines": centersObj.selectedCenterMachines
-                });
+    async.series([
+        function (callback) {
+            Center.find({}).exec().then(function (centers) {
+                callback(null, centers);
+            });
+        },
+        function (callback) {
+            Center.find({name: req.params.name}).then(function (selectedCenter) {
+                req.params.selectedCenterName = selectedCenter[0]._id;
+                callback(null, selectedCenter);
             })
+        },
+        function (callback) {
+            Machine.find({centerId: req.params.selectedCenterName, state: 'normal'}).exec().then(function (machines) {
+                callback(null, machines);
+            });
+        }
+    ], function (err, results) {
+        var centers = results[0];
+        var selectedCenter = results[1][0];
+        var selectedCenterId = results[1][0]._id;
+        var machines = results[2];
+
+        res.render("admin", {
+            layout: "layoutAdmin",
+            centers: centers,
+            selectedCenterId: selectedCenterId,
+            centerUser: selectedCenter.read,
+            terminalUser: selectedCenter.write,
+            machines: machines
         });
-    })
+    });
 };
+
 
 Handlebars.registerHelper('grouped_each', function (every, context, options) {
     var out = "", subcontext = [], i;
