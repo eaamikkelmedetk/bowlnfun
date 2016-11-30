@@ -9,22 +9,38 @@ var AdminController = (function () {
     };
 
 
-    var postRequest = function (route, data, sCallback) {
+    var postRequest = function (route, data, sCallback, fCallback) {
         $.ajax({
                 type: "POST",
                 dataType: 'json',
                 url: root + route,
                 data: data,
-                success: sCallback
+                success: sCallback,
+                error: fCallback
             }
         );
     };
 
+    var addCenter = function (data, sCallback, fCallback) {
+        return postRequest('/admin/api/centers', data, sCallback, fCallback);
+    };
+    var disableCenter = function (name, sCallback, fCallback) {
+        $.ajax({
+            type: "PUT",
+            dataType: 'json',
+            url: root + route,
+            data: {
+                name: name,
+                active: false
+            },
+            success: sCallback,
+            error: fCallback
+        })
+    };
+
     return {
-        "renderTemplate": renderTemplate,
-        "getMenuitems": getMenuItems,
-        "getmachinesById": getMachinesByid,
-        "getCenter": getCenter
+        "addCenter": addCenter,
+        "disableCenter": disableCenter
     }
 
 })();
