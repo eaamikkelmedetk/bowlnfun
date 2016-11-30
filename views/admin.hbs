@@ -58,7 +58,7 @@
                                             <div class="form-group col-lg-4 col-lg-offset-4">
                                                 <input type="hidden" value="{{terminalUser}}" id="txtOTerminalUser" />
                                                 <label for="txtUser">Brugernavn</label>
-                                                <input readonly type="txtUser" value="{{selectedCenter.terminalUser}}" class="form-control"
+                                                <input type="txtUser" value="{{terminalUser}}" class="form-control"
                                                        id="txtTerminalUser">
                                             </div>
                                         </div>
@@ -131,6 +131,8 @@
     </div>
 </div>
 
+<div class="modal fade" id="addCenterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="padding:35px 50px;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -158,10 +160,10 @@
                         <label for="centerpsw"><span class="glyphicon glyphicon-eye-open"></span> Center Password</label>
                         <input type="text" class="form-control" id="centerpsw" placeholder="Enter password">
                     </div>
-                    </br>
+                    <br />
                     <button type="submit" id="addCenterSubmitBtn" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span> Submit</button>
                     <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    </br>
+                    <br />
                 </form>
             </div>
             <div class="modal-footer" style="visibility: hidden">

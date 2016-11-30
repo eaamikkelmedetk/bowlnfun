@@ -23,6 +23,39 @@ var AdminView = (function () {
         var newCenterPassword = $('#txtCenterPwd').val();
         var centerId = $('#selectedCenterId').val();
 
+        AdminController.findUser(getSelectedCenterUser, function (user) {
+            AdminController.changePassword({
+                id: user._id,
+                centerid: centerId,
+                name: newCenterUsername,
+                password: newCenterPassword
+            }, function (response) {
+                location.reload();
+                console.log(response);
+            })
+        });
+    };
+
+    var changeTerminalPassword = function(e) {
+        e.preventDefault();
+        var getSelectedCenterUser = $('#txtOTerminalUser').val();
+        var newTerminalUsername = $('#txtTerminalUser').val();
+        var newTerminalPassword = $('#txtTerminalPwd').val();
+        var centerId = $('#selectedCenterId').val();
+
+        AdminController.findUser(getSelectedCenterUser, function(user) {
+            AdminController.changePassword({
+                id: user._id,
+                centerid: centerId,
+                name: newTerminalUsername,
+                password: newTerminalPassword
+            }, function(response) {
+                console.log(response);
+            })
+        });
+    };
+
+    var addCenterSubmit = function() {
         var $centerName = $('#centername');
         var $terminalusrname = $('#terminalusrname');
         var $terminalpsw = $('#terminalpsw');
@@ -51,37 +84,6 @@ var AdminView = (function () {
         });
     };
 
-        AdminController.findUser(getSelectedCenterUser, function (user) {
-            AdminController.changePassword({
-                id: user._id,
-                centerid: centerId,
-                name: newCenterUsername,
-                password: newCenterPassword
-            }, function (response) {
-                location.reload();
-                console.log(response);
-            })
-        });
-    });
-
-        var changeTerminalPassword = function(e) {
-            e.preventDefault();
-            var getSelectedCenterUser = $('#txtOTerminalUser').val();
-            var newTerminalUsername = $('#txtTerminalUser').val();
-            var newTerminalPassword = $('#txtTerminalPwd').val();
-            var centerId = $('#selectedCenterId').val();
-
-            AdminController.findUser(getSelectedCenterUser, function(user) {
-                AdminController.changePassword({
-                    id: user._id,
-                    centerid: centerId,
-                    name: newTerminalUsername,
-                    password: newTerminalPassword
-                }, function(response) {
-                    console.log(response);
-                })
-            });
-    };
 
     var addMachine = function(e) {
         var centerId = $('#selectedCenterId').val();
@@ -115,7 +117,7 @@ var AdminView = (function () {
         // $('#disableCenterBtn').on('click', disableCenter);
     }();
 
-})
+});
 
 $(document).ready(function () {
     AdminView();

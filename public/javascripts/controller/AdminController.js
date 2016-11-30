@@ -85,14 +85,16 @@ var AdminController = (function () {
             success: sCallback,
             error: fCallback
         });
+    };
 
     return {
-        "renderTemplate": renderTemplate,
-        "getMenuitems": getMenuItems,
-        "getmachinesById": getMachinesByid,
+        "findUser": findUser,
+        "changePassword": changePassword,
+        "addMachine": addMachine,
+        "deleteMachine": deleteMachine,
         "addCenter": addCenter,
         "disableCenter": disableCenter
-    }
+    };
 
 
-}})();
+})();
