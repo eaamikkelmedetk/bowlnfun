@@ -81,7 +81,8 @@ var AdminController = (function () {
         "changePassword": changePassword,
         "addMachine": addMachine,
         "deleteMachine": deleteMachine,
-        "changeCenterStatus": changeCenterStatus
+        "changeCenterStatus": changeCenterStatus,
+        "addCenter" : addCenter
     };
 
 

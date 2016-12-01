@@ -49,48 +49,52 @@ var AdminView = (function () {
     };
 
     var changeCenterPassword = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var getSelectedCenterUser = $('#txtOCenterUser').val();
-        var newCenterUsername = $('#txtCenterUser').val();
-        var newCenterPassword = $('#txtCenterPwd').val();
-        var centerId = $('#selectedCenterId').val();
+        if(!($(e.target).hasClass('disabled'))) {
+            e.preventDefault();
+            e.stopPropagation();
+            var getSelectedCenterUser = $('#txtOCenterUser').val();
+            var newCenterUsername = $('#txtCenterUser').val();
+            var newCenterPassword = $('#txtCenterPwd').val();
+            var centerId = $('#selectedCenterId').val();
 
-        AdminController.findUser(getSelectedCenterUser, function (user) {
-            AdminController.changePassword({
-                id: user._id,
-                centerid: centerId,
-                name: newCenterUsername,
-                password: newCenterPassword
-            }, function (response) {
-                $.growl({ title: "Center", message: "Centerbrugeren er blevet opdateret" });
-                setTimeout(function() {
-                    location.reload();
-                }, 1500);
-            })
-        });
+            AdminController.findUser(getSelectedCenterUser, function (user) {
+                AdminController.changePassword({
+                    id: user._id,
+                    centerid: centerId,
+                    name: newCenterUsername,
+                    password: newCenterPassword
+                }, function (response) {
+                    $.growl({ title: "Center", message: "Centerbrugeren er blevet opdateret" });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                })
+            });
+        }
     };
 
     var changeTerminalPassword = function(e) {
-        e.preventDefault();
-        var getSelectedCenterUser = $('#txtOTerminalUser').val();
-        var newTerminalUsername = $('#txtTerminalUser').val();
-        var newTerminalPassword = $('#txtTerminalPwd').val();
-        var centerId = $('#selectedCenterId').val();
+        if(!($(e.target).hasClass('disabled'))) {
+            e.preventDefault();
+            var getSelectedCenterUser = $('#txtOTerminalUser').val();
+            var newTerminalUsername = $('#txtTerminalUser').val();
+            var newTerminalPassword = $('#txtTerminalPwd').val();
+            var centerId = $('#selectedCenterId').val();
 
-        AdminController.findUser(getSelectedCenterUser, function(user) {
-            AdminController.changePassword({
-                id: user._id,
-                centerid: centerId,
-                name: newTerminalUsername,
-                password: newTerminalPassword
-            }, function(response) {
-                $.growl({ title: "Terminal", message: "Terminalbrugeren er blevet opdatereret" });
-                setTimeout(function() {
-                    location.reload();
-                }, 1500);
-            })
-        });
+            AdminController.findUser(getSelectedCenterUser, function(user) {
+                AdminController.changePassword({
+                    id: user._id,
+                    centerid: centerId,
+                    name: newTerminalUsername,
+                    password: newTerminalPassword
+                }, function(response) {
+                    $.growl({ title: "Terminal", message: "Terminalbrugeren er blevet opdatereret" });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                })
+            });
+        }
     };
 
     var addCenterSubmit = function() {
@@ -115,13 +119,10 @@ var AdminView = (function () {
             $centerpsw.val("");
             $terminalusrname.val("");
             $terminalpsw.val("");
-            $.growl({ title: "Center", message: "Centereret er blevet oprettet" });
-            setTimeout(function() {
-                location.reload();
-            }, 1500);
+            window.location.reload();
         }, function (err) {
-            $('.modal-footer').show();
-            $('#failureMessage').val(err.responseText.message);
+            $.growl({title: "Center", message: "Oprettelsen af centeret er mislykkedes. Brugernavn skal være unikt" });
+            $("addCenterModal").modal('hide');
         });
     };
 
