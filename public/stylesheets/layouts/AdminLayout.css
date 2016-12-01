@@ -210,6 +210,14 @@ ul.panel-tabs li a {
     border-radius: 5%;
 }
 
+#input-group {
+    margin-bottom: 0px;
+}
+
+#input-group-button {
+   padding-top: 10px;
+}
+
 .top-spacing {
     padding-top: 15px;
 }

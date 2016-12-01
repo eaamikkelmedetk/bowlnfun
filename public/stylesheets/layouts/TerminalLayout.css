@@ -193,13 +193,13 @@ a.pin {
   BOOTSTRAP MODAL CSS END
  */
 
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
 
     .pin {
-        width: 110px;
-        height: 110px;
+        width: 90px;
+        height: 90px;
         border-radius: 110px;
-        line-height: 100px;
+        line-height: 80px;
     }
 
     a.pin {
