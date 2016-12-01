@@ -5,7 +5,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var machine = new Schema({
-    machineNumber: Number,
+    machineNumber: {
+        type: Number,
+        required: true
+    },
     state: String,
     centerId: {
         type: Schema.Types.ObjectId,

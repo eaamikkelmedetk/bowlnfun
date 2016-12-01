@@ -97,7 +97,8 @@ var AdminView = (function () {
         }
     };
 
-    var addCenterSubmit = function() {
+    var addCenterSubmit = function(e) {
+        e.preventDefault();
         var $centerName = $('#centername');
         var $terminalusrname = $('#terminalusrname');
         var $terminalpsw = $('#terminalpsw');
@@ -122,7 +123,7 @@ var AdminView = (function () {
             window.location.reload();
         }, function (err) {
             $.growl({title: "Center", message: "Oprettelsen af centeret er mislykkedes. Brugernavn skal være unikt" });
-            $("addCenterModal").modal('hide');
+            $("#addCenterModal").modal('hide');
         });
     };
 
