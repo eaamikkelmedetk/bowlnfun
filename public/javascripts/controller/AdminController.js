@@ -72,18 +72,8 @@ var AdminController = (function () {
         return postRequest('/admin/api/centers', data, sCallback, fCallback);
     };
 
-    var disableCenter = function (name, sCallback, fCallback) {
-        $.ajax({
-            type: "PUT",
-            dataType: 'json',
-            url: root + route,
-            data: {
-                name: name,
-                active: false
-            },
-            success: sCallback,
-            error: fCallback
-        });
+    var disableCenter = function (data, sCallback) {
+        return putRequest('/admin/api/centers', data, sCallback);
     };
 
     return {
