@@ -18,7 +18,7 @@ module.exports.authenticateLogin = function (req, res) {
     }, function (err, user){
 
         if(err) throw err;
-        if(user && user.password == sha512(req.body.password, user.salt).passwordHash) {
+        if(user && user.password == sha512(req.body.password, user.salt).passwordHash && user.active) {
             var token = jwt.sign({
                 sub: user._id,
                 centerId: user.centerId,
