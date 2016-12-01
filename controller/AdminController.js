@@ -8,23 +8,30 @@ var Machine = require('../models/machine');
 module.exports.index = function (req, res) {
     async.series([
             function (callback) {
-                Center.find({}).exec().then(function (centers) {
+                Center.find({}, null, {sort: {name: 1}}).exec().then(function (centers) {
                     req.params.selectedCenter = centers[0]._id;
                     callback(null, centers);
                 })
             },
             function (callback) {
-                Machine.find({centerId: req.params.selectedCenter, state: 'normal'}).exec().then(function (machines) {
+                Machine.find({centerId: req.params.selectedCenter, state: 'normal'}, null, {sort: {machineNumber: 1}}).exec().then(function (machines) {
                     callback(null, machines);
                 });
-            }
+            },
+        function(callback) {
+            Center.find({}, null, {sort: {name: 1}}).exec().then(function (allCenters) {
+                callback(null, allCenters);
+            });
+        }
         ], function (err, results) {
-
             var centers = results[0];
             var selectedCenterId = results[0][0]._id;
             var centerUser = results[0][0].read;
             var terminalUser = results[0][0].write;
             var machines = results[1];
+            var allCenters = results[2];
+
+
 
             res.render("admin", {
                 layout: "layoutAdmin",
@@ -32,7 +39,8 @@ module.exports.index = function (req, res) {
                 centerUser: centerUser,
                 terminalUser: terminalUser,
                 selectedCenterId: selectedCenterId,
-                machines: machines
+                machines: machines,
+                allCenters: allCenters
             });
         }
     );
@@ -42,7 +50,7 @@ module.exports.index = function (req, res) {
 module.exports.getCenter = function (req, res) {
     async.series([
         function (callback) {
-            Center.find({}).exec().then(function (centers) {
+            Center.find({"active": true}, null, {sort: {name: 1}}).exec().then(function (centers) {
                 callback(null, centers);
             });
         },
@@ -53,23 +61,30 @@ module.exports.getCenter = function (req, res) {
             })
         },
         function (callback) {
-            Machine.find({centerId: req.params.selectedCenterName, state: 'normal'}).exec().then(function (machines) {
+            Machine.find({centerId: req.params.selectedCenterName, state: 'normal'}, null, {sort: {machineNumber: 1}}).exec().then(function (machines) {
                 callback(null, machines);
+            });
+        },
+        function(callback) {
+            Center.find({}, null, {sort: {name: 1}}).exec().then(function (allCenters) {
+                callback(null, allCenters);
             });
         }
     ], function (err, results) {
-        var centers = results[0];
+        var activeCenters = results[0];
         var selectedCenter = results[1][0];
         var selectedCenterId = results[1][0]._id;
         var machines = results[2];
+        var allCenters = results[3];
 
         res.render("admin", {
             layout: "layoutAdmin",
-            centers: centers,
+            centers: activeCenters,
             selectedCenterId: selectedCenterId,
             centerUser: selectedCenter.read,
             terminalUser: selectedCenter.write,
-            machines: machines
+            machines: machines,
+            allCenters: allCenters
         });
     });
 };

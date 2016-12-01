@@ -149,12 +149,10 @@ module.exports.editUser1 = function (req, res) {
             });
         }
     ], function(err, results) {
-        console.log(results);
         var userId = results[0]._id;
         var userName = results[0].name;
         var centerId = results[1]._id;
         var terminalUser = results[1].write;
-        var centerUser = results[1].read;
         var pass = sha512(req.body.password, genSalt(saltLength));
 
 

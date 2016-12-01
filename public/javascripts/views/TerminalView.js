@@ -63,7 +63,7 @@ $(document).ready(function () {
             }
 
             errorReport.timer = startTimer();
-        }
+        };
 
         var bindPinClick = function () {
             if(errorReport.usePins) {
@@ -75,7 +75,7 @@ $(document).ready(function () {
                 $pins.removeClass("pin-selected pin-selectable");
                 $pins.off('click');
             }
-        }
+        };
 
         var postErrorReport = function() {
             if(errorReport.type && errorReport.machineId) {
