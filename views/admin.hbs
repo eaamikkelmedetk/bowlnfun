@@ -216,17 +216,12 @@
                         <div class="col-lg-9"><strong>Navn</strong></div>
                         <div class="col-lg-3 right-align"><strong>Aktiver</strong></div>
                     </div>
-                    {{#menuhelper allCenters}}
+                    {{#each allCenters}}
                     <div class="row top-spacing">
                         <div class="col-lg-9">{{name}}</div>
-                        <div class="col-lg-3 right-align"><label><input type="checkbox" class="ios-switch green"  /><div><div></div></div></label></div>
+                        <div class="col-lg-3 right-align"><label><input type="checkbox" {{#if active}}checked{{/if}} class="ios-switch green active-center-checkbox"  /><div><div></div></div></label></div>
                     </div>
-                    {{else}}
-                        <div class="row top-spacing">
-                            <div class="col-lg-9">{{name}}</div>
-                            <div class="col-lg-3 right-align"><label><input type="checkbox" checked class="ios-switch green"  /><div><div></div></div></label></div>
-                        </div>
-                    {{/menuhelper}}
+                    {{/each}}
                     <br/>
                     <br/>
                 </form>

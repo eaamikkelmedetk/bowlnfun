@@ -95,7 +95,7 @@ module.exports.addMachine = function (req, res) {
 
 module.exports.editCenter = function (req, res) {
     Center.findOne({
-        _id: req.body.name
+        name: req.body.name
     }, function (err, center) {
         if (err) throw err;
 
@@ -103,7 +103,7 @@ module.exports.editCenter = function (req, res) {
             if (req.body.name) center.name = req.body.name;
             if (req.body.active) {
                 center.active = req.body.active;
-                User.update({centerId: req.body.id}, {active: req.body.active}, {multi: true}).exec();
+                User.update({centerId: center._id}, {active: req.body.active}, {multi: true}).exec();
             }
 
             center.save();

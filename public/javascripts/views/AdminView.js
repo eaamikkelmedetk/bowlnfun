@@ -125,6 +125,18 @@ var AdminView = (function () {
         });
     };
 
+    var changeCenterStatus = function (e) {
+        var name = $(e.target.parentNode.parentNode).prev().text();
+        var checked = e.target.checked;
+
+        var data = {
+            "name": name,
+            "active": checked
+        };
+
+        AdminController.changeCenterStatus(data);
+    };
+
 
     var addMachine = function(e) {
         var centerId = $('#selectedCenterId').val();
@@ -161,7 +173,7 @@ var AdminView = (function () {
         $('.menu-heading').on("click", function() {
             window.location.href = "http://" + window.location.host + "/admin";
         });
-        // $('#disableCenterBtn').on('click', disableCenter);
+        $('.active-center-checkbox').on("click", changeCenterStatus);
 
     };
 
