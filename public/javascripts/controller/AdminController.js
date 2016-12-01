@@ -83,7 +83,8 @@ var AdminController = (function () {
         "addMachine": addMachine,
         "addCenter": addCenter,
         "deleteMachine": deleteMachine,
-        "changeCenterStatus": changeCenterStatus
+        "changeCenterStatus": changeCenterStatus,
+        "addCenter" : addCenter
     };
 
 
