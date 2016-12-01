@@ -174,7 +174,9 @@ var AdminView = (function () {
             window.location.href = "http://" + window.location.host + "/admin";
         });
         $('.active-center-checkbox').on("click", changeCenterStatus);
-
+        $('.btnLuk').on('click', function() {
+            location.reload();
+        });
     };
 
     return {
