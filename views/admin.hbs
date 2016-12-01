@@ -3,11 +3,9 @@
         <div class="col-lg-3 col-md-3 no-margin menu">
             <h1 class="menu-heading">CENTER</h1>
             <ul class="menu-items">
-                {{#menuhelper centers}}
+                {{#each centers}}
                     <li><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
-                {{else}}
-                    <li><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
-                {{/menuhelper}}
+                {{/each}}
             </ul>
             <br/>
             <div class="buttonContainer">
@@ -211,12 +209,17 @@
                         <div class="col-lg-9"><strong>Navn</strong></div>
                         <div class="col-lg-3 right-align"><strong>Aktiver</strong></div>
                     </div>
-                    {{#each allCenters}}
+                    {{#menuhelper allCenters}}
                     <div class="row top-spacing">
                         <div class="col-lg-9">{{name}}</div>
-                        <div class="col-lg-3 right-align"><label><input type="checkbox" checked="false" class="ios-switch green"  /><div><div></div></div></label></div>
+                        <div class="col-lg-3 right-align"><label><input type="checkbox" class="ios-switch green"  /><div><div></div></div></label></div>
                     </div>
-                    {{/each}}
+                    {{else}}
+                        <div class="row top-spacing">
+                            <div class="col-lg-9">{{name}}</div>
+                            <div class="col-lg-3 right-align"><label><input type="checkbox" checked class="ios-switch green"  /><div><div></div></div></label></div>
+                        </div>
+                    {{/menuhelper}}
                     <br/>
                     <br/>
                 </form>

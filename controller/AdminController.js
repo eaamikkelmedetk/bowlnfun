@@ -8,7 +8,7 @@ var Machine = require('../models/machine');
 module.exports.index = function (req, res) {
     async.series([
             function (callback) {
-                Center.find({}, null, {sort: {name: 1}}).exec().then(function (centers) {
+                Center.find({"active": true}, null, {sort: {name: 1}}).exec().then(function (centers) {
                     req.params.selectedCenter = centers[0]._id;
                     callback(null, centers);
                 })
@@ -108,15 +108,11 @@ Handlebars.registerHelper('grouped_each', function (every, context, options) {
 Handlebars.registerHelper('menuhelper', function (context, options) {
     var html = "";
     for (var i = 0; i < context.length; i++) {
-        if (i == 0) {
-            html = options.fn(context[i]);
+        if(context[i].active == false) {
+            html += options.fn(context[i]);
         } else {
             html += options.inverse(context[i]);
         }
     }
     return html;
 });
-
-// module.exports.index = function (req, res) {
-//         res.render('admin', {layout: "layoutAdmin.hbs"});
-// };
