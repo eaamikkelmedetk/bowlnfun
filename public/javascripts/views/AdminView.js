@@ -116,9 +116,7 @@ var AdminView = (function () {
             $terminalusrname.val("");
             $terminalpsw.val("");
             $.growl({ title: "Center", message: "Centereret er blevet oprettet" });
-            setTimeout(function() {
-                location.reload();
-            }, 1500);
+            window.location.reload();
         }, function (err) {
             $('.modal-footer').show();
             $('#failureMessage').val(err.responseText.message);

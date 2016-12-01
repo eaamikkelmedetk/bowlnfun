@@ -19,6 +19,7 @@ var AdminController = (function () {
     };
 
     var postRequest = function (route, data, sCallback, fCallback) {
+        console.log(sCallback);
         $.ajax({
                 type: "POST",
                 dataType: 'json',
@@ -80,6 +81,7 @@ var AdminController = (function () {
         "findUser": findUser,
         "changePassword": changePassword,
         "addMachine": addMachine,
+        "addCenter": addCenter,
         "deleteMachine": deleteMachine,
         "changeCenterStatus": changeCenterStatus
     };
