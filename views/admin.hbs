@@ -1,8 +1,6 @@
 <div class="container-fluid no-margin">
     <div class="row-fluid">
         <div class="col-lg-3 col-md-3 no-margin menu">
-            <button type="button" class="btn btn-success" id="addCenterBtn"><span class="glyphicon-plus"></span></button>
-            <button type="button" class="btn warning" id="disableCenterBtn"><span class="glyphicon-minus"></span></button><br />
             <h1 class="menu-heading">CENTER</h1>
             <ul class="menu-items">
                 {{#menuhelper centers}}
@@ -11,6 +9,15 @@
                     <li><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
                 {{/menuhelper}}
             </ul>
+            <br/>
+            <div class="buttonContainer">
+                <button type="button" class="menuButton" id="addCenterBtn" data-toggle="modal"
+                        data-target="#addCenterModal">Opret center
+                </button>&nbsp;&nbsp;
+                <button type="button" class="menuButton" id="disableCenterBtn" data-toggle="modal"
+                        data-target="#editCentersModal">Administrer centre</button>
+                <br/>
+            </div>
         </div>
         <div class="col-lg-1">
             &nbsp;&nbsp;
@@ -32,9 +39,10 @@
                                     <form>
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
-                                                <input type="hidden" value="{{centerUser}}" id="txtOCenterUser" />
+                                                <input type="hidden" value="{{centerUser}}" id="txtOCenterUser"/>
                                                 <label for="txtUser">Brugernavn</label>
-                                                <input type="txtUser" value="{{centerUser}}" class="form-control" id="txtCenterUser">
+                                                <input type="txtUser" value="{{centerUser}}" class="form-control"
+                                                       id="txtCenterUser">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -45,7 +53,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-2 col-lg-offset-6">
-                                                <button type="submit" class="btn btn-success pull-right changeCenterUser">Change password
+                                                <button type="submit"
+                                                        class="btn btn-success pull-right changeCenterUser">Change
+                                                    password
                                                 </button>
                                             </div>
                                         </div>
@@ -56,7 +66,7 @@
                                     <form>
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
-                                                <input type="hidden" value="{{terminalUser}}" id="txtOTerminalUser" />
+                                                <input type="hidden" value="{{terminalUser}}" id="txtOTerminalUser"/>
                                                 <label for="txtUser">Brugernavn</label>
                                                 <input type="txtUser" value="{{terminalUser}}" class="form-control"
                                                        id="txtTerminalUser">
@@ -70,7 +80,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-2 col-lg-offset-6">
-                                                <button type="submit" class="btn btn-success pull-right changeTerminalUser">Change password
+                                                <button type="submit"
+                                                        class="btn btn-success pull-right changeTerminalUser">Change
+                                                    password
                                                 </button>
                                             </div>
                                         </div>
@@ -81,14 +93,18 @@
                         <br/><br/>
                         <div class="maskiner">
                             <span style="display: block;text-align: center;"><h1>MASKINER</h1><br/></span>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalTilføjMaskine">Tilføj maskine</button><br /><br />
+                            <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-target="#modalTilføjMaskine">Tilføj maskine
+                            </button>
+                            <br/><br/>
                             {{#grouped_each 4 machines}}
                                 <div class="row">
                                     {{#each this }}
                                         <div class="col-lg-3">
-                                            <input type="hidden" value="{{_id}}" class="machineId" />
+                                            <input type="hidden" value="{{_id}}" class="machineId"/>
                                             <div class="maskine">MASKINE {{machineNumber}}</div>
-                                            <p class="deleteContainer">&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span> FJERN</p>
+                                            <p class="deleteContainer">&nbsp;&nbsp;<span
+                                                    class="glyphicon glyphicon-trash"></span> FJERN</p>
                                         </div>
                                     {{/each}}
                                 </div>
@@ -108,7 +124,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Tilføj maskine</h4>
             </div>
             <div class="modal-body">
@@ -145,29 +162,68 @@
                         <input type="text" class="form-control" id="centername" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="terminalusrname"><span class="glyphicon glyphicon-user"></span> Terminal Username</label>
+                        <label for="terminalusrname"><span class="glyphicon glyphicon-user"></span> Terminal
+                            Username</label>
                         <input type="text" class="form-control" id="terminalusrname" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <label for="terminalpsw"><span class="glyphicon glyphicon-eye-open"></span> Terminal Password</label>
+                        <label for="terminalpsw"><span class="glyphicon glyphicon-eye-open"></span> Terminal
+                            Password</label>
                         <input type="password" class="form-control" id="terminalpsw" placeholder="Enter password">
                     </div>
                     <div class="form-group">
-                        <label for="centerusrname"><span class="glyphicon glyphicon-user"></span> Center Username</label>
+                        <label for="centerusrname"><span class="glyphicon glyphicon-user"></span> Center
+                            Username</label>
                         <input type="text" class="form-control" id="centerusrname" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <label for="centerpsw"><span class="glyphicon glyphicon-eye-open"></span> Center Password</label>
+                        <label for="centerpsw"><span class="glyphicon glyphicon-eye-open"></span> Center
+                            Password</label>
                         <input type="password" class="form-control" id="centerpsw" placeholder="Enter password">
                     </div>
-                    <br />
-                    <button type="submit" id="addCenterSubmitBtn" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span> Submit</button>
-                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <br />
+                    <br/>
+                    <button type="submit" id="addCenterSubmitBtn" class="btn btn-success pull-right"><span
+                            class="glyphicon glyphicon-ok"></span> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span
+                            class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                    <br/>
                 </form>
             </div>
             <div class="modal-footer" style="visibility: hidden">
                 <span class="glyphicon-remove"></span><h4 id="failureMessage"></h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editCentersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>New Center</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form">
+                    <div class="row">
+                        <div class="col-lg-9"><strong>Navn</strong></div>
+                        <div class="col-lg-3 right-align"><strong>Aktiver</strong></div>
+                    </div>
+                    {{#each allCenters}}
+                    <div class="row top-spacing">
+                        <div class="col-lg-9">{{name}}</div>
+                        <div class="col-lg-3 right-align"><label><input type="checkbox" checked="false" class="ios-switch green"  /><div><div></div></div></label></div>
+                    </div>
+                    {{/each}}
+                    <br/>
+                    <br/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="" class="btn btn-success pull-right" data-dismiss="modal">Luk
+                </button>
             </div>
         </div>
     </div>

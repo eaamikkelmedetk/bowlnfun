@@ -101,7 +101,7 @@ var AdminView = (function () {
         var $centerpsw = $('#centerpsw');
 
         var newCenter = {
-            name: $centerName.val(),
+            name: $centerName.val().toLowerCase(),
             readName: $centerusrname.val(),
             readPass: $centerpsw.val(),
             writeName: $terminalusrname.val(),
@@ -110,15 +110,15 @@ var AdminView = (function () {
 
         AdminController.addCenter(newCenter, function () {
             $('#addCenterModal').modal('hide');
-            $.growl({ title: "Center", message: "Centereret er blevet oprettet" });
-            setTimeout(function() {
-                location.reload();
-            }, 1500);
             $centerName.val("");
             $centerusrname.val("");
             $centerpsw.val("");
             $terminalusrname.val("");
             $terminalpsw.val("");
+            $.growl({ title: "Center", message: "Centereret er blevet oprettet" });
+            setTimeout(function() {
+                location.reload();
+            }, 1500);
         }, function (err) {
             $('.modal-footer').show();
             $('#failureMessage').val(err.responseText.message);
@@ -157,9 +157,6 @@ var AdminView = (function () {
         $('.changeTerminalUser').on('click', changeTerminalPassword);
         $('#btnAddMachine').on('click', addMachine);
         $('.deleteContainer').on('click', removeMachine);
-        $('#addCenterBtn').on('click', function(){
-            $('#addCenterModal').modal();
-        });
         $('#addCenterSubmitBtn').on('click', addCenterSubmit);
         $('.menu-heading').on("click", function() {
             window.location.href = "http://" + window.location.host + "/admin";
