@@ -34,26 +34,28 @@
                         <div class="panel-body">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab1"><h1>CENTER</h1><br/>
-                                    <form>
+                                    <form data-toggle="validator">
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
                                                 <input type="hidden" value="{{centerUser}}" id="txtOCenterUser"/>
                                                 <label for="txtUser">Brugernavn</label>
-                                                <input type="txtUser" value="{{centerUser}}" class="form-control"
-                                                       id="txtCenterUser">
+                                                <input type="txtUser" value="{{centerUser}}" class="form-control" id="txtCenterUser" pattern="[\w]{4,}" data-error="Dit brugernavn skal minimum være 4 tegn og kan kun indeholde A-z, 0-9 og '_'" required>
+                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
                                                 <label for="pwd">Password:</label>
-                                                <input type="password" class="form-control" id="txtCenterPwd">
+                                                <input type="password" class="form-control" id="txtCenterPwd" data-minlength="6"  data-error="Dit password skal minimum være 6 tegn" required>
+                                                <div class="help-block with-errors"></div>
+                                                <label for="pwd">Gentag password:</label>
+                                                <input type="password" class="form-control" id="txtCenterPwdConfirm" data-match="#txtCenterPwd"  data-error="Felterne matcher ikke hinanden" required>
+                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-2 col-lg-offset-6">
-                                                <button type="submit"
-                                                        class="btn btn-success pull-right changeCenterUser">Change
-                                                    password
+                                                <button type="submit" class="btn btn-success pull-right changeCenterUser">Gem ændringer
                                                 </button>
                                             </div>
                                         </div>
@@ -64,16 +66,20 @@
                                     <form>
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
-                                                <input type="hidden" value="{{terminalUser}}" id="txtOTerminalUser"/>
+                                                <input type="hidden" value="{{terminalUser}}" id="txtOTerminalUser" />
                                                 <label for="txtUser">Brugernavn</label>
-                                                <input type="txtUser" value="{{terminalUser}}" class="form-control"
-                                                       id="txtTerminalUser">
+                                                <input type="txtUser" value="{{terminalUser}}" class="form-control" id="txtTerminalUser" pattern="[\w]{4,}" data-error="Dit brugernavn skal minimum være 4 tegn og kan kun indeholde A-z, 0-9 og '_'" required>
+                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-lg-4 col-lg-offset-4">
                                                 <label for="pwd">Password:</label>
-                                                <input type="password" class="form-control" id="txtTerminalPwd">
+                                                <input type="password" class="form-control" id="txtTerminalPwd" data-minlength="6"  data-error="Dit password skal minimum være 6 tegn" required>
+                                                <div class="help-block with-errors"></div>
+                                                <label for="pwd">Gentag password:</label>
+                                                <input type="password" class="form-control" id="txtTerminalPwdConfirm" data-match="#txtTerminalPwd"  data-error="Felterne matcher ikke hinanden" required>
+                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -88,7 +94,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br/><br/>
                         <div class="maskiner">
                             <span style="display: block;text-align: center;"><h1>MASKINER</h1><br/></span>
                             <button type="button" class="btn btn-default" data-toggle="modal"
@@ -128,12 +133,12 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" value="{{selectedCenterId}}" id="selectedCenterId">
-                <form>
+                <form data-toggle="validator">
                     <div class="row">
                         <div class="form-group col-lg-12">
-                            <label for="txtUser">Maskinnummer (Kun i tal)</label>
-                            <input type="txtUser" class="form-control"
-                                   id="txtMachineNumber">
+                            <label for="txtUser">Maskinnummer</label>
+                            <input class="form-control" id="txtMachineNumber" type="txtUser" pattern="[\d]{1,}" data-error="Maskinnummeret skal være et tal">
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </form>
@@ -151,50 +156,54 @@
         <div class="modal-content">
             <div class="modal-header" style="padding:35px 50px;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4>New Center</h4>
+                <h4>Opret center</h4>
             </div>
             <div class="modal-body">
-                <form role="form">
+                <form role="form"  data-toggle="validator">
                     <div class="form-group">
                         <label for="centername"><span class="glyphicon glyphicon-home"></span> Center Name</label>
                         <input type="text" class="form-control" id="centername" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="terminalusrname"><span class="glyphicon glyphicon-user"></span> Terminal
-                            Username</label>
-                        <input type="text" class="form-control" id="terminalusrname" placeholder="Username">
+                        <label for="terminalusrname"><span class="glyphicon glyphicon-user"></span> Terminal brugernavn</label>
+                        <input type="text" class="form-control" id="terminalusrname" placeholder="Username" pattern="[\w]{4,}" data-error="Dit brugernavn skal minimum være 4 tegn og kan kun indeholde A-z, 0-9 og '_'" required>
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label for="terminalpsw"><span class="glyphicon glyphicon-eye-open"></span> Terminal
-                            Password</label>
-                        <input type="password" class="form-control" id="terminalpsw" placeholder="Enter password">
+                        <label for="terminalpsw"><span class="glyphicon glyphicon-eye-open"></span> Terminal password</label>
+                        <input type="password" class="form-control" id="terminalpsw" placeholder="Enter password" data-minlength="6"  data-error="Dit password skal minimum være 6 tegn" required>
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label for="centerusrname"><span class="glyphicon glyphicon-user"></span> Center
-                            Username</label>
-                        <input type="text" class="form-control" id="centerusrname" placeholder="Username">
+                        <label for="terminalpswconfirm"><span class="glyphicon glyphicon-eye-open"></span>Bekræft terminal Password</label>
+                        <input type="password" class="form-control" id="terminalpswconfirm" placeholder="Enter password" data-match="#terminalpsw" data-error="Felterne matcher ikke hinanden" required>
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label for="centerpsw"><span class="glyphicon glyphicon-eye-open"></span> Center
-                            Password</label>
-                        <input type="password" class="form-control" id="centerpsw" placeholder="Enter password">
+                        <label for="centerusrname"><span class="glyphicon glyphicon-user"></span> Center brugernavn</label>
+                        <input type="text" class="form-control" id="centerusrname" placeholder="Username" pattern="[\w]{4,}" data-error="Dit brugernavn skal minimum være 4 tegn og kan kun indeholde A-z, 0-9 og '_'" required>
+                        <div class="help-block with-errors"></div>
                     </div>
-                    <br/>
-                    <button type="submit" id="addCenterSubmitBtn" class="btn btn-success pull-right"><span
-                            class="glyphicon glyphicon-ok"></span> Submit
-                    </button>
-                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span
-                            class="glyphicon glyphicon-remove"></span> Cancel
-                    </button>
-                    <br/>
+                    <div class="form-group">
+                        <label for="centerpsw"><span class="glyphicon glyphicon-eye-open"></span> Center password</label>
+                        <input type="password" class="form-control" id="centerpsw" placeholder="Enter password" data-minlength="6"  data-error="Dit password skal minimum være 6 tegn" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="centerpswcconfirm"><span class="glyphicon glyphicon-eye-open"></span> Bekræft center password</label>
+                        <input type="password" class="form-control" id="centerpswconfirm" placeholder="Enter password" data-match="#centerpsw" data-error="Felterne matcher ikke hinanden" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer" style="visibility: hidden">
-                <span class="glyphicon-remove"></span><h4 id="failureMessage"></h4>
+            <div class="modal-footer">
+                <button type="submit" id="addCenterSubmitBtn" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="editCentersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
