@@ -72,7 +72,7 @@ var AdminController = (function () {
         return postRequest('/admin/api/centers', data, sCallback, fCallback);
     };
 
-    var disableCenter = function (data, sCallback) {
+    var changeCenterStatus = function (data, sCallback) {
         return putRequest('/admin/api/centers', data, sCallback);
     };
 
@@ -81,8 +81,7 @@ var AdminController = (function () {
         "changePassword": changePassword,
         "addMachine": addMachine,
         "deleteMachine": deleteMachine,
-        "addCenter": addCenter,
-        "disableCenter": disableCenter
+        "changeCenterStatus": changeCenterStatus
     };
 
 
