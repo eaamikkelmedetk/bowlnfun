@@ -54,7 +54,7 @@ h1.menu-heading {
 
 ul.menu-items li {
     display: block;
-    font-size: 30px;
+    font-size: 28px;
     letter-spacing: 2px;
 }
 
@@ -130,7 +130,7 @@ ul.panel-tabs li {
 }
 
 ul.panel-tabs li:nth-child(1) {
-    border-right: 3px solid black;
+    border-right: 3px solid #293b4c;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
@@ -149,7 +149,7 @@ ul.panel-tabs li:hover
 ul.panel-tabs li > a:link, ul.panel-tabs li a:visited
 {
     color: white;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #293b4c;
 }
 
 ul.panel-tabs li > a:hover {
@@ -222,4 +222,8 @@ ul.panel-tabs li a {
 }
 .modal-footer {
     background-color: #f9f9f9;
+}
+
+.help-block {
+    font-size: 12px;
 }
