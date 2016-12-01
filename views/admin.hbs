@@ -2,11 +2,11 @@
     <div class="row-fluid">
         <div class="col-lg-3 col-md-3 no-margin menu">
             <button type="button" class="btn btn-success" id="addCenterBtn"><span class="glyphicon-plus"></span></button>
-            <button type="button" class="btn warning" id="disableCenterBtn"><span class="glyphicon-minus"></span></button>
+            <button type="button" class="btn warning" id="disableCenterBtn"><span class="glyphicon-minus"></span></button><br />
             <h1 class="menu-heading">CENTER</h1>
             <ul class="menu-items">
                 {{#menuhelper centers}}
-                    <li class="menu-active"><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
+                    <li><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
                 {{else}}
                     <li><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
                 {{/menuhelper}}
@@ -80,7 +80,7 @@
                         </div>
                         <br/><br/>
                         <div class="maskiner">
-                            <h1>MASKINER</h1><br/>
+                            <span style="display: block;text-align: center;"><h1>MASKINER</h1><br/></span>
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalTilføjMaskine">Tilføj maskine</button><br /><br />
                             {{#grouped_each 4 machines}}
                                 <div class="row">
@@ -150,7 +150,7 @@
                     </div>
                     <div class="form-group">
                         <label for="terminalpsw"><span class="glyphicon glyphicon-eye-open"></span> Terminal Password</label>
-                        <input type="text" class="form-control" id="terminalpsw" placeholder="Enter password">
+                        <input type="password" class="form-control" id="terminalpsw" placeholder="Enter password">
                     </div>
                     <div class="form-group">
                         <label for="centerusrname"><span class="glyphicon glyphicon-user"></span> Center Username</label>
@@ -158,7 +158,7 @@
                     </div>
                     <div class="form-group">
                         <label for="centerpsw"><span class="glyphicon glyphicon-eye-open"></span> Center Password</label>
-                        <input type="text" class="form-control" id="centerpsw" placeholder="Enter password">
+                        <input type="password" class="form-control" id="centerpsw" placeholder="Enter password">
                     </div>
                     <br />
                     <button type="submit" id="addCenterSubmitBtn" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span> Submit</button>

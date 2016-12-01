@@ -3,7 +3,7 @@
  */
 
 var AdminView = (function () {
-    var isItemsBound = false;
+    var weburl = "http://localhost:3000/admin";
     /**
      * LAYOUT START
      */
@@ -11,13 +11,46 @@ var AdminView = (function () {
     var highlightMenuitems = function () {
         $('ul.menu-items li').removeClass('menu-active');
         $(this).addClass('menu-active');
+    };
 
-        var centerName = $('.menu-active').children('.menu-items-text').text();
+    var resetMenuHeight = function() {
+        var documentHeight = $(document).height();
+        $(".menu").height(documentHeight);
+    }
 
+    var menuItemIsSet = function() {
+        var pathname = window.location.pathname.split("/");
+
+        if(pathname[2] === undefined) {
+            $('ul.menu-items li:nth-child(1)').addClass('menu-active')
+        } else {
+            var centerSelected = pathname[2];
+
+            var menuItemsElements = $('ul.menu-items > li').map(function(){
+                return $(this);
+            }).get();
+
+            var menuItemsText = $('ul.menu-items > li > a').map(function(){
+                return $.trim($(this).text());
+            }).get();
+
+            var found = false;
+            var i = 0;
+
+            while(!found && i < menuItemsText.length) {
+                if(centerSelected === menuItemsText[i]) {
+                    found = true;
+                    menuItemsElements[i].addClass("menu-active");
+                } else {
+                    i++;
+                }
+            }
+        }
     };
 
     var changeCenterPassword = function(e) {
         e.preventDefault();
+        e.stopPropagation();
         var getSelectedCenterUser = $('#txtOCenterUser').val();
         var newCenterUsername = $('#txtCenterUser').val();
         var newCenterPassword = $('#txtCenterPwd').val();
@@ -30,8 +63,10 @@ var AdminView = (function () {
                 name: newCenterUsername,
                 password: newCenterPassword
             }, function (response) {
-                location.reload();
-                console.log(response);
+                $.growl({ title: "Center", message: "Centerbrugeren er blevet opdateret" });
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
             })
         });
     };
@@ -50,7 +85,10 @@ var AdminView = (function () {
                 name: newTerminalUsername,
                 password: newTerminalPassword
             }, function(response) {
-                console.log(response);
+                $.growl({ title: "Terminal", message: "Terminalbrugeren er blevet opdatereret" });
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
             })
         });
     };
@@ -72,13 +110,16 @@ var AdminView = (function () {
 
         AdminController.addCenter(newCenter, function () {
             $('#addCenterModal').modal('hide');
+            $.growl({ title: "Center", message: "Centereret er blevet oprettet" });
+            setTimeout(function() {
+                location.reload();
+            }, 1500);
             $centerName.val("");
             $centerusrname.val("");
             $centerpsw.val("");
             $terminalusrname.val("");
             $terminalpsw.val("");
         }, function (err) {
-            console.log(err.responseText);
             $('.modal-footer').show();
             $('#failureMessage').val(err.responseText.message);
         });
@@ -92,15 +133,21 @@ var AdminView = (function () {
 
         AdminController.addMachine({"machineNumber": machineNumber, "state": state, "centerId": centerId}, function(result) {
             $('#modalTilføjMaskine').modal("hide");
-            location.reload();
+            $.growl({ title: "Maskine", message: "Maskinen er blevet oprettet" });
+            setTimeout(function() {
+                location.reload();
+            }, 1500);
         })
     };
 
-    var removeMachine = function() {
+    var removeMachine = function(e) {
+        e.stopPropagation();
         var machineId = $(this).siblings(".machineId").val();
         AdminController.deleteMachine({"id": machineId, "state": "deleted"}, function() {
-            alert("Maskinen er blevet slettet!");
-            location.reload();
+            $.growl({ title: "Maskine", message: "Maskinen er blevet slettet" });
+            setTimeout(function() {
+                location.reload();
+            }, 1500);
         })
     };
 
@@ -114,11 +161,23 @@ var AdminView = (function () {
             $('#addCenterModal').modal();
         });
         $('#addCenterSubmitBtn').on('click', addCenterSubmit);
+        $('.menu-heading').on("click", function() {
+            window.location.href = "http://" + window.location.host + "/admin";
+        });
         // $('#disableCenterBtn').on('click', disableCenter);
-    }();
+
+    };
+
+    return {
+        "bindEvents": bindEvents,
+        "menuItemIsSet": menuItemIsSet,
+        "resetMenuHeight": resetMenuHeight
+    };
 
 });
 
 $(document).ready(function () {
-    AdminView();
+    AdminView().bindEvents();
+    AdminView().menuItemIsSet();
+    AdminView().resetMenuHeight();
 });

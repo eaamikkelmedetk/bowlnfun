@@ -72,7 +72,6 @@ $(document).ready(function () {
             }
             else {
                 errorReport.pins = pinsDefault();
-                console.log(errorReport.pins);
                 $pins.removeClass("pin-selected pin-selectable");
                 $pins.off('click');
             }

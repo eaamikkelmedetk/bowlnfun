@@ -31,7 +31,6 @@ var AdminController = (function () {
     };
 
     var putRequest = function (route, data, sCallback) {
-        console.log(root + route);
         $.ajax({
                 type: "PUT",
                 dataType: 'json',
