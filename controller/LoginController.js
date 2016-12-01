@@ -23,7 +23,7 @@ module.exports.authenticateLogin = function (req, res) {
                 sub: user._id,
                 centerId: user.centerId,
                 permissions: user.role
-            }, config.secret, {expiresIn: '1d'});
+            }, config.secret, {expiresIn: '7d'});
             // return the information including token as JSON
             res.cookie("bowlnfunErrorApp", token, {
                 expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7))
@@ -121,7 +121,7 @@ function useToken(dat) {
         dat.next();
 
     } else if (dat.role) {
-        dat.next(errorMessage("Access denied"), 403);
+        dat.res.redirect('/login');
     }
     else {
         var path = "";
