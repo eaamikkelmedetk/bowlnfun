@@ -15,14 +15,14 @@ module.exports.getErrors = function(req, res) {
     var fDate = req.query.fDate;
     var tDate = req.query.tDate;
 
-    fDate = moment(fDate).hours(0, 'h');
-    tDate = moment(tDate).hours(23, 'h').minutes(59);
+    fDate = moment(fDate).hours(0, 'h').toDate();
+    tDate = moment(tDate).hours(23, 'h').minutes(59).toDate();
 
 
     Error.aggregate([
         {
             $match: {
-                "timestamp": {$gte: new Date(fDate), $lte: new Date(tDate)}
+                "timestamp": {$gte: fDate, $lte: tDate}
             }
         },
         {
