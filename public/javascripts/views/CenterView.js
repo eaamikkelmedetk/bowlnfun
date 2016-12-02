@@ -68,6 +68,13 @@ $(document).ready(function() {
                 .on("changeDate", changeToDate);
         }();
 
+        var logoutClick = function () {
+            $('#logoutButton').on('click', function () {
+                LoginService.deleteCookie();
+                window.location.href='/login';
+            })
+        }();
+
         function changeFromDate(e) {
             dates.fromISODate = convertTOISO($fromDate.datepicker("getDate"));
             centerController.getErrorsFromTo(dates);

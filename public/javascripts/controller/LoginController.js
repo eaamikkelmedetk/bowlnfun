@@ -11,7 +11,11 @@
 
 var LoginService = (function() {
 
-    function publicLogin(username, password) {
+    var deleteCookie = function() {
+        document.cookie = 'bowlnfunErrorApp =; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    };
+
+    var publicLogin = function(username, password) {
         var root = window.location.origin;
         var route = '/login/authenticate';
         $.ajax(
@@ -24,9 +28,10 @@ var LoginService = (function() {
                 },
                 dataType: 'json'
             }
-        )
-        return {
-            login: publicLogin
-        }
+        );
+    };
+    return {
+        login: publicLogin,
+        deleteCookie: deleteCookie
     };
 })();

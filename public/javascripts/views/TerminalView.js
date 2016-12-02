@@ -33,6 +33,13 @@ $(document).ready(function () {
 
         };
 
+        var logoutClick = function () {
+            $('#logoutButton').on('click', function () {
+                LoginService.deleteCookie();
+                window.location.href='/login';
+            })
+        }();
+
         /**
          * Responsible for binding a click event to Error buttons
          */

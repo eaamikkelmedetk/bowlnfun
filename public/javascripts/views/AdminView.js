@@ -181,6 +181,13 @@ var AdminView = (function () {
         });
     };
 
+    var logoutClick = function () {
+        $('#logoutButton').on('click', function () {
+            LoginService.deleteCookie();
+            window.location.href='/login';
+        })
+    }();
+
     return {
         "bindEvents": bindEvents,
         "menuItemIsSet": menuItemIsSet,
