@@ -2,6 +2,9 @@
     <div class="row-fluid">
         <div class="col-lg-3 col-md-3 no-margin menu">
             <h1 class="menu-heading">CENTER</h1>
+            <div class="buttonContainer">
+                <button type="button" class="menuButton" onclick="window.location.href='/login';" id="logoutButton" >Log ud</button>
+            </div>
             <ul class="menu-items">
                 {{#each centers}}
                     <li><a href="../admin/{{name}}" class="menu-items-text">{{name}}</a></li>
@@ -10,8 +13,7 @@
             <br/>
             <div class="buttonContainer">
                 <button type="button" class="menuButton" id="addCenterBtn" data-toggle="modal"
-                        data-target="#addCenterModal">Opret center
-                </button>&nbsp;&nbsp;
+                        data-target="#addCenterModal">Opret center</button>&nbsp;&nbsp;
                 <button type="button" class="menuButton" id="disableCenterBtn" data-toggle="modal"
                         data-target="#editCentersModal">Administrer centre</button>
                 <br/>
@@ -154,7 +156,6 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="btnAddMachine">Opret</button>
             </div>
         </div>
@@ -173,7 +174,8 @@
 
                     <div class="form-group">
                         <label for="centername"><span class="glyphicon glyphicon-home"></span> Center navn</label>
-                        <input type="text" class="form-control" id="centername" placeholder="Navn">
+                        <input type="text" class="form-control" id="centername" placeholder="Navn" pattern="[\w]{4,}" data-error="Dit center navn skal minimum være 4 tegn og kan kun indeholde A-z, 0-9 og '_'" required>
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
                         <label for="terminalusrname"><span class="glyphicon glyphicon-user"></span> Terminal brugernavn</label>
