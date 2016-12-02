@@ -6,9 +6,8 @@ var moment = require('moment');
 
 
 module.exports.index = function(req, res) {
-    console.log(req.decoded);
     machineModel.find({"centerId": req.decoded.centerId, "state": "normal"}, null, {sort: {machineNumber: 1}}).exec().then(function(machines) {
-        res.render('terminal', {"layout": "layoutTerminal.hbs", "machines": machines});
+        res.render('terminal', {"layout": "layoutTerminal.hbs", title: "Fejlindrapportering", "machines": machines});
     });
 };
 

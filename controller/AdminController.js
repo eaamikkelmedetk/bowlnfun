@@ -35,6 +35,7 @@ module.exports.index = function (req, res) {
 
             res.render("admin", {
                 layout: "layoutAdmin",
+                title: "Administration",
                 centers: centers,
                 centerUser: centerUser,
                 terminalUser: terminalUser,
@@ -79,6 +80,7 @@ module.exports.getCenter = function (req, res) {
 
         res.render("admin", {
             layout: "layoutAdmin",
+            title: "Administration",
             centers: activeCenters,
             selectedCenterId: selectedCenterId,
             centerUser: selectedCenter.read,

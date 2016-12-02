@@ -162,7 +162,7 @@ a.pin {
 }
 
 .error-type h1 {
-    font-size: 2em;
+    font-size: 1.7em;
     font-weight: bold;
     color: #ecf0f1;
 }
@@ -205,4 +205,5 @@ a.pin {
     a.pin {
         font-size: 3em;
     }
+
 }
