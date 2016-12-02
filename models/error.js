@@ -2,12 +2,13 @@
  * Created by Morten on 15/11/2016.
  */
 var mongoose = require('mongoose');
+var moment = require("moment");
 var Schema = mongoose.Schema;
 
 var error = new Schema({
     pins: Array,
     type: String,
-    timestamp: Date,
+    timestamp: {type: Date, default: moment().toDate()},
     machineId: {type: Schema.Types.ObjectId}
 });
 
