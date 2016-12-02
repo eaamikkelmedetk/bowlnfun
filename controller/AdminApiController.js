@@ -115,27 +115,6 @@ module.exports.editCenter = function (req, res) {
 };
 
 module.exports.editUser = function (req, res) {
-    User.findOne({
-        _id: req.body.id
-    }, function (err, user) {
-        if (err) throw err;
-
-        if (req.body.name) user.name = req.body.name;
-        if (req.body.password) {
-            var pass = sha512(req.body.password, genSalt(saltLength));
-            user.password = pass.passwordHash;
-            user.salt = pass.salt;
-        }
-        if (req.body.role) user.role = req.body.permissions;
-
-        if (user) {
-            user.update(newUser, {});
-            res.json({success: true, message: "'user' with id " + req.body.id + " updated"});
-        } else res.status(404).json({success: false, message: "No 'user' with id " + req.body.id + " found"});
-    });
-};
-
-module.exports.editUser1 = function (req, res) {
     async.series([
         function(callback) {
             User.findOne({"_id": req.body.id}).exec().then(function(user) {

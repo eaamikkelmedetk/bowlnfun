@@ -61,8 +61,8 @@ var AdminController = (function () {
         return putRequest('/admin/api/users/', data, sCallBack);
     };
 
-    var addMachine = function(data, sCallback) {
-        return postRequest('/admin/api/machine/', data, sCallback);
+    var addMachine = function(data, sCallback, fCallback) {
+        return postRequest('/admin/api/machine/', data, sCallback, fCallback);
     };
 
     var deleteMachine = function(data, sCallback) {

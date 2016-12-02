@@ -48,6 +48,7 @@ var centerController = (function () {
 
     return {
         getErrorsFromTo: publicGetErrorsFromTo
+
     };
 
 })();

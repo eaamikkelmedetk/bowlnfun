@@ -7,8 +7,7 @@ var moment = require('moment');
 var mongoose = require('mongoose');
 
 module.exports.index = function (req, res) {
-
-    res.render('center', {layout: 'layoutCenter.hbs'});
+    res.render('center', {layout: 'layoutCenter.hbs', "title": "Fejlrapport"});
 };
 
 module.exports.getErrors = function(req, res) {

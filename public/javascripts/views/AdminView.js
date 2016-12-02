@@ -151,6 +151,8 @@ var AdminView = (function () {
             setTimeout(function() {
                 location.reload();
             }, 1500);
+        }, function() {
+            $.growl({ title: "Maskine", message: "Der er opstået en fejl. Prøv venligst igen."})
         })
     };
 

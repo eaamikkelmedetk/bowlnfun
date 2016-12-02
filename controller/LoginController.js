@@ -12,13 +12,13 @@ module.exports.login = function (req, res) {
     res.render('login');
 };
 
-module.exports.authenticateLogin = function (req, res) {
+module.exports.authenticateLogin = function (req, res, next) {
     User.findOne({
         name: req.body.name
-    }, function (err, user){
+    }, function (err, user) {
 
-        if(err) throw err;
-        if(user && user.password == sha512(req.body.password, user.salt).passwordHash && user.active) {
+        if (err) throw err;
+        if (user && user.password == sha512(req.body.password, user.salt).passwordHash && user.active) {
             var token = jwt.sign({
                 sub: user._id,
                 centerId: user.centerId,
@@ -34,10 +34,7 @@ module.exports.authenticateLogin = function (req, res) {
             //     message: 'Enjoy your token!',
             //     token: token
             // });
-        } else res.status(401.1).json({
-            success: false,
-            message: 'Authentication failed. Wrong username or password.'
-        })
+        } else res.status(401.1 || 500).render('error', {"title": "Loginoplysninger", "message": "De indtastede brugeroplysninger var ikke korrekte"});
     });
 };
 
@@ -85,7 +82,7 @@ function authenticateTokenAndRedirect(dat) {
     else dat.res.redirect('/login');
 };
 
-function verifyToken (dat) {
+function verifyToken(dat) {
     jwt.verify(dat.token, config.secret, function (err, decoded) {
         dat.decoded = decoded;
 
@@ -97,16 +94,16 @@ function verifyToken (dat) {
     });
 };
 
-function validateTokenUser(dat){
+function validateTokenUser(dat) {
     User.findOne({
         _id: dat.decoded.sub
-    }, function(err, user) {
+    }, function (err, user) {
         dat.user = user;
 
-        if(err) {
+        if (err) {
             throw err;
             dat.next(errorMessage("Token user validation failed.", 403));
-        } else if(dat.user.centerId == dat.decoded.centerId)
+        } else if (dat.user.centerId == dat.decoded.centerId)
             useToken(dat);
         else dat.next(errorMessage("Token validation failed.", 403));
     });
@@ -163,12 +160,13 @@ function errorMessage(text, code) {
     return err;
 };
 
-function sha512(password, salt){
-    var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+function sha512(password, salt) {
+    var hash = crypto.createHmac('sha512', salt);
+    /** Hashing algorithm sha512 */
     hash.update(password);
     var value = hash.digest('hex');
     return {
-        salt:salt,
-        passwordHash:value
+        salt: salt,
+        passwordHash: value
     };
 };
