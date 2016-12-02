@@ -167,6 +167,36 @@ a.pin {
     color: #ecf0f1;
 }
 
+.buttonContainer {
+    margin: 15px;
+}
+
+.menuButton {
+    padding:10px;
+    margin-top: 10px;
+    font-size: 24px;
+    color: white;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #fff;
+    border-radius: 10%;
+    border-image: none;
+    background-color: #1abc9c;
+}
+
+.menuButton:hover {
+    background-color: white;
+    color: #1abc9c;
+}
+
+#logoutButton {
+    position: absolute;
+    bottom: 25px;
+    right: 2%;
+    padding: 15px;
+    font-size: 16px;
+}
+
 /**
   BOOTSTRAP MODAL CSS START
  */
