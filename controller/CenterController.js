@@ -16,7 +16,7 @@ module.exports.getErrors = function(req, res) {
     var tDate = req.query.tDate;
 
     fDate = moment(fDate).hours(0, 'h').toDate();
-    tDate = moment(tDate).hours(23, 'h').minutes(59).toDate();
+    tDate = moment(tDate).add('days', 1).toDate();
 
 
     Error.aggregate([

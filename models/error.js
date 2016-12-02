@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var error = new Schema({
     pins: Array,
     type: String,
-    timestamp: {type: Date, default: moment().toDate()},
+    timestamp: {type: Date, default: moment().toISOString()},
     machineId: {type: Schema.Types.ObjectId}
 });
 
