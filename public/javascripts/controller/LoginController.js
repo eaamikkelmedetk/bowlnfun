@@ -15,23 +15,7 @@ var LoginService = (function() {
         document.cookie = 'bowlnfunErrorApp =; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     };
 
-    var publicLogin = function(username, password) {
-        var root = window.location.origin;
-        var route = '/login/authenticate';
-        $.ajax(
-            {
-                type: "POST",
-                url: root + route,
-                data: {
-                    "name": username,
-                    "password": password
-                },
-                dataType: 'json'
-            }
-        );
-    };
     return {
-        login: publicLogin,
         deleteCookie: deleteCookie
     };
 })();

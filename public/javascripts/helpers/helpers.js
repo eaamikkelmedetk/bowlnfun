@@ -26,11 +26,10 @@ $(document).ready(function () {
     });
 
     Handlebars.registerHelper("format", function (inputDate) {
-        var date = new Date(inputDate);
-        2
-        var formattedDate = "Dato: " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " - kl. " + date.getHours() + ":" + addZero(date.getUTCMinutes());
+        moment.locale("da");
+        var date = moment(inputDate).format("L LT");
 
-        return formattedDate;
+        return date;
     });
 
     function addZero(i) {

@@ -13,9 +13,6 @@ $(document).ready(function () {
             $password = $('.password');
         }();
 
-        var postLogin = function () {
-            LoginService.login($name.val(), $password.val());
-        }();
     };
    LoginGUI();
 });
