@@ -16,7 +16,6 @@ module.exports.authenticateLogin = function (req, res, next) {
     User.findOne({
         name: req.body.name
     }, function (err, user) {
-
         if (err) throw err;
         if (user && user.password == sha512(req.body.password, user.salt).passwordHash && user.active) {
             var token = jwt.sign({
@@ -99,7 +98,6 @@ function validateTokenUser(dat) {
         _id: dat.decoded.sub
     }, function (err, user) {
         dat.user = user;
-
         if (err) {
             throw err;
             dat.next(errorMessage("Token user validation failed.", 403));

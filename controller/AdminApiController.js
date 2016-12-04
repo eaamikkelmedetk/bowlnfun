@@ -118,7 +118,6 @@ module.exports.editUser = function (req, res) {
     async.series([
         function(callback) {
             User.findOne({"_id": req.body.id}).exec().then(function(user) {
-                console.log(req.body.id);
                 callback(null, user);
             });
         },
@@ -139,23 +138,27 @@ module.exports.editUser = function (req, res) {
 
             async.series([
                 function(callback) {
-                    User.update({"_id": userId}, {"name": req.body.name, "password": pass.passwordHash, "salt": pass.salt}, function() {
-                        callback(null);
+                    User.update({"_id": userId}, {"name": req.body.name, "password": pass.passwordHash, "salt": pass.salt}, function(err) {
+                        callback(err)
                     })
                 },
                 function(callback) {
                 if(userName === terminalUser) {
-                    Center.update({"_id": centerId}, {"write": req.body.name}, function () {
-                        callback(null);
+                    Center.update({"_id": centerId}, {"write": req.body.name}, function (err) {
+                        callback(err)
                     })
                 } else {
-                    Center.update({"_id": centerId}, {"read": req.body.name}, function () {
-                        callback(null);
+                    Center.update({"_id": centerId}, {"read": req.body.name}, function (err) {
+                        callback(err);
                     })
                 }
                 }
             ], function(err, results) {
-                res.json("Brugernavnet og passwordet er blevet opdatereret.");
+                if(err === null) {
+                    res.json("Brugernavnet og passwordet er blevet opdatereret.");
+                } else {
+                    res.json("Der er opstået en fejl. Prøv evt. og ændre brugernavnet ellers prøv igen.");
+                }
             })
 
     });
