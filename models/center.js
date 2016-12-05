@@ -10,19 +10,19 @@ var center = new Schema({
     write: {
         type: String,
         required: true,
-        sparse: true,
+        unique: true,
         minlength: 1
     },
     read: {
         type: String,
         required: true,
-        sparse: true,
+        unique: true,
         minlength: 1
     },
     name: {
         type: String,
         required: true,
-        sparse: true,
+        unique: true,
         minlength: 1
     },
     active: {

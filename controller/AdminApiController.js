@@ -138,17 +138,17 @@ module.exports.editUser = function (req, res) {
 
             async.series([
                 function(callback) {
-                    User.update({"_id": userId}, {"name": req.body.name, "password": pass.passwordHash, "salt": pass.salt}, function(err) {
+                    User.update({"_id": userId}, {"name": req.body.name, "password": pass.passwordHash, "salt": pass.salt}, { runValidators: true, context: 'query' }, function(err) {
                         callback(err)
                     })
                 },
                 function(callback) {
                 if(userName === terminalUser) {
-                    Center.update({"_id": centerId}, {"write": req.body.name}, function (err) {
+                    Center.update({"_id": centerId}, {"write": req.body.name}, { runValidators: true, context: 'query' }, function (err) {
                         callback(err)
                     })
                 } else {
-                    Center.update({"_id": centerId}, {"read": req.body.name}, function (err) {
+                    Center.update({"_id": centerId}, {"read": req.body.name}, { runValidators: true, context: 'query' }, function (err) {
                         callback(err);
                     })
                 }
