@@ -28,11 +28,6 @@ module.exports.authenticateLogin = function (req, res, next) {
                 expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7))
             })
                 .redirect('/');
-            //     .json({
-            //     success: true,
-            //     message: 'Enjoy your token!',
-            //     token: token
-            // });
         } else res.status(401.1 || 500).render('error', {"title": "Loginoplysninger", "message": "De indtastede brugeroplysninger var ikke korrekte"});
     });
 };
@@ -86,26 +81,26 @@ function verifyToken(dat) {
         dat.decoded = decoded;
 
         if (err) {
-            dat.next(errorMessage("Token verification failed.", 403));
+            dat.res.status(403).render('error', {"title": "Token verification", "message": "Token verification failed."});
             throw err;
         }
-        else validateTokenUser(dat);
+        else useToken(dat);
     });
 };
 
-function validateTokenUser(dat) {
-    User.findOne({
-        _id: dat.decoded.sub
-    }, function (err, user) {
-        dat.user = user;
-        if (err) {
-            throw err;
-            dat.next(errorMessage("Token user validation failed.", 403));
-        } else if (dat.user.centerId == dat.decoded.centerId)
-            useToken(dat);
-        else dat.next(errorMessage("Token validation failed.", 403));
-    });
-};
+// function validateTokenUser(dat) {
+//     User.findOne({
+//         _id: dat.decoded.sub
+//     }, function (err, user) {
+//         dat.user = user;
+//         if (err) {
+//             throw err;
+//             dat.res.status(403).render('error', {"title": "Token validation", "message": "Token validation failed."});
+//         } else if (dat.user.centerId == dat.decoded.centerId)
+//             useToken(dat);
+//         else dat.res.status(403).render('error', {"title": "Token validation", "message": "Token validation failed."});
+//     });
+// };
 
 function useToken(dat) {
     // Add custom properties to decoded
