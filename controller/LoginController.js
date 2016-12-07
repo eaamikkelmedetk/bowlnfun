@@ -88,20 +88,6 @@ function verifyToken(dat) {
     });
 };
 
-// function validateTokenUser(dat) {
-//     User.findOne({
-//         _id: dat.decoded.sub
-//     }, function (err, user) {
-//         dat.user = user;
-//         if (err) {
-//             throw err;
-//             dat.res.status(403).render('error', {"title": "Token validation", "message": "Token validation failed."});
-//         } else if (dat.user.centerId == dat.decoded.centerId)
-//             useToken(dat);
-//         else dat.res.status(403).render('error', {"title": "Token validation", "message": "Token validation failed."});
-//     });
-// };
-
 function useToken(dat) {
     // Add custom properties to decoded
     dat.req.decoded = expandDecoded(dat.decoded);

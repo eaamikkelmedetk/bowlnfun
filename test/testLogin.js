@@ -30,7 +30,7 @@ suite("POST /login", function () {
         request(app)
             .post('/login/authenticate')
             .send({ name: "root", password: "gummiand" })
-            .expect(200)
+            .expect(302)
             .end(onResponse);
 
         function onResponse(err, res) {

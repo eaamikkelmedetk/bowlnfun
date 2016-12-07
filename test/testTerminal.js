@@ -2,10 +2,11 @@
  * Created by Morten on 16/11/2016.
  */
 var request = require('supertest');
-var route = '/terminal/api/errors'
+var route = '/terminal/api/errors';
 var app = require('../app');
+var config = require('../config');
 
-var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1ODU0NmY3YzE5NWFhNTVjYTY0YmIiLCJwZXJtaXNzaW9ucyI6InJlYWQtYWNjZXNzLHdyaXRlLWFjY2VzcyxhZG1pbiIsImlhdCI6MTQ3OTk4MjUyOCwiZXhwIjoxNDgwMDY4OTI4fQ._0Ldod7qhMO1xFSNGI0osSKxHIF5uMdfJyQ9Mjerjyc";
+var validToken = config.testToken;
 
 suite("POST /errors", function () {
 

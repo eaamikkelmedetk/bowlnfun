@@ -53,26 +53,44 @@ module.exports.addCenter = function (req, res) {
             active: true
         });
 
-
         center.save(function (err, doc) {
-            if (err) {
-                res.status(417).json({success: false, message: "'center' failed validation"});
-            }
+            if(err) res.status(417).json({
+                success: false,
+                message: "'center' failed validation",
+                error: err
+            })
             else {
                 userWrite.centerId = userRead.centerId = doc._id;
-                userWrite.save(function (err) {
-                    if (err) res.status(417).json({success: false, message: "'userWrite' failed validation"});
-                    else userRead.save(function (err) {
-                        if (err) res.status(417).json({success: false, message: "'userRead' failed validation"});
-                        else res.json({
-                            "success": true,
-                            "message": "The center has been added to the registry",
-                            "center": doc
+                async.series([
+                    function(callback) {
+                        userWrite.save(function(err, doc) {
+                            if(err) callback(err)
+                            else callback(null, doc._id);
                         });
+                    },
+                    function(callback) {
+                        userRead.save(function(err, doc) {
+                            if(err) callback(err)
+                            else callback(null, doc._id);
+                        });
+                    }
+                ], function (err, results) {
+                    if(err) {
+                        Center.remove({_id: doc._id});
+                        res.status(417).json({
+                            success: false,
+                            message: "Failed validation"})
+                    }
+                    else res.json({
+                        success: true,
+                        message: "The center has been added to the registry",
+                        results: results
                     });
                 });
             }
         });
+
+
     }
     else res.status(417).json({success: false, message: "no passwords defined"});
 };
