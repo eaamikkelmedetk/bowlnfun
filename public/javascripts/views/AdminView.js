@@ -64,7 +64,7 @@ var AdminView = (function () {
                     name: newCenterUsername,
                     password: newCenterPassword
                 }, function (response) {
-                    $.growl({ title: "Center", message: "Centerbrugeren er blevet opdateret" });
+                    $.growl({ title: "Center", message: response });
                     setTimeout(function() {
                         location.reload();
                     }, 1500);

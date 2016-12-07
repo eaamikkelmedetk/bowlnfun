@@ -3,8 +3,10 @@
  */
 
 var request = require('supertest');
-
+var config = require('../config');
 var app = require('../app');
+
+var validToken = config.testToken;
 
 suite("GET /errors", function () {
 

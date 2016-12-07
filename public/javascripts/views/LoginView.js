@@ -2,7 +2,7 @@
  * Created by Morten on 23/11/2016.
  */
 $(document).ready(function () {
-    var LoginGUI = function () {
+    var loginView = function () {
 
         //jQuery variables
         var $name;
@@ -14,5 +14,5 @@ $(document).ready(function () {
         }();
 
     };
-   LoginGUI();
+   loginView();
 });

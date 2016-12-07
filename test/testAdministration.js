@@ -3,16 +3,33 @@
  */
 
 var request = require('supertest');
+var config = require('../config');
 var app = require('../app');
 var route = "/admin/api/centers/";
-var Center = "../models/center";
+var Center = require("../models/center");
+var User = require("../models/user");
 
-var validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODM1ODU0NmY3YzE5NWFhNTVjYTY0YmIiLCJwZXJtaXNzaW9ucyI6InJlYWQtYWNjZXNzLHdyaXRlLWFjY2VzcyxhZG1pbiIsImlhdCI6MTQ3OTk4MjUyOCwiZXhwIjoxNDgwMDY4OTI4fQ._0Ldod7qhMO1xFSNGI0osSKxHIF5uMdfJyQ9Mjerjyc";
+var validToken = config.testToken;
+
 suite('POST /admin/centers', function () {
+
 
     /*------------------------------- TC7 -----------------------------------*/
 
     test("POST: should add a new center to DB", function (done) {
+        teardown(function() {
+            Center.findOne({name: "testCenterTC7"}, function(err, doc) {
+                if(err) console.log("could not find 'testCenterTC7'");
+                else if(doc) {
+                    Center.remove({_id: doc._id}, function(err) {
+                        if(err) console.log(err);
+                    });
+                    User.remove({centerId: doc._id}, function(err) {
+                        if(err) console.log(err);
+                    });
+                }
+            });
+        });
         var center = {
             name: "testCenterTC7",
             readName: "testCenterReadTC7",
@@ -27,6 +44,8 @@ suite('POST /admin/centers', function () {
             .send(center)
             .expect(200, done);
     });
+
+
 
     /*------------------------------- TC8 -----------------------------------*/
 

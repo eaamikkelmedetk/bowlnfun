@@ -53,26 +53,44 @@ module.exports.addCenter = function (req, res) {
             active: true
         });
 
-
         center.save(function (err, doc) {
-            if (err) {
-                res.status(417).json({success: false, message: "'center' failed validation"});
-            }
+            if(err) res.status(417).json({
+                success: false,
+                message: "'center' failed validation",
+                error: err
+            })
             else {
                 userWrite.centerId = userRead.centerId = doc._id;
-                userWrite.save(function (err) {
-                    if (err) res.status(417).json({success: false, message: "'userWrite' failed validation"});
-                    else userRead.save(function (err) {
-                        if (err) res.status(417).json({success: false, message: "'userRead' failed validation"});
-                        else res.json({
-                            "success": true,
-                            "message": "The center has been added to the registry",
-                            "center": doc
+                async.series([
+                    function(callback) {
+                        userWrite.save(function(err, doc) {
+                            if(err) callback(err)
+                            else callback(null, doc._id);
                         });
+                    },
+                    function(callback) {
+                        userRead.save(function(err, doc) {
+                            if(err) callback(err)
+                            else callback(null, doc._id);
+                        });
+                    }
+                ], function (err, results) {
+                    if(err) {
+                        Center.remove({_id: doc._id});
+                        res.status(417).json({
+                            success: false,
+                            message: "Failed validation"})
+                    }
+                    else res.json({
+                        success: true,
+                        message: "The center has been added to the registry",
+                        results: results
                     });
                 });
             }
         });
+
+
     }
     else res.status(417).json({success: false, message: "no passwords defined"});
 };
@@ -118,7 +136,6 @@ module.exports.editUser = function (req, res) {
     async.series([
         function(callback) {
             User.findOne({"_id": req.body.id}).exec().then(function(user) {
-                console.log(req.body.id);
                 callback(null, user);
             });
         },
@@ -139,23 +156,27 @@ module.exports.editUser = function (req, res) {
 
             async.series([
                 function(callback) {
-                    User.update({"_id": userId}, {"name": req.body.name, "password": pass.passwordHash, "salt": pass.salt}, function() {
-                        callback(null);
+                    User.update({"_id": userId}, {"name": req.body.name, "password": pass.passwordHash, "salt": pass.salt}, { runValidators: true, context: 'query' }, function(err) {
+                        callback(err)
                     })
                 },
                 function(callback) {
                 if(userName === terminalUser) {
-                    Center.update({"_id": centerId}, {"write": req.body.name}, function () {
-                        callback(null);
+                    Center.update({"_id": centerId}, {"write": req.body.name}, { runValidators: true, context: 'query' }, function (err) {
+                        callback(err)
                     })
                 } else {
-                    Center.update({"_id": centerId}, {"read": req.body.name}, function () {
-                        callback(null);
+                    Center.update({"_id": centerId}, {"read": req.body.name}, { runValidators: true, context: 'query' }, function (err) {
+                        callback(err);
                     })
                 }
                 }
             ], function(err, results) {
-                res.json("Brugernavnet og passwordet er blevet opdatereret.");
+                if(err === null) {
+                    res.json("Brugernavnet og passwordet er blevet opdatereret.");
+                } else {
+                    res.json("Der er opstået en fejl. Prøv evt. og ændre brugernavnet ellers prøv igen.");
+                }
             })
 
     });

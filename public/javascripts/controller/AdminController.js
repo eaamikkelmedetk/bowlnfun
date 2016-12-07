@@ -19,7 +19,6 @@ var AdminController = (function () {
     };
 
     var postRequest = function (route, data, sCallback, fCallback) {
-        console.log(sCallback);
         $.ajax({
                 type: "POST",
                 dataType: 'json',
