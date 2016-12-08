@@ -190,11 +190,11 @@ a.pin {
 }
 
 #logoutButton {
-    position: absolute;
+    position: fixed;
     bottom: 25px;
-    right: 2%;
+    right: 22px;
     padding: 15px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 /**

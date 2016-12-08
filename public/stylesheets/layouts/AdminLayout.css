@@ -54,7 +54,7 @@ h1.menu-heading {
 
 ul.menu-items li {
     display: block;
-    font-size: 28px;
+    font-size: 26px;
     letter-spacing: 2px;
 }
 
@@ -263,11 +263,11 @@ ul.panel-tabs li a {
 }
 
 #logoutButton {
-    position: absolute;
-    top: 19px;
-    left: 75%;
-    padding: 5px;
-    font-size: 16px;
+    position: fixed;
+    bottom: 25px;
+    right: 22px;
+    padding: 15px;
+    font-size: 18px;
 }
 
 hr {
