@@ -22,13 +22,13 @@ module.exports.authenticateLogin = function (req, res, next) {
                 sub: user._id,
                 centerId: user.centerId,
                 permissions: user.role
-            }, config.secret, {expiresIn: '7d'});
+            }, config.secret, {expiresIn: '365d'});
             // return the information including token as JSON
             res.cookie("bowlnfunErrorApp", token, {
-                expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7))
+                expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365))
             })
                 .redirect('/');
-        } else res.status(401.1 || 500).render('error', {"title": "Loginoplysninger", "message": "De indtastede brugeroplysninger var ikke korrekte"});
+        } else res.status(401.1).render('error', {"title": "Loginoplysninger", "message": "De indtastede brugeroplysninger var ikke korrekte"});
     });
 };
 
